@@ -1,0 +1,21 @@
+{
+  "name": "popular-science",
+  "version": "1.0.0",
+  "description": "A simple blog for popular science",
+  "scripts": {
+    "start": "./node_modules/http-server/bin/http-server client/ -p 8080"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TIY-DC-FEE-2016-Mar/popular-science.git"
+  },
+  "author": "Jordan Kasper",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/TIY-DC-FEE-2016-Mar/popular-science/issues"
+  },
+  "homepage": "https://github.com/TIY-DC-FEE-2016-Mar/popular-science#readme",
+  "dependencies": {
+    "http-server": "^0.9.0"
+  }
+}
