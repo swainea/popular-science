@@ -1,1 +1,1 @@
-web: harp server ./client/ --port 80
+web: harp server ./client/ --port $PORT
