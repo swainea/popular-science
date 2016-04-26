@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "A simple blog for popular science",
   "scripts": {
-    "start": "./node_modules/http-server/bin/http-server client/ -p 8080"
+    "start": "./node_modules/http-server/bin/http-server client/ -p 80"
   },
   "repository": {
     "type": "git",
