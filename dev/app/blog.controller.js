@@ -22,7 +22,7 @@
         // TODO: create a template for 'categoryStories and include its URL here'
       });
 
-      
+
   }
 
 })();
