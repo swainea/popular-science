@@ -1,10 +1,50 @@
+* {
+  margin: 0; }
+
 .main-header #banner {
-  position: absolute;
   top: 0px;
   left: 0px;
   right: 0px;
   width: 100%;
   height: 230px;
   z-index: -1; }
+.main-header .nav {
+  background-color: #F7F5E7;
+  border: none; }
+.main-header .nav-tabs > li > a {
+  margin-right: 2px;
+  line-height: 1.42857143;
+  border: 1px solid transparent;
+  border-radius: 4px 4px 0 0; }
+.main-header .nav > li > a {
+  position: relative;
+  display: block;
+  padding: 10px 15px; }
+.main-header a {
+  color: #000000;
+  text-decoration: none;
+  font-size: 1.3em; }
+.main-header a {
+  background-color: transparent; }
+.main-header .nav-tabs > li.active > a, .main-header .nav-tabs > li.active > a:focus, .main-header .nav-tabs > li.active > a:hover {
+  color: #F0532B;
+  border: none;
+  cursor: default;
+  border-bottom-color: transparent;
+  font-style: italic;
+  background-color: #F7F5E7; }
+
+.panel {
+  border: none;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding: none; }
+  .panel .panel-footer {
+    border: none;
+    background-color: #F7F5E7;
+    font-size: 1.1em;
+    text-align: center;
+    color: #000000; }
 
 /*# sourceMappingURL=main.css.map */
