@@ -27,8 +27,9 @@
     return {
       getCategoryID: getCategoryID,
       getAllPosts: getAllPosts,
-      getPostsByCategory: getPostsByCategoryID,
-      getPostsByAuthor: getPostsByAuthor
+      getPostsByCategoryID: getPostsByCategoryID,
+      getPostsByAuthorID: getPostsByAuthorID,
+      getPostByTitle: getPostByTitle
     };
 
     function getCategoryID(category) {
@@ -52,7 +53,7 @@
     function getAllPosts() {
       return $http({
         method: 'GET',
-        url: apiURL + '/Posts',
+        url: apiURL + '/Posts' + '?filter={"include":["author","category"]}',
       }).then(function successGetAllPosts(response) {
         return response.data;
       });
@@ -61,16 +62,44 @@
     function getPostsByCategoryID(categoryID) {
       return $http({
         method: 'GET',
-        url: apiURL + '/Posts',
-        data: {
-          filter: {include:["author","category"]}
-        }
+        url: apiURL + '/Categories/' + categoryID + '?filter={"include":"posts"}',
+      }).then(function successGetPostsByCategory(response) {
+        return response.data;
       });
     }
 
-    function getPostsByAuthor() {
-
+    function getPostsByAuthorID(authorID) {
+      return $http({
+        method: 'GET',
+        url: apiURL + '/Posts'
+      }).then(function getPostsByAuthor(response) {
+        var authorPostList = [];
+        response.data.forEach(function successGetPostsByAuthorID(each) {
+          if(each.authorId === authorID){
+            authorPostList.push(each);
+          }
+        });
+        return authorPostList;
+      });
     }
+
+    function getPostByTitle(title) {
+      return $http({
+        method: 'GET',
+        url: apiURL + '/Posts'
+      }).then(function successGetPostByTitle(response) {
+        var postByTitle;
+        response.data.forEach(function findTitle(each) {
+          if(each.title === title){
+            postByTitle = each;
+          } else {
+            postByTitle = 'No such title.';
+          }
+        });
+        return postByTitle;
+      });
+    }
+
 
 
     // TODO: This should do some logic to figure out what subset of the list
