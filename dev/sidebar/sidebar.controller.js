@@ -3,7 +3,6 @@
 
   angular
     .module('blog')
-    // TODO: make sure that the app really is called 'blog'
     .controller('SidebarController', SidebarController);
 
   SidebarController.$inject = ['postListFactory'];
@@ -23,7 +22,8 @@
     //     console.log(response);
     //   });
 
-    postListFactory.getAllPosts().then(function (response) {
+    postListFactory.getPostsByCategoryID('571e6e9362e24e1100c9e4c2')
+    .then(function (response) {
       console.log(response);
     });
 

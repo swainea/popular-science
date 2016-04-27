@@ -27,7 +27,7 @@
     return {
       getCategoryID: getCategoryID,
       getAllPosts: getAllPosts,
-      getPostsByCategory: getPostsByCategoryID,
+      getPostsByCategoryID: getPostsByCategoryID,
       getPostsByAuthor: getPostsByAuthor
     };
 
@@ -61,10 +61,9 @@
     function getPostsByCategoryID(categoryID) {
       return $http({
         method: 'GET',
-        url: apiURL + '/Posts',
-        data: {
-          filter: {include:["author","category"]}
-        }
+        url: apiURL + '/Categories/' + categoryID + '?filter={"include":"posts"}',
+      }).then(function successGetPostsByCategory(response) {
+        return response.data;
       });
     }
 
