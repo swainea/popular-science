@@ -28,7 +28,7 @@
       getCategoryID: getCategoryID,
       getAllPosts: getAllPosts,
       getPostsByCategoryID: getPostsByCategoryID,
-      getPostsByAuthor: getPostsByAuthor
+      getPostsByAuthorID: getPostsByAuthorID
     };
 
     function getCategoryID(category) {
@@ -52,7 +52,7 @@
     function getAllPosts() {
       return $http({
         method: 'GET',
-        url: apiURL + '/Posts',
+        url: apiURL + '/Posts' + '?filter={"include":["author","category"]}',
       }).then(function successGetAllPosts(response) {
         return response.data;
       });
@@ -67,8 +67,19 @@
       });
     }
 
-    function getPostsByAuthor() {
-
+    function getPostsByAuthorID(authorID) {
+      return $http({
+        method: 'GET',
+        url: apiURL + '/Posts',
+      }).then(function getPostsByAuthor(response) {
+        var authorPostList = [];
+        response.data.forEach(function successGetPostsByAuthorID(each) {
+          if(each.authorId === authorID){
+            authorPostList.push(each);
+          }
+        });
+        return authorPostList;
+      });
     }
 
 

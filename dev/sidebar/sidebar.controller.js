@@ -22,9 +22,12 @@
     //     console.log(response);
     //   });
 
-    postListFactory.getPostsByCategoryID('571e6e9362e24e1100c9e4c2')
-    .then(function (response) {
-      console.log(response);
+    // postListFactory.getAllPosts().then(function (response) {
+    //   console.log(response);
+    // });
+
+    postListFactory.getPostsByAuthorID('571ba0271a8ec71100d46fc2').then(function (r) {
+      console.log(r);
     });
 
 
