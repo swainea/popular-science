@@ -5,13 +5,13 @@
     .module('blog')
     .factory('postListFactory', postListFactory);
 
-  var storyList = [
-    {id: 1111, title: 'A Call to Farms', author: 'mattgrosso', category: 'fiction'},
-    {id: 2222, title: 'Jurassic Pork', author: 'david', category: 'fiction'},
-    {id: 3333, title: 'The Count of Monte Crisco', author: 'sarah', category: 'drama'},
-    {id: 4444, title: 'A Short History of a Few Things', author: 'lindsey', category: 'science'},
-    {id: 5555, title: 'A Song of Lice and Tires', author: 'martin', category: 'politics'},
-  ];
+  // var storyList = [
+  //   {id: 1111, title: 'A Call to Farms', author: 'mattgrosso', category: 'fiction'},
+  //   {id: 2222, title: 'Jurassic Pork', author: 'david', category: 'fiction'},
+  //   {id: 3333, title: 'The Count of Monte Crisco', author: 'sarah', category: 'drama'},
+  //   {id: 4444, title: 'A Short History of a Few Things', author: 'lindsey', category: 'science'},
+  //   {id: 5555, title: 'A Song of Lice and Tires', author: 'martin', category: 'politics'},
+  // ];
 
   postListFactory.$inject = ['$http'];
 
@@ -36,11 +36,15 @@
         method: 'GET',
         url: apiURL + '/Categories?filter={"include":"posts"}',
       }).then(function successGetCategory(response) {
+        var catid;
         response.data.forEach(function findCategoryID(each) {
           if(each.name === category){
-            return each.id;
+            catid = each.id;
+          } else {
+            catid = 'No such category';
           }
         });
+        return catid;
       }
 
       );

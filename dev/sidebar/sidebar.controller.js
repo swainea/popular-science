@@ -18,7 +18,12 @@
       {id: 456456, name: 'politics'},
     ];
 
-    postListFactory.getCategoryID('drama');
+    postListFactory.getCategoryID('drama')
+      .then(function (response) {
+        console.log(response);
+      });
+
+
 
   }
 
