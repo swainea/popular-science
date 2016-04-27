@@ -28,7 +28,8 @@
       getCategoryID: getCategoryID,
       getAllPosts: getAllPosts,
       getPostsByCategoryID: getPostsByCategoryID,
-      getPostsByAuthorID: getPostsByAuthorID
+      getPostsByAuthorID: getPostsByAuthorID,
+      getPostByTitle: getPostByTitle
     };
 
     function getCategoryID(category) {
@@ -70,7 +71,7 @@
     function getPostsByAuthorID(authorID) {
       return $http({
         method: 'GET',
-        url: apiURL + '/Posts',
+        url: apiURL + '/Posts'
       }).then(function getPostsByAuthor(response) {
         var authorPostList = [];
         response.data.forEach(function successGetPostsByAuthorID(each) {
@@ -81,6 +82,24 @@
         return authorPostList;
       });
     }
+
+    function getPostByTitle(title) {
+      return $http({
+        method: 'GET',
+        url: apiURL + '/Posts'
+      }).then(function successGetPostByTitle(response) {
+        var postByTitle;
+        response.data.forEach(function findTitle(each) {
+          if(each.title === title){
+            postByTitle = each;
+          } else {
+            postByTitle = 'No such title.';
+          }
+        });
+        return postByTitle;
+      });
+    }
+
 
 
     // TODO: This should do some logic to figure out what subset of the list

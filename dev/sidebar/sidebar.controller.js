@@ -26,10 +26,13 @@
     //   console.log(response);
     // });
 
-    postListFactory.getPostsByAuthorID('571ba0271a8ec71100d46fc2').then(function (r) {
+    // postListFactory.getPostsByAuthorID('571ba0271a8ec71100d46fc2').then(function (r) {
+    //   console.log(r);
+    // });
+
+    postListFactory.getPostByTitle('Hello World').then(function (r) {
       console.log(r);
     });
-
 
 
   }
