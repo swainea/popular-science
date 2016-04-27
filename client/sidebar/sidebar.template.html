@@ -1,0 +1,18 @@
+<!--
+At this point there is no nav set up for states but when there is I assume
+this code will be inserted as needed. It's possible that this will need to
+exist on it own or else maybe as a part of the index.
+-->
+
+<div class="sidebar" ng-controller="SidebarController as sidebar">
+  <ul>
+    <li ng-repeat="category in sidebar.categories">
+      <a ui-sref="categoryStories({ name: category.name })">
+        {{category.name}}
+      </a>
+    </li>
+    <li><button ui-sref="allStories">All Stories</button></li>
+<!-- TODO: create a state called 'allStories' for the view of the full list
+of stories in summary form -->
+  </ul>
+</div>
