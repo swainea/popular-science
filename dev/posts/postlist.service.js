@@ -34,13 +34,13 @@
     function getCategoryID(category) {
       return $http({
         method: 'GET',
-        url: apiURL + '/Categories',
-        data: {
-          filter: {include:["posts"]}
-        }
+        url: apiURL + '/Categories?filter={"include":"posts"}',
       }).then(function successGetCategory(response) {
-        console.log('this is working');
-        console.log(response);
+        response.data.forEach(function findCategoryID(each) {
+          if(each.name === category){
+            return each.id;
+          }
+        });
       }
 
       );
