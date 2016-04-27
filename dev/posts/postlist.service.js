@@ -45,9 +45,17 @@
           }
         });
         return catid;
-      }
+      });
+      // TODO: calling function should expect promise and catch errors
+    }
 
-      );
+    function getAllPosts() {
+      return $http({
+        method: 'GET',
+        url: apiURL + '/Posts',
+      }).then(function successGetAllPosts(response) {
+        return response.data;
+      });
     }
 
     function getPostsByCategoryID(categoryID) {
@@ -64,9 +72,6 @@
 
     }
 
-    function getAllPosts() {
-
-    }
 
     // TODO: This should do some logic to figure out what subset of the list
     // was asked for. It should also get real data from a server, not fake data
