@@ -36,10 +36,20 @@
         url: '/:name',
         templateURL: ''
         // TODO: create a template for 'categoryStories and include its URL here'
+      })
+      .state('about', {
+        url: '/:about',
+        templateURL: '',
+        controller: 'AboutController',
+        controllerAs: 'about'
+        // TODO: create a template for 'categoryStories and include its URL here'
       });
 
 
+<<<<<<< HEAD:dev/app/blog.controller.js
 
+=======
+>>>>>>> upstream/master:dev/app/blog.module.js
   }
 
 })();

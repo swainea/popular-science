@@ -35,3 +35,4 @@ node_modules
 .sass-cache
 main.css.map
 blog.js.map
+tester.html
