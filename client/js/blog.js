@@ -24,7 +24,7 @@
     })
     .state('allPosts', {
       url: '/allPosts',
-      templateURL: '/posts/allposts.template.html',
+      templateUrl: '/posts/allposts.template.html',
       controller: 'AllPostsController',
       controllerAs: 'allPosts'
     })
@@ -36,24 +36,22 @@
     })
     .state('allStories', {
       url: '/allStories',
-      templateURL: ''
+      templateUrl: ''
       // TODO: create a template for 'allStories' and include its URL here
     })
     .state('categoryStories', {
       url: '/:name',
-      templateURL: ''
+      templateUrl: ''
       // TODO: create a template for 'categoryStories and include its URL here'
     })
     .state('about', {
       url: '/about',
-      templateURL: '',
-      controller: 'AboutController',
-      controllerAs: 'about'
+      templateUrl:"about/about.html"
       // TODO: create a template for "about" and include its URL here'
     })
     .state('post', {
       url: '/post',
-      templateURL: '',
+      templateUrl: '',
       controller: 'CreatePostController',
       controllerAs: 'post'
       // TODO: create a template for "post" and include its URL here'
@@ -140,9 +138,10 @@
 
   function CreatePostController (CreatePostService){
     this.blogPost = {
-      title: "",
-      postText: "",
-      category: ""
+      "title": "",
+      "content": "",
+      "categoryId": "",
+      "authorId": "5722369d84c2fd11003f9f2b" 
     };
     this.newPost = function newPost (){
       //this function needs to post a new post to the internet and send uf tyo a view that shows that this happened
@@ -171,7 +170,9 @@
         url: "https://tiy-blog-api.herokuapp.com/api/Posts",
         data: blogPost,
         headers: {
-          // Authorization: come back to this
+          Authorization: {
+            id: "cStlRZdmrEnDqJr8V80SBlddBWlrBtj1N3Bbc7SJC4w1aE28MMyW2hxbKh7M3vbN",
+          }
         }
       }).then (function onSuccess(response){
         console.log(response);
@@ -180,6 +181,60 @@
   }
 
 }());
+;(function() {
+  'use strict';
+
+  angular
+    .module('blog')
+    .controller("LoginController", LoginController);
+
+  LoginController.$inject = ["LoginService"];
+
+  function LoginController(LoginService) {            //this will give it access to the things in LoginService
+    this.login = {};
+
+    this.loginForm = function loginForm(){
+      LoginService.authenticate(this.login);    //this.login has the email and password in the form, pass it in as a form so it can grab author.email and author.password
+       // LoginService.authenticate(this.login) === response.data 
+    };
+  }
+
+      
+
+})();
+;(function() {
+  'use strict';
+
+  angular
+    .module('blog')
+    .factory("LoginService", LoginService);
+
+    LoginService.$inject = ["$http"];
+
+    function LoginService($http) {
+
+    	return {
+    		authenticate: authenticate      //this returns authenticate function
+    	};
+
+    	function authenticate(author){
+    		return $http({
+    			method: "POST",
+    			url: "https://tiy-blog-api.herokuapp.com/api/Authors/login",   //add "Authors/login" to authenticate the login
+    			data: {
+    				email: author.email,
+    				password: author.password
+    			}
+
+    		}).then(function successHandler(response) {
+    			// $state.go("home");
+    			console.log(response.data);
+                return response.data;
+	    		});
+    	}
+    }
+
+})();
 ;(function() {
   'use strict';
 
