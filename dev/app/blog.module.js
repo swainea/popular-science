@@ -26,7 +26,7 @@
         templateURL: '',
         controller: 'AboutController',
         controllerAs: 'about'
-        // TODO: create a template for 'categoryStories and include its URL here'
+        // TODO: create a template for "about" and include its URL here'
       });
 
 
