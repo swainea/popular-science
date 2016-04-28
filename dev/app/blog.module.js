@@ -12,12 +12,14 @@
 
     $stateProvider
     .state('home', {
-      url: '/'
-      // templateUrl: 'welcome/welcome.html'
+      url: '/',
     })
     .state('about', {
-      url: '/about'
-      // templateUrl: 'welcome/welcome.html'
+      url: '/about',
+      templateURL: 'about/about.html',
+      controller: 'AboutController',
+      controllerAs: 'about'
+      // TODO: create a template for 'categoryStories and include its URL here'
     })
     .state('categories', {
       url: '/categories'
@@ -41,13 +43,6 @@
     .state('categoryStories', {
       url: '/:name',
       templateURL: ''
-      // TODO: create a template for 'categoryStories and include its URL here'
-    })
-    .state('about', {
-      url: '/:about',
-      templateURL: '',
-      controller: 'AboutController',
-      controllerAs: 'about'
       // TODO: create a template for 'categoryStories and include its URL here'
     });
 
