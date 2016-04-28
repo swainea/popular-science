@@ -23,7 +23,7 @@
     			}
 
     		}).then(function successHandler(response) {
-    			// $state.go("home");
+    			$state.go("home");
     			console.log(response.data);
                 return response.data;
 	    		});
