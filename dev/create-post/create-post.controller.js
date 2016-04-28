@@ -9,9 +9,10 @@
 
   function CreatePostController (CreatePostService){
     this.blogPost = {
-      title: "",
-      postText: "",
-      category: ""
+      "title": "",
+      "content": "",
+      "categoryId": "",
+      "authorId": "5722369d84c2fd11003f9f2b" 
     };
     this.newPost = function newPost (){
       //this function needs to post a new post to the internet and send uf tyo a view that shows that this happened

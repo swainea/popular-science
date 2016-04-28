@@ -19,7 +19,9 @@
         url: "https://tiy-blog-api.herokuapp.com/api/Posts",
         data: blogPost,
         headers: {
-          // Authorization: come back to this
+          Authorization: {
+            id: "cStlRZdmrEnDqJr8V80SBlddBWlrBtj1N3Bbc7SJC4w1aE28MMyW2hxbKh7M3vbN",
+          }
         }
       }).then (function onSuccess(response){
         console.log(response);
