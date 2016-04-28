@@ -27,6 +27,7 @@
     return {
       getCategoryID: getCategoryID,
       getAllPosts: getAllPosts,
+      getAllCategories: getAllCategories,
       getPostsByCategoryID: getPostsByCategoryID,
       getPostsByAuthorID: getPostsByAuthorID,
       getPostByTitle: getPostByTitle
@@ -55,6 +56,15 @@
         method: 'GET',
         url: apiURL + '/Posts' + '?filter={"include":["author","category"]}',
       }).then(function successGetAllPosts(response) {
+        return response.data;
+      });
+    }
+
+    function getAllCategories() {
+      return $http({
+        method: 'GET',
+        url: apiURL + '/Categories' + '?filter={"include":"posts"}',
+      }).then(function successGetAllCategories(response) {
         return response.data;
       });
     }

@@ -15,10 +15,6 @@
       url: '/'
       // templateUrl: 'welcome/welcome.html'
     })
-    .state('about', {
-      url: '/about'
-      // templateUrl: 'welcome/welcome.html'
-    })
     .state('categories', {
       url: '/categories'
       // templateUrl: 'welcome/welcome.html'
@@ -44,12 +40,5 @@
         controllerAs: 'about'
         // TODO: create a template for 'categoryStories and include its URL here'
       });
-
-
-<<<<<<< HEAD:dev/app/blog.controller.js
-
-=======
->>>>>>> upstream/master:dev/app/blog.module.js
   }
-
 })();
