@@ -42,7 +42,7 @@
         method: 'GET',
         url: apiURL + '/Posts' + '?filter={"include":["author","category"]}',
       }).then(function successGetAllPosts(response) {
-        return response.data;
+        return response;
       });
     }
 
@@ -51,7 +51,7 @@
         method: 'GET',
         url: apiURL + '/Categories' + '?filter={"include":"posts"}',
       }).then(function successGetAllCategories(response) {
-        return response.data;
+        return response;
       });
     }
 
@@ -78,7 +78,7 @@
         method: 'GET',
         url: apiURL + '/Categories/' + categoryID + '?filter={"include":"posts"}',
       }).then(function successGetPostsByCategory(response) {
-        return response.data;
+        return response;
       });
     }
 
