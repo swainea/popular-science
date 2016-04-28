@@ -8,6 +8,6 @@
   AboutController.$inject = ["$state"];
 
   function AboutController($state){
-    
+
   }
 }());
