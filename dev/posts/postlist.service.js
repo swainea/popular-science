@@ -37,12 +37,12 @@
       getTitleID: getTitleID
     };
 // TODO: Set up arguments for all post retrieval functions.
-    function getAllPosts(limit, offset) {
+    function getAllPosts() {
       return $http({
         method: 'GET',
-        url: apiURL + '/Posts' + '?filter={"limit":'+ limit + ',"offset": ' + offset + ',"include":["author","category"]}',
+        url: apiURL + '/Posts' + '?filter={"include":["author","category"]}',
       }).then(function successGetAllPosts(response) {
-        return response;
+        return response.data;
       });
     }
 
