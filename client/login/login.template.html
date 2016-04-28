@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body ng-app="blog">
+
+	<section class="partial" ng-controller="LoginController as lc">
+		<form novalidate ng-submit="lc.loginForm()">
+			<label>Email</label>
+				<input ng-model="lc.login.email" required type="text" placeholder="email">
+			<label>Password</label>
+				<input ng-model="lc.login.password" required type="password" placeholder="password">
+			<button>Login</button>
+		</form>
+
+		<button>Register</button>
+	</section>
+  		<script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular.min.js'></script>
+        
+        <script src='http://angular-ui.github.io/ui-router/release/angular-ui-router.js'></script>
+        
+
+        <script src='../app/blog.module.js'></script>
+
+        <script src='login.service.js'></script>
+        <script src='login.controller.js'></script>
+</body>
+</html>
