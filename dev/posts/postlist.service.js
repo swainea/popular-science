@@ -28,31 +28,13 @@
     var apiURL = 'https://tiy-blog-api.herokuapp.com/api';
 
     return {
-      getCategoryID: getCategoryID,
       getAllPosts: getAllPosts,
       getAllCategories: getAllCategories,
+      getCategoryID: getCategoryID,
       getPostsByCategoryID: getPostsByCategoryID,
       getPostsByAuthorID: getPostsByAuthorID,
       getPostByTitle: getPostByTitle
     };
-
-    function getCategoryID(category) {
-      return $http({
-        method: 'GET',
-        url: apiURL + '/Categories?filter={"include":"posts"}',
-      }).then(function successGetCategory(response) {
-        var catid;
-        response.data.forEach(function findCategoryID(each) {
-          if(each.name === category){
-            catid = each.id;
-          } else {
-            catid = 'No such category';
-          }
-        });
-        return catid;
-      });
-      // TODO: calling function should expect promise and catch errors
-    }
 
     function getAllPosts() {
       return $http({
@@ -70,6 +52,24 @@
       }).then(function successGetAllCategories(response) {
         return response.data;
       });
+    }
+
+    function getCategoryID(category) {
+      return $http({
+        method: 'GET',
+        url: apiURL + '/Categories?filter={"include":"posts"}',
+      }).then(function successGetCategory(response) {
+        var catid;
+        response.data.forEach(function findCategoryID(each) {
+          if(each.name === category){
+            catid = each.id;
+          } else {
+            catid = 'No such category';
+          }
+        });
+        return catid;
+      });
+      // TODO: calling function should expect promise and catch errors
     }
 
     function getPostsByCategoryID(categoryID) {

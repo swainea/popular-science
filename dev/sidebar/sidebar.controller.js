@@ -29,9 +29,16 @@
     //   console.log(r);
     // });
 
-    postListFactory.getAllCategories().then(function (e) {
-      console.log(e);
+    // postListFactory.getAllCategories().then(function (e) {
+    //   console.log(e);
+    // });
+    //
+
+    postListFactory.getAllPosts().then(function (r) {
+      console.log(r);
     });
+
+    console.log(postListFactory.getAllPosts());
 
   }
 

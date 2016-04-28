@@ -9,6 +9,13 @@
 
   function AllPostsController(postListFactory) {
 
+    var that = this;
+
+    postListFactory.getAllPosts()
+      .then(function (r) {
+        that.postList = r;
+      });
+
     this.postList = [];
   }
 
