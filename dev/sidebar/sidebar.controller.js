@@ -17,15 +17,15 @@
     //     console.log(response);
     //   });
 
-    // postListFactory.getAllPosts().then(function (response) {
-    //   console.log(response);
-    // });
+    postListFactory.getAllPosts().then(function (response) {
+      console.log(response);
+    });
 
     // postListFactory.getPostsByAuthorID('571ba0271a8ec71100d46fc2').then(function (r) {
     //   console.log(r);
     // });
 
-    // postListFactory.getPostByTitle('Hello World').then(function (r) {
+    // postListFactory.getPostByTitleID('571e6ea562e24e1100c9e4c3').then(function (r) {
     //   console.log(r);
     // });
 
@@ -34,11 +34,10 @@
     // });
     //
 
-    postListFactory.getAllPosts().then(function (r) {
-      console.log(r);
-    });
+    // postListFactory.getTitleID('Hello World').then(function (e) {
+    //   console.log(e);
+    // });
 
-    console.log(postListFactory.getAllPosts());
 
   }
 

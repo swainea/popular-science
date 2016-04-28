@@ -5,10 +5,12 @@
     .module('blog')
     .factory("LoginService", LoginService);
 
-    LoginService.$inject = ["$http", "$state"];
+    LoginService.$inject = ["$http"];
+
 
     function LoginService($http, $state) {
     	var loginData;
+
     	return {
     		authenticate: authenticate,      //this returns authenticate function
     		getLoginData: getLoginData       //Inject LoginService and getLoginData to make sure it runs after the authentication happens
