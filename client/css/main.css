@@ -21,13 +21,12 @@
   display: block;
   padding: 10px 15px; }
 .main-header a {
-  color: #000000;
+  color: #F0532B;
   text-decoration: none;
   font-size: 1.3em; }
 .main-header a {
   background-color: transparent; }
 .main-header .nav-tabs > li.active > a, .main-header .nav-tabs > li.active > a:focus, .main-header .nav-tabs > li.active > a:hover {
-  color: #F0532B;
   border: none;
   cursor: default;
   border-bottom-color: transparent;

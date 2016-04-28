@@ -2,19 +2,6 @@
   'use strict';
 
   angular
-    .module('blog')
-    .controller('AboutController', AboutController);
-
-  AboutController.$inject = ["$state"];
-
-  function AboutController($state){
-    this.state = $state;  // This is just here to get past the linter error
-  }
-}());
-;(function() {
-  'use strict';
-
-  angular
     .module('blog', ['ui.router'])
     .config(blogConfig);
 
@@ -25,12 +12,14 @@
 
     $stateProvider
     .state('home', {
-      url: '/'
-      // templateUrl: 'welcome/welcome.html'
+      url: '/',
     })
     .state('about', {
-      url: '/about'
-      // templateUrl: 'welcome/welcome.html'
+      url: '/about',
+      templateURL: 'about/about.html',
+      controller: 'AboutController',
+      controllerAs: 'about'
+      // TODO: create a template for 'categoryStories and include its URL here'
     })
     .state('categories', {
       url: '/categories'
@@ -55,19 +44,25 @@
       url: '/:name',
       templateURL: ''
       // TODO: create a template for 'categoryStories and include its URL here'
-    })
-    .state('about', {
-      url: '/:about',
-      templateURL: '',
-      controller: 'AboutController',
-      controllerAs: 'about'
-      // TODO: create a template for 'categoryStories and include its URL here'
     });
 
 
   }
 
 })();
+;(function() {
+  'use strict';
+
+  angular
+    .module('blog')
+    .controller('AboutController', AboutController);
+
+  AboutController.$inject = ["$state"];
+
+  function AboutController($state){
+    this.state = $state;  // This is just here to get past the linter error
+  }
+}());
 ;(function() {
     'use strict';
 
@@ -135,7 +130,7 @@
 
   }
 }());
-;;(function() {
+;(function() {
   'use strict';
 
   angular

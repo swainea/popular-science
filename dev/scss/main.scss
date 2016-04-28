@@ -15,6 +15,7 @@
   .nav {
     background-color:#F7F5E7;
     border: none;
+
   }
   .nav-tabs>li>a {
     margin-right: 2px;
@@ -28,7 +29,7 @@
     padding: 10px 15px;
   }
   a {
-    color: #000000;
+      color:#F0532B;
     text-decoration: none;
     font-size: 1.3em;
   }
@@ -37,7 +38,6 @@
   }
 
   .nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover {
-    color:#F0532B;
     border: none;
     cursor: default;
     border-bottom-color: transparent;
