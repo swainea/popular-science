@@ -80,6 +80,7 @@
   AboutController.$inject = ["$state"];
 
   function AboutController($state){
+
     this.state = $state;  // This is just here to get past the linter error
   }
 }());
@@ -153,10 +154,10 @@
       "title": "",
       "content": "",
       "categoryId": "",
-      "authorId": "5722369d84c2fd11003f9f2b" 
+      "authorId": "5722369d84c2fd11003f9f2b"
     };
     this.newPost = function newPost (){
-      //this function needs to post a new post to the internet and send uf tyo a view that shows that this happened
+      //this function needs to post a new post to the internet and send us to a view that shows that this happened
       CreatePostService.submitPost(this.blogPost);
     };
   }
@@ -207,11 +208,11 @@
 
     this.loginForm = function loginForm(){
       LoginService.authenticate(this.login);    //this.login has the email and password in the form, pass it in as a form so it can grab author.email and author.password
-       // LoginService.authenticate(this.login) === response.data 
+       // LoginService.authenticate(this.login) === response.data
     };
   }
 
-      
+
 
 })();
 ;(function() {
