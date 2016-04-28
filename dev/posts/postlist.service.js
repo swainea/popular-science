@@ -20,17 +20,39 @@
  * category or author or else all posts.
  * It should return that list as an array of objects.
  */
+
+// TODO: These functions should really all return an array instead of a promise
+// I wonder if that's possible. I'll work on that next chance I get.
   function postListFactory($http) {
 
     var apiURL = 'https://tiy-blog-api.herokuapp.com/api';
 
     return {
-      getCategoryID: getCategoryID,
       getAllPosts: getAllPosts,
+      getAllCategories: getAllCategories,
+      getCategoryID: getCategoryID,
       getPostsByCategoryID: getPostsByCategoryID,
       getPostsByAuthorID: getPostsByAuthorID,
       getPostByTitle: getPostByTitle
     };
+
+    function getAllPosts() {
+      return $http({
+        method: 'GET',
+        url: apiURL + '/Posts' + '?filter={"include":["author","category"]}',
+      }).then(function successGetAllPosts(response) {
+        return response.data;
+      });
+    }
+
+    function getAllCategories() {
+      return $http({
+        method: 'GET',
+        url: apiURL + '/Categories' + '?filter={"include":"posts"}',
+      }).then(function successGetAllCategories(response) {
+        return response.data;
+      });
+    }
 
     function getCategoryID(category) {
       return $http({
@@ -48,15 +70,6 @@
         return catid;
       });
       // TODO: calling function should expect promise and catch errors
-    }
-
-    function getAllPosts() {
-      return $http({
-        method: 'GET',
-        url: apiURL + '/Posts' + '?filter={"include":["author","category"]}',
-      }).then(function successGetAllPosts(response) {
-        return response.data;
-      });
     }
 
     function getPostsByCategoryID(categoryID) {

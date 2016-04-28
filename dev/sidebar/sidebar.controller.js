@@ -10,12 +10,7 @@
   function SidebarController(postListFactory) {
     // TODO: this array is here as a placeholder. Replace it with some
     // sort of real data as soon as possible.
-    this.categories = [
-      {id: 123123, name: 'science'},
-      {id: 234234, name: 'fiction'},
-      {id: 345345, name: 'drama'},
-      {id: 456456, name: 'politics'},
-    ];
+    this.categories = '';
 
     // postListFactory.getCategoryID('drama')
     //   .then(function (response) {
@@ -30,10 +25,20 @@
     //   console.log(r);
     // });
 
-    postListFactory.getPostByTitle('Hello World').then(function (r) {
+    // postListFactory.getPostByTitle('Hello World').then(function (r) {
+    //   console.log(r);
+    // });
+
+    // postListFactory.getAllCategories().then(function (e) {
+    //   console.log(e);
+    // });
+    //
+
+    postListFactory.getAllPosts().then(function (r) {
       console.log(r);
     });
 
+    console.log(postListFactory.getAllPosts());
 
   }
 
