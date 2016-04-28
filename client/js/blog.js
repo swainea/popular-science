@@ -24,7 +24,7 @@
     })
     .state('allPosts', {
       url: '/allPosts',
-      templateUrl: '/posts/allposts.template.html',
+      templateUrl: 'posts/allposts.template.html',
       controller: 'AllPostsController',
       controllerAs: 'allPosts'
     })
@@ -34,14 +34,14 @@
       controller: 'CreateNewAuthorController',
       controllerAs: 'cna'
     })
-    .state('allStories', {
-      url: '/allStories',
-      templateUrl: ''
-      // TODO: create a template for 'allStories' and include its URL here
-    })
+    // .state('allStories', {
+    //   url: '/allStories',
+    //   templateUrl: ''
+    //   // TODO: create a template for 'allStories' and include its URL here
+    // })
     .state('categoryStories', {
-      url: '/:name',
-      templateUrl: ''
+      url: '/category/:name',  // this was "/:name" and that ALSO matches /about which is bad.
+      // templateUrl: ''  // a blank templateURL loads http://localhost:8080/ (which means he index.html file!)
       // TODO: create a template for 'categoryStories and include its URL here'
     })
     .state('about', {
@@ -51,7 +51,7 @@
     })
     .state('post', {
       url: '/post',
-      templateUrl: '',
+      // templateUrl: '',
       controller: 'CreatePostController',
       controllerAs: 'post'
       // TODO: create a template for "post" and include its URL here'
