@@ -11,6 +11,22 @@
     $urlRouterProvider.otherwise('/');
 
     $stateProvider
+    .state('home', {
+      url: '/'
+      // templateUrl: 'welcome/welcome.html'
+    })
+    .state('about', {
+      url: '/about'
+      // templateUrl: 'welcome/welcome.html'
+    })
+    .state('categories', {
+      url: '/categories'
+      // templateUrl: 'welcome/welcome.html'
+    })
+    .state('login', {
+      url: '/login'
+      // templateUrl: 'welcome/welcome.html'
+    })
       .state('allStories', {
         url: '/allStories',
         templateURL: ''
@@ -30,6 +46,10 @@
       });
 
 
+<<<<<<< HEAD:dev/app/blog.controller.js
+
+=======
+>>>>>>> upstream/master:dev/app/blog.module.js
   }
 
 })();
