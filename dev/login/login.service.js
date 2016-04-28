@@ -5,9 +5,9 @@
     .module('blog')
     .factory("LoginService", LoginService);
 
-    LoginService.$inject = ["$http", "$state"];
+    LoginService.$inject = ["$http"];
 
-    function LoginService($http, $state) {
+    function LoginService($http) {
 
     	return {
     		authenticate: authenticate      //this returns authenticate function
