@@ -2,8 +2,8 @@
   'use strict';
 
   angular
-    .module('blog', ['ui.router'])
-    .config(blogConfig);
+  .module('blog', ['ui.router'])
+  .config(blogConfig);
 
   blogConfig.$inject = ['$stateProvider', '$urlRouterProvider'];
 
@@ -50,6 +50,13 @@
       url: '/:name',
       templateURL: ''
       // TODO: create a template for 'categoryStories and include its URL here'
+    })
+    .state('post', {
+      url: '/post',
+      templateURL: '',
+      controller: 'CreatePostController',
+      controllerAs: 'post'
+      // TODO: create a template for "post" and include its URL here'
     });
   }
 })();
