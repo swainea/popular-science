@@ -24,7 +24,7 @@
     })
     .state('allPosts', {
       url: '/allPosts',
-      templateURL: '/posts/allposts.template.html',
+      templateUrl: 'posts/allposts.template.html',
       controller: 'AllPostsController',
       controllerAs: 'allPosts'
     })
@@ -34,26 +34,36 @@
       controller: 'CreateNewAuthorController',
       controllerAs: 'cna'
     })
+    // .state('allStories', {
+    //   url: '/allStories',
+    //   templateUrl: ''
+    //   // TODO: create a template for 'allStories' and include its URL here
+    // })
+    .state('categoryStories', {
+      url: '/category/:name',  // this was "/:name" and that ALSO matches /about which is bad.
+      // templateUrl: ''  // a blank templateURL loads http://localhost:8080/ (which means he index.html file!)
+    })
     .state('allStories', {
       url: '/allStories',
-      templateURL: ''
+      templateUrl: ''
       // TODO: create a template for 'allStories' and include its URL here
     })
     .state('categoryStories', {
-      url: '/:name',
-      templateURL: ''
+      url: 'category/:name',
+      templateUrl: ''
       // TODO: create a template for 'categoryStories and include its URL here'
     })
     .state('about', {
       url: '/about',
-      templateURL: '',
+      templateUrl:"about/about.html",
       controller: 'AboutController',
       controllerAs: 'about'
       // TODO: create a template for "about" and include its URL here'
     })
     .state('post', {
       url: '/post',
-      templateURL: '',
+      // templateUrl: '',
+      // templateUrl: '',
       controller: 'CreatePostController',
       controllerAs: 'post'
       // TODO: create a template for "post" and include its URL here'
@@ -198,11 +208,11 @@
 
     this.loginForm = function loginForm(){
       LoginService.authenticate(this.login);    //this.login has the email and password in the form, pass it in as a form so it can grab author.email and author.password
-       // LoginService.authenticate(this.login) === response.data 
+       // LoginService.authenticate(this.login) === response.data
     };
   }
 
-      
+
 
 })();
 ;(function() {
@@ -212,10 +222,9 @@
     .module('blog')
     .factory("LoginService", LoginService);
 
-    LoginService.$inject = ["$http", "$state"];
+    LoginService.$inject = ["$http"];
 
-    function LoginService($http, $state) {
-      this.$state = $state;
+    function LoginService($http) {
 
     	return {
     		authenticate: authenticate      //this returns authenticate function
@@ -296,15 +305,16 @@
       getCategoryID: getCategoryID,
       getPostsByCategoryID: getPostsByCategoryID,
       getPostsByAuthorID: getPostsByAuthorID,
-      getPostByTitle: getPostByTitle
+      getPostByTitleID: getPostByTitleID,
+      getTitleID: getTitleID
     };
-
-    function getAllPosts() {
+// TODO: Set up arguments for all post retrieval functions.
+    function getAllPosts(limit, offset) {
       return $http({
         method: 'GET',
-        url: apiURL + '/Posts' + '?filter={"include":["author","category"]}',
+        url: apiURL + '/Posts' + '?filter={"limit":'+ limit + ',"offset": ' + offset + ',"include":["author","category"]}',
       }).then(function successGetAllPosts(response) {
-        return response.data;
+        return response;
       });
     }
 
@@ -313,7 +323,7 @@
         method: 'GET',
         url: apiURL + '/Categories' + '?filter={"include":"posts"}',
       }).then(function successGetAllCategories(response) {
-        return response.data;
+        return response;
       });
     }
 
@@ -340,7 +350,7 @@
         method: 'GET',
         url: apiURL + '/Categories/' + categoryID + '?filter={"include":"posts"}',
       }).then(function successGetPostsByCategory(response) {
-        return response.data;
+        return response;
       });
     }
 
@@ -359,20 +369,27 @@
       });
     }
 
-    function getPostByTitle(title) {
+    function getTitleID(title) {
       return $http({
         method: 'GET',
-        url: apiURL + '/Posts'
-      }).then(function successGetPostByTitle(response) {
-        var postByTitle;
-        response.data.forEach(function findTitle(each) {
+        url: apiURL + '/Posts',
+      }).then(function successGetTitleID(response) {
+        var titleID;
+        response.data.forEach(function searchForTitle(each) {
           if(each.title === title){
-            postByTitle = each;
-          } else {
-            postByTitle = 'No such title.';
+            titleID = each.id;
           }
         });
-        return postByTitle;
+        return titleID;
+      });
+    }
+
+    function getPostByTitleID(id) {
+      return $http({
+        method: 'GET',
+        url: apiURL + '/Posts/' + id,
+      }).then(function successGetPostByTitleID(response) {
+        return response;
       });
     }
 
@@ -403,15 +420,15 @@
     //     console.log(response);
     //   });
 
-    // postListFactory.getAllPosts().then(function (response) {
-    //   console.log(response);
-    // });
+    postListFactory.getAllPosts().then(function (response) {
+      console.log(response);
+    });
 
     // postListFactory.getPostsByAuthorID('571ba0271a8ec71100d46fc2').then(function (r) {
     //   console.log(r);
     // });
 
-    // postListFactory.getPostByTitle('Hello World').then(function (r) {
+    // postListFactory.getPostByTitleID('571e6ea562e24e1100c9e4c3').then(function (r) {
     //   console.log(r);
     // });
 
@@ -420,11 +437,10 @@
     // });
     //
 
-    postListFactory.getAllPosts().then(function (r) {
-      console.log(r);
-    });
+    // postListFactory.getTitleID('Hello World').then(function (e) {
+    //   console.log(e);
+    // });
 
-    console.log(postListFactory.getAllPosts());
 
   }
 
