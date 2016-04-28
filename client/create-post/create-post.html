@@ -3,16 +3,16 @@
 <form>
 
   <label for="create-postTitle">Title</label>
-  <input type="text" class="form-control" placeholder="Title">
+  <input ng-model="post.blogPost.title" type="text" class="form-control" placeholder="Title">
 
-  <label for="create-postText">Write Your Ppost Here!</label>
-  <textarea class="form-control" name="blogText" rows="10" cols="50">Write your post here</textarea>
+  <label for="create-postText">Write Your Post Here!</label>
+  <textarea ng-model="post.blogPost.content" class="form-control" name="blogText" rows="10" cols="50">Write your post here</textarea>
   <div class="dropdown open">
-    <button class="btn btn-primary dropdown-toggle" type="button">Category<span class="caret"></span></button>
+    <!-- <button ng-model="post.blogPost.category" class="btn btn-primary dropdown-toggle" type="button">Category<span class="caret"></span></button>
     <ul class="dropdown-menu">
       <li ng-repeat=""></li>
-    </ul>
+    </ul> -->
   </div>
-  <button class="btn btn-default" ng-click="">Publish Post</button>
+  <button class="btn btn-default" ng-click="post.newPost()">Publish Post</button>
 
 </form>
