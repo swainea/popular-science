@@ -87,12 +87,7 @@
     // Custom Globals
     "globals"       : {
       "$": true,
-<<<<<<< HEAD
-      "angular": true,
-      "ght": true
-=======
       "ght": true,
       "angular": true
->>>>>>> upstream/master
       }        // additional predefined global variables
 }

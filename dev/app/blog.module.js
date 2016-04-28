@@ -27,29 +27,31 @@
       url: '/login'
       // templateUrl: 'welcome/welcome.html'
     })
-      .state('allStories', {
-        url: '/allStories',
-        templateURL: ''
-        // TODO: create a template for 'allStories' and include its URL here
-      })
-      .state('categoryStories', {
-        url: '/:name',
-        templateURL: ''
-        // TODO: create a template for 'categoryStories and include its URL here'
-      })
-      .state('about', {
-        url: '/:about',
-        templateURL: '',
-        controller: 'AboutController',
-        controllerAs: 'about'
-        // TODO: create a template for 'categoryStories and include its URL here'
-      });
+    .state('createAuthor', {
+      url:'/create-author',
+      templateUrl: 'create-author/create-author.template.html',
+      controller: 'CreateNewAuthorController',
+      controllerAs: 'cna'
+    })
+    .state('allStories', {
+      url: '/allStories',
+      templateURL: ''
+      // TODO: create a template for 'allStories' and include its URL here
+    })
+    .state('categoryStories', {
+      url: '/:name',
+      templateURL: ''
+      // TODO: create a template for 'categoryStories and include its URL here'
+    })
+    .state('about', {
+      url: '/:about',
+      templateURL: '',
+      controller: 'AboutController',
+      controllerAs: 'about'
+      // TODO: create a template for 'categoryStories and include its URL here'
+    });
 
 
-<<<<<<< HEAD:dev/app/blog.controller.js
-
-=======
->>>>>>> upstream/master:dev/app/blog.module.js
   }
 
 })();
