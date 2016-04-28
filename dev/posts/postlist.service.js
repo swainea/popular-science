@@ -36,7 +36,7 @@
       getPostByTitleID: getPostByTitleID,
       getTitleID: getTitleID
     };
-
+// TODO: Set up arguments for all post retrieval functions.
     function getAllPosts(limit, offset) {
       return $http({
         method: 'GET',
