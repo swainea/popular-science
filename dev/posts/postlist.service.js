@@ -37,10 +37,10 @@
       getTitleID: getTitleID
     };
 
-    function getAllPosts() {
+    function getAllPosts(limit, offset) {
       return $http({
         method: 'GET',
-        url: apiURL + '/Posts' + '?filter={"include":["author","category"]}',
+        url: apiURL + '/Posts' + '?filter={"limit":'+ limit + ',"offset": ' + offset + ',"include":["author","category"]}',
       }).then(function successGetAllPosts(response) {
         return response;
       });
