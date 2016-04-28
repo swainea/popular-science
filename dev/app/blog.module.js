@@ -24,7 +24,7 @@
     })
     .state('allPosts', {
       url: '/allPosts',
-      templateURL: '/posts/allposts.template.html',
+      templateUrl: '/posts/allposts.template.html',
       controller: 'AllPostsController',
       controllerAs: 'allPosts'
     })
@@ -36,24 +36,24 @@
     })
     .state('allStories', {
       url: '/allStories',
-      templateURL: ''
+      templateUrl: ''
       // TODO: create a template for 'allStories' and include its URL here
     })
     .state('categoryStories', {
       url: '/:name',
-      templateURL: ''
+      templateUrl: ''
       // TODO: create a template for 'categoryStories and include its URL here'
     })
     .state('about', {
       url: '/about',
-      templateURL: '',
+      templateUrl: '',
       controller: 'AboutController',
       controllerAs: 'about'
       // TODO: create a template for "about" and include its URL here'
     })
     .state('post', {
       url: '/post',
-      templateURL: '',
+      templateUrl: '',
       controller: 'CreatePostController',
       controllerAs: 'post'
       // TODO: create a template for "post" and include its URL here'

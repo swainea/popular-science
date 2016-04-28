@@ -33,7 +33,8 @@
       getCategoryID: getCategoryID,
       getPostsByCategoryID: getPostsByCategoryID,
       getPostsByAuthorID: getPostsByAuthorID,
-      getPostByTitle: getPostByTitle
+      getPostByTitleID: getPostByTitleID,
+      getTitleID: getTitleID
     };
 
     function getAllPosts() {
@@ -96,20 +97,27 @@
       });
     }
 
-    function getPostByTitle(title) {
+    function getTitleID(title) {
       return $http({
         method: 'GET',
-        url: apiURL + '/Posts'
-      }).then(function successGetPostByTitle(response) {
-        var postByTitle;
-        response.data.forEach(function findTitle(each) {
+        url: apiURL + '/Posts',
+      }).then(function successGetTitleID(response) {
+        var titleID;
+        response.data.forEach(function searchForTitle(each) {
           if(each.title === title){
-            postByTitle = each;
-          } else {
-            postByTitle = 'No such title.';
+            titleID = each.id;
           }
         });
-        return postByTitle;
+        return titleID;
+      });
+    }
+
+    function getPostByTitleID(id) {
+      return $http({
+        method: 'GET',
+        url: apiURL + '/Posts/' + id,
+      }).then(function successGetPostByTitleID(response) {
+        return response;
       });
     }
 
