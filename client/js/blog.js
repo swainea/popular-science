@@ -12,8 +12,7 @@
 
     $stateProvider
     .state('home', {
-      url: '/'
-      // templateUrl: 'welcome/welcome.html'
+      url: '/',
     })
     .state('categories', {
       url: '/categories'
@@ -23,15 +22,18 @@
       url: '/login'
       // templateUrl: 'welcome/welcome.html'
     })
-<<<<<<< HEAD
-=======
+    .state('allPosts', {
+      url: '/allPosts',
+      templateURL: '/posts/allposts.template.html',
+      controller: 'AllPostsController',
+      controllerAs: 'allPosts'
+    })
     .state('createAuthor', {
       url:'/create-author',
       templateUrl: 'create-author/create-author.template.html',
       controller: 'CreateNewAuthorController',
       controllerAs: 'cna'
     })
->>>>>>> upstream/master
     .state('allStories', {
       url: '/allStories',
       templateURL: ''
@@ -43,21 +45,20 @@
       // TODO: create a template for 'categoryStories and include its URL here'
     })
     .state('about', {
-      url: '/:about',
+      url: '/about',
       templateURL: '',
       controller: 'AboutController',
       controllerAs: 'about'
-<<<<<<< HEAD
       // TODO: create a template for "about" and include its URL here'
+    })
+    .state('post', {
+      url: '/post',
+      templateURL: '',
+      controller: 'CreatePostController',
+      controllerAs: 'post'
+      // TODO: create a template for "post" and include its URL here'
     });
-=======
-      // TODO: create a template for 'categoryStories and include its URL here'
-    });
-
->>>>>>> upstream/master
-
   }
-
 })();
 ;(function() {
   'use strict';
@@ -69,11 +70,7 @@
   AboutController.$inject = ["$state"];
 
   function AboutController($state){
-<<<<<<< HEAD
-
-=======
     this.state = $state;  // This is just here to get past the linter error
->>>>>>> upstream/master
   }
 }());
 ;(function() {
@@ -139,27 +136,72 @@
     .module('blog')
     .controller('CreatePostController', CreatePostController);
 
-  function CreatePostController (){
+  CreatePostController.$inject = ['CreatePostService'];
 
+  function CreatePostController (CreatePostService){
+    this.blogPost = {
+      title: "",
+      postText: "",
+      category: ""
+    };
+    this.newPost = function newPost (){
+      //this function needs to post a new post to the internet and send uf tyo a view that shows that this happened
+      CreatePostService.submitPost(this.blogPost);
+    };
   }
 }());
-;// (function() {
-//   'use strict';
-//
-//   angular
-//     .module('blog')
-//     .factory( 'CreatePostService', CreatePostService );
-//
-//   CreatePostService.$inject = ['$http'];
-//
-//   function CreatePostService ($http){
-//     if ( );
-//   } return $http ({
-//       method:'POST',
-//       url:
-//   });
-//
-// }());
+;(function() {
+  'use strict';
+
+  angular
+    .module('blog')
+    .factory( 'CreatePostService', CreatePostService );
+
+  CreatePostService.$inject = ['$http'];
+
+  function CreatePostService ($http){
+
+    return {
+      submitPost: submitPost
+    };
+
+    function submitPost (blogPost){
+      return $http ({
+        method:'POST',
+        url: "https://tiy-blog-api.herokuapp.com/api/Posts",
+        data: blogPost,
+        headers: {
+          // Authorization: come back to this
+        }
+      }).then (function onSuccess(response){
+        console.log(response);
+      });
+    }
+  }
+
+}());
+;(function() {
+  'use strict';
+
+  angular
+    .module('blog')
+    .controller('AllPostsController', AllPostsController);
+
+  AllPostsController.$inject = ['postListFactory'];
+
+  function AllPostsController(postListFactory) {
+
+    var that = this;
+
+    postListFactory.getAllPosts()
+      .then(function (r) {
+        that.postList = r;
+      });
+
+    this.postList = [];
+  }
+
+})();
 ;(function() {
   'use strict';
 
@@ -182,17 +224,39 @@
  * category or author or else all posts.
  * It should return that list as an array of objects.
  */
+
+// TODO: These functions should really all return an array instead of a promise
+// I wonder if that's possible. I'll work on that next chance I get.
   function postListFactory($http) {
 
     var apiURL = 'https://tiy-blog-api.herokuapp.com/api';
 
     return {
-      getCategoryID: getCategoryID,
       getAllPosts: getAllPosts,
+      getAllCategories: getAllCategories,
+      getCategoryID: getCategoryID,
       getPostsByCategoryID: getPostsByCategoryID,
       getPostsByAuthorID: getPostsByAuthorID,
       getPostByTitle: getPostByTitle
     };
+
+    function getAllPosts() {
+      return $http({
+        method: 'GET',
+        url: apiURL + '/Posts' + '?filter={"include":["author","category"]}',
+      }).then(function successGetAllPosts(response) {
+        return response.data;
+      });
+    }
+
+    function getAllCategories() {
+      return $http({
+        method: 'GET',
+        url: apiURL + '/Categories' + '?filter={"include":"posts"}',
+      }).then(function successGetAllCategories(response) {
+        return response.data;
+      });
+    }
 
     function getCategoryID(category) {
       return $http({
@@ -210,15 +274,6 @@
         return catid;
       });
       // TODO: calling function should expect promise and catch errors
-    }
-
-    function getAllPosts() {
-      return $http({
-        method: 'GET',
-        url: apiURL + '/Posts' + '?filter={"include":["author","category"]}',
-      }).then(function successGetAllPosts(response) {
-        return response.data;
-      });
     }
 
     function getPostsByCategoryID(categoryID) {
@@ -282,12 +337,7 @@
   function SidebarController(postListFactory) {
     // TODO: this array is here as a placeholder. Replace it with some
     // sort of real data as soon as possible.
-    this.categories = [
-      {id: 123123, name: 'science'},
-      {id: 234234, name: 'fiction'},
-      {id: 345345, name: 'drama'},
-      {id: 456456, name: 'politics'},
-    ];
+    this.categories = '';
 
     // postListFactory.getCategoryID('drama')
     //   .then(function (response) {
@@ -302,10 +352,20 @@
     //   console.log(r);
     // });
 
-    postListFactory.getPostByTitle('Hello World').then(function (r) {
+    // postListFactory.getPostByTitle('Hello World').then(function (r) {
+    //   console.log(r);
+    // });
+
+    // postListFactory.getAllCategories().then(function (e) {
+    //   console.log(e);
+    // });
+    //
+
+    postListFactory.getAllPosts().then(function (r) {
       console.log(r);
     });
 
+    console.log(postListFactory.getAllPosts());
 
   }
 

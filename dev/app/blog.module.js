@@ -12,8 +12,7 @@
 
     $stateProvider
     .state('home', {
-      url: '/'
-      // templateUrl: 'welcome/welcome.html'
+      url: '/',
     })
     .state('categories', {
       url: '/categories'
@@ -23,14 +22,18 @@
       url: '/login'
       // templateUrl: 'welcome/welcome.html'
     })
-
+    .state('allPosts', {
+      url: '/allPosts',
+      templateURL: '/posts/allposts.template.html',
+      controller: 'AllPostsController',
+      controllerAs: 'allPosts'
+    })
     .state('createAuthor', {
       url:'/create-author',
       templateUrl: 'create-author/create-author.template.html',
       controller: 'CreateNewAuthorController',
       controllerAs: 'cna'
     })
-
     .state('allStories', {
       url: '/allStories',
       templateURL: ''
@@ -55,8 +58,5 @@
       controllerAs: 'post'
       // TODO: create a template for "post" and include its URL here'
     });
-
-
   }
-
 })();
