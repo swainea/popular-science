@@ -33,15 +33,16 @@
       getCategoryID: getCategoryID,
       getPostsByCategoryID: getPostsByCategoryID,
       getPostsByAuthorID: getPostsByAuthorID,
-      getPostByTitle: getPostByTitle
+      getPostByTitleID: getPostByTitleID,
+      getTitleID: getTitleID
     };
-
-    function getAllPosts() {
+// TODO: Set up arguments for all post retrieval functions.
+    function getAllPosts(limit, offset) {
       return $http({
         method: 'GET',
-        url: apiURL + '/Posts' + '?filter={"include":["author","category"]}',
+        url: apiURL + '/Posts' + '?filter={"limit":'+ limit + ',"offset": ' + offset + ',"include":["author","category"]}',
       }).then(function successGetAllPosts(response) {
-        return response.data;
+        return response;
       });
     }
 
@@ -50,7 +51,7 @@
         method: 'GET',
         url: apiURL + '/Categories' + '?filter={"include":"posts"}',
       }).then(function successGetAllCategories(response) {
-        return response.data;
+        return response;
       });
     }
 
@@ -77,7 +78,7 @@
         method: 'GET',
         url: apiURL + '/Categories/' + categoryID + '?filter={"include":"posts"}',
       }).then(function successGetPostsByCategory(response) {
-        return response.data;
+        return response;
       });
     }
 
@@ -96,20 +97,27 @@
       });
     }
 
-    function getPostByTitle(title) {
+    function getTitleID(title) {
       return $http({
         method: 'GET',
-        url: apiURL + '/Posts'
-      }).then(function successGetPostByTitle(response) {
-        var postByTitle;
-        response.data.forEach(function findTitle(each) {
+        url: apiURL + '/Posts',
+      }).then(function successGetTitleID(response) {
+        var titleID;
+        response.data.forEach(function searchForTitle(each) {
           if(each.title === title){
-            postByTitle = each;
-          } else {
-            postByTitle = 'No such title.';
+            titleID = each.id;
           }
         });
-        return postByTitle;
+        return titleID;
+      });
+    }
+
+    function getPostByTitleID(id) {
+      return $http({
+        method: 'GET',
+        url: apiURL + '/Posts/' + id,
+      }).then(function successGetPostByTitleID(response) {
+        return response;
       });
     }
 
