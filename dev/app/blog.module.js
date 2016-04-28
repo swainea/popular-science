@@ -15,10 +15,6 @@
       url: '/'
       // templateUrl: 'welcome/welcome.html'
     })
-    .state('about', {
-      url: '/about'
-      // templateUrl: 'welcome/welcome.html'
-    })
     .state('categories', {
       url: '/categories'
       // templateUrl: 'welcome/welcome.html'
@@ -26,6 +22,12 @@
     .state('login', {
       url: '/login'
       // templateUrl: 'welcome/welcome.html'
+    })
+    .state('allPosts', {
+      url: '/allPosts',
+      templateURL: '/posts/allposts.template.html',
+      controller: 'AllPostsController',
+      controllerAs: 'allPosts'
     })
     .state('createAuthor', {
       url:'/create-author',
@@ -50,8 +52,5 @@
       controllerAs: 'about'
       // TODO: create a template for 'categoryStories and include its URL here'
     });
-
-
   }
-
 })();
