@@ -29,6 +29,17 @@
       controller: 'AllPostsController',
       controllerAs: 'allPosts'
     })
+    .state('createAuthor', {
+      url:'/create-author',
+      templateUrl: 'create-author/create-author.template.html',
+      controller: 'CreateNewAuthorController',
+      controllerAs: 'cna'
+    })
+    .state('allStories', {
+      url: '/allStories',
+      templateURL: ''
+      // TODO: create a template for 'allStories' and include its URL here
+    })
     .state('categoryStories', {
       url: '/:name',
       templateURL: ''

@@ -50,7 +50,7 @@ module.exports = function(grunt) {
                 sourceMap: true
             },
             js: {
-                src: [ 'dev/app/blog.controller.js', 'dev/**/*.js' ],
+                src: [ 'dev/app/blog.module.js', 'dev/**/*.js' ],
                 dest: 'client/js/blog.js',
             },
         },
