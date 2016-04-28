@@ -8,6 +8,7 @@
     LoginService.$inject = ["$http", "$state"];
 
     function LoginService($http, $state) {
+      this.$state = $state;
 
     	return {
     		authenticate: authenticate      //this returns authenticate function
