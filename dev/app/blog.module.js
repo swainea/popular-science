@@ -46,7 +46,7 @@
     })
     .state('about', {
       url: '/about',
-      templateURL: '',
+      templateURL: 'about/about.html',
       controller: 'AboutController',
       controllerAs: 'about'
       // TODO: create a template for "about" and include its URL here'
