@@ -20,6 +20,9 @@
  * category or author or else all posts.
  * It should return that list as an array of objects.
  */
+
+// TODO: These functions should really all return an array instead of a promise
+// I wonder if that's possible. I'll work on that next chance I get.
   function postListFactory($http) {
 
     var apiURL = 'https://tiy-blog-api.herokuapp.com/api';

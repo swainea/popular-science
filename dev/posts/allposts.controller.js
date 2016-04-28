@@ -5,12 +5,11 @@
     .module('blog')
     .controller('AllPostsController', AllPostsController);
 
-AllPostsController.$inject = ['postListFactory'];
+  AllPostsController.$inject = ['postListFactory'];
 
   function AllPostsController(postListFactory) {
-    this.postList = postListFactory.getAllPosts().then(function gotAllPosts(response) {
-      return response;
-    });
+
+    this.postList = [];
   }
 
 })();
