@@ -8,6 +8,10 @@
   AboutController.$inject = ["$state"];
 
   function AboutController($state){
+<<<<<<< HEAD
 
+=======
+    this.state = $state;  // This is just here to get past the linter error
+>>>>>>> upstream/master
   }
 }());
