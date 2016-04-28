@@ -23,15 +23,14 @@
       url: '/login'
       // templateUrl: 'welcome/welcome.html'
     })
-<<<<<<< HEAD
-=======
+
     .state('createAuthor', {
       url:'/create-author',
       templateUrl: 'create-author/create-author.template.html',
       controller: 'CreateNewAuthorController',
       controllerAs: 'cna'
     })
->>>>>>> upstream/master
+
     .state('allStories', {
       url: '/allStories',
       templateURL: ''
@@ -43,18 +42,20 @@
       // TODO: create a template for 'categoryStories and include its URL here'
     })
     .state('about', {
-      url: '/:about',
+      url: '/about',
       templateURL: '',
       controller: 'AboutController',
       controllerAs: 'about'
-<<<<<<< HEAD
       // TODO: create a template for "about" and include its URL here'
-    });
-=======
-      // TODO: create a template for 'categoryStories and include its URL here'
+    })
+    .state('post', {
+      url: '/post',
+      templateURL: '',
+      controller: 'CreatePostController',
+      controllerAs: 'post'
+      // TODO: create a template for "post" and include its URL here'
     });
 
->>>>>>> upstream/master
 
   }
 

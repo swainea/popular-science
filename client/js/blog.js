@@ -2,21 +2,8 @@
   'use strict';
 
   angular
-    .module('blog')
-    .controller('AboutController', AboutController);
-
-  AboutController.$inject = ["$state"];
-
-  function AboutController($state){
-    this.state = $state;  // This is just here to get past the linter error
-  }
-}());
-;(function() {
-  'use strict';
-
-  angular
-    .module('blog', ['ui.router'])
-    .config(blogConfig);
+  .module('blog', ['ui.router'])
+  .config(blogConfig);
 
   blogConfig.$inject = ['$stateProvider', '$urlRouterProvider'];
 
@@ -28,10 +15,6 @@
       url: '/'
       // templateUrl: 'welcome/welcome.html'
     })
-    .state('about', {
-      url: '/about'
-      // templateUrl: 'welcome/welcome.html'
-    })
     .state('categories', {
       url: '/categories'
       // templateUrl: 'welcome/welcome.html'
@@ -40,12 +23,15 @@
       url: '/login'
       // templateUrl: 'welcome/welcome.html'
     })
+<<<<<<< HEAD
+=======
     .state('createAuthor', {
       url:'/create-author',
       templateUrl: 'create-author/create-author.template.html',
       controller: 'CreateNewAuthorController',
       controllerAs: 'cna'
     })
+>>>>>>> upstream/master
     .state('allStories', {
       url: '/allStories',
       templateURL: ''
@@ -61,13 +47,35 @@
       templateURL: '',
       controller: 'AboutController',
       controllerAs: 'about'
+<<<<<<< HEAD
+      // TODO: create a template for "about" and include its URL here'
+    });
+=======
       // TODO: create a template for 'categoryStories and include its URL here'
     });
 
+>>>>>>> upstream/master
 
   }
 
 })();
+;(function() {
+  'use strict';
+
+  angular
+    .module('blog')
+    .controller('AboutController', AboutController);
+
+  AboutController.$inject = ["$state"];
+
+  function AboutController($state){
+<<<<<<< HEAD
+
+=======
+    this.state = $state;  // This is just here to get past the linter error
+>>>>>>> upstream/master
+  }
+}());
 ;(function() {
     'use strict';
 
@@ -135,7 +143,24 @@
 
   }
 }());
-;;(function() {
+;// (function() {
+//   'use strict';
+//
+//   angular
+//     .module('blog')
+//     .factory( 'CreatePostService', CreatePostService );
+//
+//   CreatePostService.$inject = ['$http'];
+//
+//   function CreatePostService ($http){
+//     if ( );
+//   } return $http ({
+//       method:'POST',
+//       url:
+//   });
+//
+// }());
+;(function() {
   'use strict';
 
   angular
