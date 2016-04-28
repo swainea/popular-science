@@ -13,29 +13,30 @@
 
       <nav>
         <ul class="nav nav-tabs">
-          <li role="presentation"><a ui-sref='home'>Home</a></li>
-          <li role="presentation"><a ui-sref='about'>About</a></li>
-          <li role="presentation"><a ui-sref='login'>Login</a></li>
+          <li><a ui-sref='home'>Home</a></li>
+          <li><a ui-sref='about'>About</a></li>
+          <li><a ui-sref='categoryStories'>Categories</a></li>
+          <li><a ui-sref='allPosts'>All Posts</a></li>
+          <li><a ui-sref='post'>Post</a></li>
+          <li><a ui-sref='login'>Login</a></li>
+
           <!-- <li role="presentation"><a ui-sref='post'>Post</a></li>
           <li role="presentation"><a ui-sref='logout'>Logout</a></li> -->
-  </ul>
-</nav>
-</header>
-<section ui-view>
+        </ul>
+      </nav>
+    </header>
+    <section ui-view class="main-section">
+    </section>
 
+    <div class="panel panel-default">
+      <!-- <div class="panel-body"></div> -->
+      <div class="panel-footer">&copy 2016 Jordan Kasper</div>
+    </div>
+  </main>
 
-</section>
-
-
-<div class="panel panel-default">
-  <!-- <div class="panel-body"></div> -->
-  <div class="panel-footer">&copy 2016 Jordan Kasper</div>
-</div>
-</main>
-
-<script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular.min.js'></script>
-<script src='http://angular-ui.github.io/ui-router/release/angular-ui-router.js'></script>
-<script src='js/blog.js'></script>
+  <script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular.min.js'></script>
+  <script src='https://angular-ui.github.io/ui-router/release/angular-ui-router.js'></script>
+  <script src='js/blog.js'></script>
 
 
 </body>
