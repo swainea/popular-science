@@ -14,13 +14,6 @@
     .state('home', {
       url: '/',
     })
-    .state('about', {
-      url: '/about',
-      templateURL: 'about/about.html',
-      controller: 'AboutController',
-      controllerAs: 'about'
-      // TODO: create a template for 'categoryStories and include its URL here'
-    })
     .state('categories', {
       url: '/categories'
       // templateUrl: 'welcome/welcome.html'
@@ -50,6 +43,13 @@
       url: '/:name',
       templateURL: ''
       // TODO: create a template for 'categoryStories and include its URL here'
+    })
+    .state('about', {
+      url: '/about',
+      templateURL: '',
+      controller: 'AboutController',
+      controllerAs: 'about'
+      // TODO: create a template for "about" and include its URL here'
     })
     .state('post', {
       url: '/post',

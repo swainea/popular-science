@@ -14,13 +14,6 @@
     .state('home', {
       url: '/',
     })
-    .state('about', {
-      url: '/about',
-      templateURL: 'about/about.html',
-      controller: 'AboutController',
-      controllerAs: 'about'
-      // TODO: create a template for 'categoryStories and include its URL here'
-    })
     .state('categories', {
       url: '/categories'
       // templateUrl: 'welcome/welcome.html'
@@ -49,6 +42,19 @@
 
 })();
 (function() {
+    })
+    .state('about', {
+      url: '/:about',
+      templateURL: '',
+      controller: 'AboutController',
+      controllerAs: 'about'
+      // TODO: create a template for "about" and include its URL here'
+    });
+
+  }
+
+})();
+;(function() {
   'use strict';
 
   angular
@@ -64,6 +70,9 @@
   }
 }());
 (function() {
+  }
+}());
+;(function() {
     'use strict';
 
     angular.module('blog')
@@ -130,7 +139,7 @@
 
   }
 }());
-(function() {
+;(function() {
   'use strict';
 
   angular
