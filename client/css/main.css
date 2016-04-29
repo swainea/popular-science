@@ -419,7 +419,6 @@ html, body {
 
 .panel {
   border: none;
-  position: fixed;
   bottom: 0;
   width: 100%; }
   .panel .panel-footer {
@@ -445,5 +444,11 @@ html, body {
     background-color: #F84E32; }
     .sidebar .list-group-item a {
       color: black; }
+
+.password {
+  margin-left: 10px; }
+
+.email {
+  margin-left: 39px; }
 
 /*# sourceMappingURL=main.css.map */
