@@ -16,7 +16,7 @@
       getAllCategories: getAllCategories,
       getCategoryID: getCategoryID,
       getPostsByCategoryID: getPostsByCategoryID,
-      getAuthorID: getAuthorID,
+      // getAuthorID: getAuthorID,
       getPostsByAuthorID: getPostsByAuthorID,
       getTitleID: getTitleID,
       getPostByTitleID: getPostByTitleID
