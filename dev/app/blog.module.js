@@ -8,12 +8,15 @@
   blogConfig.$inject = ['$stateProvider', '$urlRouterProvider'];
 
   function blogConfig($stateProvider, $urlRouterProvider) {
-    
+
     $urlRouterProvider.otherwise('/');
 
     $stateProvider
     .state('home', {
       url: '/',
+      templateUrl: 'home/home.template.html',
+      controller: 'HomeViewController',
+      controllerAs: 'home'
     })
     .state('categories', {
       url: '/categories'
@@ -47,10 +50,16 @@
       controllerAs: 'about'
     })
     .state('post', {
-      url: '/post',
+      url: '/post/:id',
       controller: 'CreatePostController',
       controllerAs: 'post'
       // TODO: create a template for "post" and include its URL here'
+    })
+    .state('author', {
+      url: '/author/:id',
+      templateUrl:"author/author.template.html",
+      controller: 'AuthorController',
+      controllerAs: 'author'
     });
   }
 })();

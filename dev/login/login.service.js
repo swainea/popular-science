@@ -8,7 +8,7 @@
     LoginService.$inject = ["$http"];
 
 
-    function LoginService($http, $state) {
+    function LoginService($http) {
     	var loginData;
 
     	return {

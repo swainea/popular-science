@@ -132,7 +132,7 @@
     function getPostsByAuthorID(authorID) {
       return $http({
         method: 'GET',
-        url: apiURL + '/Posts'
+        url: apiURL + '/Posts?filter={"include":["author","category"]}'
       }).then(function getPostsByAuthor(response) {
         var authorPostList = [];
         response.data.forEach(function successGetPostsByAuthorID(each) {
