@@ -21,8 +21,6 @@
         CreatePostService.createCategory(this.blogPost.newCategory);
       }
       CreatePostService.submitPost(this.blogPost);
-      // console.log("inside of newPost function");
-
     };
   }
 }());
