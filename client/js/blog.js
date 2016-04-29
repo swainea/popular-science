@@ -111,9 +111,9 @@
     angular.module('blog')
       .controller('CreateNewAuthorController', CreateNewAuthorController);
 
-      CreateNewAuthorController.$inject = ['NewAuthorService'];
+      CreateNewAuthorController.$inject = ['$state', 'NewAuthorService', 'LoginService'];
 
-      function CreateNewAuthorController(NewAuthorService){
+      function CreateNewAuthorController($state, NewAuthorService, LoginService){
 
         console.log('In Author Stories');
 
@@ -122,7 +122,11 @@
         this.newAuthorForm = function newAuthorForm() {
           // console.log(this.newAuthor);
 
-          NewAuthorService.createAuthor(this.newAuthor);
+          NewAuthorService.createAuthor(this.newAuthor)
+            .then(LoginService.authenticate(this.author))
+            .then( function goHome() {
+              $state.go('home');
+            });
 
 
           };
