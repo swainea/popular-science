@@ -10,6 +10,13 @@ html, body{
   background-color: #F7F5E7;
 }
 
+.wrapper {
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+  margin: 0 auto -50px;
+  }
+
 .main-header {
   height: 260px;
   .banner-image{
@@ -41,12 +48,13 @@ html, body{
     font-size: 1.3em;
     background-color: transparent;
   }
+  // TODO: I would like to make the active tab have the 'active' class but I'm not sure how.
   .nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover {
     border: none;
     cursor: default;
     border-bottom-color: transparent;
     font-style: italic;
-    background-color: #F5BE7D;
+    background-color: #F7F5E7;
   }
 }
 
@@ -55,6 +63,10 @@ html, body{
   margin-left: 10%;
   margin-right: 10%;
   bottom: 0;
+}
+
+.panel .push{
+  height: 50px;
 }
 
 .panel{
