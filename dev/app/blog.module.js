@@ -22,7 +22,10 @@
       url: '/categories'
     })
     .state('login', {
-      url: '/login'
+      url: '/login',
+      templateUrl: 'login/login.template.html',
+      controller: 'LoginController',
+      controllerAs: 'lc'
     })
     .state('allPosts', {
       url: '/allPosts',
