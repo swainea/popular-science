@@ -1,8 +1,9 @@
-
-
-
 * {
     margin: 0;
+}
+
+html, body{
+  height: 100%;
 }
 
 .main-header {
@@ -72,4 +73,20 @@
 //   bottom: 0;
 //   color: #000000;
 // }
+}
+// TODO: I don't know how to get this thing to stretch the full height of the
+// page. Help!
+.sidebar{
+  background-color: #F7F5E7;
+  float: right;
+  width: 20%;
+  .list-group {
+    background-color: #F0532B;
+  }
+  .list-group-item {
+    background-color: #F0532B;
+    a {
+      color: black;
+    }
+  }
 }

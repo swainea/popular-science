@@ -8,6 +8,7 @@
   blogConfig.$inject = ['$stateProvider', '$urlRouterProvider'];
 
   function blogConfig($stateProvider, $urlRouterProvider) {
+    
     $urlRouterProvider.otherwise('/');
 
     $stateProvider
@@ -16,11 +17,9 @@
     })
     .state('categories', {
       url: '/categories'
-      // templateUrl: 'welcome/welcome.html'
     })
     .state('login', {
       url: '/login'
-      // templateUrl: 'welcome/welcome.html'
     })
     .state('allPosts', {
       url: '/allPosts',
@@ -34,36 +33,21 @@
       controller: 'CreateNewAuthorController',
       controllerAs: 'cna'
     })
-    // .state('allStories', {
-    //   url: '/allStories',
-    //   templateUrl: ''
-    //   // TODO: create a template for 'allStories' and include its URL here
-    // })
     .state('categoryStories', {
-      url: '/category/:name',  // this was "/:name" and that ALSO matches /about which is bad.
-      // templateUrl: ''  // a blank templateURL loads http://localhost:8080/ (which means he index.html file!)
+      url: '/category/:name',
     })
     .state('allStories', {
       url: '/allStories',
-      templateUrl: ''
-      // TODO: create a template for 'allStories' and include its URL here
-    })
-    .state('categoryStories', {
-      url: 'category/:name',
-      templateUrl: ''
-      // TODO: create a template for 'categoryStories and include its URL here'
+      templateUrl: 'posts/allposts.template.html'
     })
     .state('about', {
       url: '/about',
       templateUrl:"about/about.html",
       controller: 'AboutController',
       controllerAs: 'about'
-      // TODO: create a template for "about" and include its URL here'
     })
     .state('post', {
       url: '/post',
-      // templateUrl: '',
-      // templateUrl: '',
       controller: 'CreatePostController',
       controllerAs: 'post'
       // TODO: create a template for "post" and include its URL here'
@@ -71,18 +55,19 @@
   }
 })();
 ;(function() {
-  'use strict';
+  // 'use strict';
+  //
+  // angular
+  //   .module('blog')
+  //   .controller('AboutController', AboutController);
 
-  angular
-    .module('blog')
-    .controller('AboutController', AboutController);
-
-  AboutController.$inject = ["$state"];
-
-  function AboutController($state){
-
-    this.state = $state;  // This is just here to get past the linter error
-  }
+// We many not need the below function and inject afterall
+  // AboutController.$inject = ["$state"];
+  //
+  // function AboutController($state){
+  //
+  //
+  // }
 }());
 ;(function() {
     'use strict';
@@ -151,14 +136,20 @@
 
   function CreatePostController (CreatePostService){
     this.blogPost = {
-      "title": "",
-      "content": "",
-      "categoryId": "",
-      "authorId": "5722369d84c2fd11003f9f2b"
+      title: "",
+      content: "",
+      categoryId: "571e6e9362e24e1100c9e4c2",
+      authorId: "5722369d84c2fd11003f9f2b",
+      newCategory: null,
     };
     this.newPost = function newPost (){
-      //this function needs to post a new post to the internet and send us to a view that shows that this happened
+      console.log("blogPost is: ", this.blogPost);
+      if (this.blogPost.newCategory){
+        CreatePostService.createCategory(this.blogPost.newCategory);
+      }
       CreatePostService.submitPost(this.blogPost);
+      // console.log("inside of newPost function");
+
     };
   }
 }());
@@ -174,20 +165,40 @@
   function CreatePostService ($http){
 
     return {
-      submitPost: submitPost
+      submitPost: submitPost,
+      createCategory: createCategory
     };
 
     function submitPost (blogPost){
+      console.log(blogPost);
       return $http ({
         method:'POST',
         url: "https://tiy-blog-api.herokuapp.com/api/Posts",
         data: blogPost,
         headers: {
-          Authorization: {
-            id: "cStlRZdmrEnDqJr8V80SBlddBWlrBtj1N3Bbc7SJC4w1aE28MMyW2hxbKh7M3vbN",
-          }
+          Authorization: "lYldEKUsuEELUiFwFcRRNm1o1YjsGSsCAUwWzTmgmtdNfYj2p9Dwi9FHEtwdCSAW"
+
         }
       }).then (function onSuccess(response){
+        console.log("inside of onSuccess function", response);
+      }, function error(response) {
+        console.log(response);
+      }
+    );
+    }
+
+    function createCategory(newCategory){
+      console.log(newCategory);
+      return $http ({
+        method: 'POST',
+        url: "https://tiy-blog-api.herokuapp.com/api/Categories",
+        data: { name: newCategory},
+        headers: {
+          Authorization: "lYldEKUsuEELUiFwFcRRNm1o1YjsGSsCAUwWzTmgmtdNfYj2p9Dwi9FHEtwdCSAW"
+        }
+      }).then (function onSuccess(response){
+        console.log("inside of second onSuccess function", response);
+      }, function error(response) {
         console.log(response);
       });
     }
@@ -207,12 +218,15 @@
     this.login = {};
 
     this.loginForm = function loginForm(){
-      LoginService.authenticate(this.login);    //this.login has the email and password in the form, pass it in as a form so it can grab author.email and author.password
-       // LoginService.authenticate(this.login) === response.data
+      LoginService.authenticate(this.login).then(function(response){
+        console.log(response.id);
+        // LoginService.getLoginData();   Now you can run that logindata and it will return the user's Login Data, in this case, response.data
+        //state.go should go here because the controller marries the UI with the data
+      });
     };
   }
 
-
+      
 
 })();
 ;(function() {
@@ -224,10 +238,13 @@
 
     LoginService.$inject = ["$http"];
 
+
     function LoginService($http) {
+    	var loginData;
 
     	return {
-    		authenticate: authenticate      //this returns authenticate function
+    		authenticate: authenticate,      //this returns authenticate function
+    		getLoginData: getLoginData       //Inject LoginService and getLoginData to make sure it runs after the authentication happens
     	};
 
     	function authenticate(author){
@@ -240,10 +257,17 @@
     			}
 
     		}).then(function successHandler(response) {
-    			// $state.go("home");
     			console.log(response.data);
+
+    			loginData = response.data;
+    			console.log(loginData);
                 return response.data;
 	    		});
+    	}
+
+    	function getLoginData() {
+    		console.log(loginData);
+    		return loginData;
     	}
     }
 
@@ -262,13 +286,12 @@
     var that = this;
 
     postListFactory.getAllPosts()
-      .then(function (r) {
-        that.postList = r;
+      .then(function returnPostsList(response) {
+        that.postList = response.data;
       });
 
     this.postList = [];
   }
-
 })();
 ;(function() {
   'use strict';
@@ -277,24 +300,8 @@
     .module('blog')
     .factory('postListFactory', postListFactory);
 
-  // var storyList = [
-  //   {id: 1111, title: 'A Call to Farms', author: 'mattgrosso', category: 'fiction'},
-  //   {id: 2222, title: 'Jurassic Pork', author: 'david', category: 'fiction'},
-  //   {id: 3333, title: 'The Count of Monte Crisco', author: 'sarah', category: 'drama'},
-  //   {id: 4444, title: 'A Short History of a Few Things', author: 'lindsey', category: 'science'},
-  //   {id: 5555, title: 'A Song of Lice and Tires', author: 'martin', category: 'politics'},
-  // ];
-
   postListFactory.$inject = ['$http'];
 
-/**
- * This factory should be able to retrieve a list of blog posts for a given
- * category or author or else all posts.
- * It should return that list as an array of objects.
- */
-
-// TODO: These functions should really all return an array instead of a promise
-// I wonder if that's possible. I'll work on that next chance I get.
   function postListFactory($http) {
 
     var apiURL = 'https://tiy-blog-api.herokuapp.com/api';
@@ -304,20 +311,39 @@
       getAllCategories: getAllCategories,
       getCategoryID: getCategoryID,
       getPostsByCategoryID: getPostsByCategoryID,
+      // getAuthorID: getAuthorID,
       getPostsByAuthorID: getPostsByAuthorID,
-      getPostByTitleID: getPostByTitleID,
-      getTitleID: getTitleID
+      getTitleID: getTitleID,
+      getPostByTitleID: getPostByTitleID
     };
-// TODO: Set up arguments for all post retrieval functions.
-    function getAllPosts(limit, offset) {
+
+    /**
+     * This function returns a promise with an array that contains all of the
+     * posts on the site.
+     * The contents of the return can be modified using filters as arguments.
+     * @param  {[number]} limit   [This is the number of posts you want to return]
+     * @param  {[number]} offset  [This is the index number of the first post
+     *                            you want to return]
+     * @param  {[string]} orderBy [Here you can sort by any key in the objects
+     *                            and include ASC or DESC to sort in ascending
+     *                            or decending order (eg. 'title ASC')]
+     * @return {[promise]}        [Returns a promise with an array of all posts]
+     */
+    function getAllPosts(limit, offset, orderBy) {
+      offset = offset || 0;
+      limit = limit || null;
       return $http({
         method: 'GET',
-        url: apiURL + '/Posts' + '?filter={"limit":'+ limit + ',"offset": ' + offset + ',"include":["author","category"]}',
+        url: apiURL + '/Posts' + '?filter={"limit":' + limit + ',"offset":' + offset + ',"order":"' + orderBy + '","include":["author","category"]}',
       }).then(function successGetAllPosts(response) {
-        return response;
+        return response.data;
       });
     }
 
+    /**
+     * This function returns a list of all of the categories on the site.
+     * @return {[promise]} [Returns a promise with an array of all category objects]
+     */
     function getAllCategories() {
       return $http({
         method: 'GET',
@@ -327,6 +353,12 @@
       });
     }
 
+    /**
+     * This function returns the category ID for a given category.
+     * @param  {[string]} category [The name of the category to ID]
+     * @return {[promise]}         [Returns a promise with a string of the
+     *                             category's ID or else 'No such category']
+     */
     function getCategoryID(category) {
       return $http({
         method: 'GET',
@@ -342,9 +374,14 @@
         });
         return catid;
       });
-      // TODO: calling function should expect promise and catch errors
     }
 
+    /**
+     * This function returns a list of all of the posts within a given category.
+     * @param  {[string]} categoryID [The category ID of the desired category]
+     * @return {[type]}              [Returns a promise with an array of all of
+     *                               the posts within the given category]
+     */
     function getPostsByCategoryID(categoryID) {
       return $http({
         method: 'GET',
@@ -354,6 +391,39 @@
       });
     }
 
+    /**
+     * This function returns the author ID for a given author.
+     * @param  {[string]} author [The name of the author to ID]
+     * @return {[promise]}       [Returns a promise with a string of the author's
+     *                           author ID or else 'No such author']
+     */
+    // function getAuthorID(author) {
+    //   return $http({
+    //     method: 'GET',
+    //     url: apiURL + '/Authors',
+    //     // TODO: I need to figure out where this authorization will come from.
+    //     // data: {
+    //     //   email: author.email,
+    //     //   password: author.password
+    //     // }
+    //   }).then(function successGetAuthorID(response) {
+    //     var authorID;
+    //     response.data.forEach(function findAuthorID(each) {
+    //       if(each.name === author){
+    //         authorID = each.id;
+    //       } else {
+    //         authorID = 'No such author';
+    //       }
+    //     });
+    //   });
+    // }
+
+    /**
+     * This function returns a list of all of the posts from a given author.
+     * @param  {[string]} authorID [The author ID of the desired author]
+     * @return {[type]}            [Returns a promise with an array of all of
+     *                             the posts from a given author]
+     */
     function getPostsByAuthorID(authorID) {
       return $http({
         method: 'GET',
@@ -369,6 +439,12 @@
       });
     }
 
+    /**
+     * This function returns the ID for a post given its title.
+     * @param  {[string]} title [The title of a post]
+     * @return {[promise]}      [Returns a promise with a string value of the ID
+     *                          of the given post title]
+     */
     function getTitleID(title) {
       return $http({
         method: 'GET',
@@ -384,6 +460,12 @@
       });
     }
 
+    /**
+     * This function returns the full post object of a given post ID
+     * @param  {[string]} id [The ID of the desired post]
+     * @return {[promise]}   [Returns a promise with the full object of the
+     *                       desired post]
+     */
     function getPostByTitleID(id) {
       return $http({
         method: 'GET',
@@ -392,12 +474,6 @@
         return response;
       });
     }
-
-
-
-    // TODO: This should do some logic to figure out what subset of the list
-    // was asked for. It should also get real data from a server, not fake data
-    // from above.
   }
 
 })();
@@ -411,39 +487,16 @@
   SidebarController.$inject = ['postListFactory'];
 
   function SidebarController(postListFactory) {
-    // TODO: this array is here as a placeholder. Replace it with some
-    // sort of real data as soon as possible.
-    this.categories = '';
 
-    // postListFactory.getCategoryID('drama')
-    //   .then(function (response) {
-    //     console.log(response);
-    //   });
+    var that = this;
 
-    postListFactory.getAllPosts().then(function (response) {
-      console.log(response);
-    });
+    postListFactory.getAllCategories()
+      .then(function returnCategoryList(response) {
+        that.categories = response.data;
+      });
 
-    // postListFactory.getPostsByAuthorID('571ba0271a8ec71100d46fc2').then(function (r) {
-    //   console.log(r);
-    // });
-
-    // postListFactory.getPostByTitleID('571e6ea562e24e1100c9e4c3').then(function (r) {
-    //   console.log(r);
-    // });
-
-    // postListFactory.getAllCategories().then(function (e) {
-    //   console.log(e);
-    // });
-    //
-
-    // postListFactory.getTitleID('Hello World').then(function (e) {
-    //   console.log(e);
-    // });
-
-
+    this.categories = [];
   }
-
 })();
 
 //# sourceMappingURL=blog.js.map
