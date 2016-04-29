@@ -78,7 +78,6 @@
   //
   //
   // }
-
 }());
 ;(function() {
     'use strict';
@@ -283,7 +282,7 @@
     };
   }
 
-      
+
 
 })();
 ;(function() {
@@ -374,7 +373,6 @@
       getTitleID: getTitleID,
       getPostByTitleID: getPostByTitleID
     };
-
     /**
      * This function returns a promise with an array that contains all of the
      * posts on the site.
