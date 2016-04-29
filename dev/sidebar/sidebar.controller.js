@@ -17,7 +17,18 @@
     //     console.log(response);
     //   });
 
-    console.log(postListFactory.getAllPosts());
+    postListFactory.getAllPosts().then(function (r) {
+      console.log(r);
+    });
+
+    postListFactory.getAllPosts(3,3,'title ASC').then(function (r) {
+      console.log(r);
+    });
+
+    postListFactory.getAllPosts(3,0,'title ASC').then(function (r) {
+      console.log(r);
+    });
+
 
     // postListFactory.getAllPosts().then(function (response) {
     //   console.log(response);

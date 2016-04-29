@@ -38,18 +38,14 @@
     };
 // TODO: Set up arguments for all post retrieval functions.
     function getAllPosts(limit, offset, orderBy) {
-
       offset = offset || 0;
       limit = limit || null;
-      var getPostsURL = apiURL + '/Posts' + '?filter={"limit":' + limit + ',"offset":' + offset + ',"order":"' + orderBy + '","include":["author","category"]}';
-      return getPostsURL;
-
-      // return $http({
-      //   method: 'GET',
-      //   url: apiURL + '/Posts' + '?filter={"limit":' + limit + ',"offset": ' + offset + ',"order": ' + orderBy + ' ' + sortOrder + ',"include":["author","category"]}',
-      // }).then(function successGetAllPosts(response) {
-      //   return response.data;
-      // });
+      return $http({
+        method: 'GET',
+        url: apiURL + '/Posts' + '?filter={"limit":' + limit + ',"offset":' + offset + ',"order":"' + orderBy + '","include":["author","category"]}',
+      }).then(function successGetAllPosts(response) {
+        return response.data;
+      });
     }
 
     function getAllCategories() {
