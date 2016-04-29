@@ -48,11 +48,6 @@
       templateUrl: ''
       // TODO: create a template for 'allStories' and include its URL here
     })
-    .state('categoryStories', {
-      url: 'category/:name',
-      templateUrl: ''
-      // TODO: create a template for 'categoryStories and include its URL here'
-    })
     .state('about', {
       url: '/about',
       templateUrl:"about/about.html",
