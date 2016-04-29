@@ -77,11 +77,12 @@
     .module('blog')
     .controller('AboutController', AboutController);
 
-  AboutController.$inject = ["$state"];
-
-  function AboutController($state){
-
-    this.state = $state;  // This is just here to get past the linter error
+// We many not need the below function and inject afterall
+  // AboutController.$inject = ["$state"];
+  //
+  function AboutController(){
+  //
+  //
   }
 }());
 ;(function() {
@@ -151,14 +152,20 @@
 
   function CreatePostController (CreatePostService){
     this.blogPost = {
-      "title": "",
-      "content": "",
-      "categoryId": "",
-      "authorId": "5722369d84c2fd11003f9f2b"
+      title: "",
+      content: "",
+      categoryId: "571e6e9362e24e1100c9e4c2",
+      authorId: "5722369d84c2fd11003f9f2b",
+      newCategory: null,
     };
     this.newPost = function newPost (){
-      //this function needs to post a new post to the internet and send us to a view that shows that this happened
+      console.log("blogPost is: ", this.blogPost);
+      if (this.blogPost.newCategory){
+        CreatePostService.createCategory(this.blogPost.newCategory);
+      }
       CreatePostService.submitPost(this.blogPost);
+      // console.log("inside of newPost function");
+
     };
   }
 }());
@@ -174,20 +181,40 @@
   function CreatePostService ($http){
 
     return {
-      submitPost: submitPost
+      submitPost: submitPost,
+      createCategory: createCategory
     };
 
     function submitPost (blogPost){
+      console.log(blogPost);
       return $http ({
         method:'POST',
         url: "https://tiy-blog-api.herokuapp.com/api/Posts",
         data: blogPost,
         headers: {
-          Authorization: {
-            id: "cStlRZdmrEnDqJr8V80SBlddBWlrBtj1N3Bbc7SJC4w1aE28MMyW2hxbKh7M3vbN",
-          }
+          Authorization: "lYldEKUsuEELUiFwFcRRNm1o1YjsGSsCAUwWzTmgmtdNfYj2p9Dwi9FHEtwdCSAW"
+
         }
       }).then (function onSuccess(response){
+        console.log("inside of onSuccess function", response);
+      }, function error(response) {
+        console.log(response);
+      }
+    );
+    }
+
+    function createCategory(newCategory){
+      console.log(newCategory);
+      return $http ({
+        method: 'POST',
+        url: "https://tiy-blog-api.herokuapp.com/api/Categories",
+        data: { name: newCategory},
+        headers: {
+          Authorization: "lYldEKUsuEELUiFwFcRRNm1o1YjsGSsCAUwWzTmgmtdNfYj2p9Dwi9FHEtwdCSAW"
+        }
+      }).then (function onSuccess(response){
+        console.log("inside of second onSuccess function", response);
+      }, function error(response) {
         console.log(response);
       });
     }
@@ -208,11 +235,11 @@
 
     this.loginForm = function loginForm(){
       LoginService.authenticate(this.login);    //this.login has the email and password in the form, pass it in as a form so it can grab author.email and author.password
-       // LoginService.authenticate(this.login) === response.data
+       // LoginService.authenticate(this.login) === response.data 
     };
   }
 
-
+      
 
 })();
 ;(function() {
@@ -309,12 +336,12 @@
       getTitleID: getTitleID
     };
 // TODO: Set up arguments for all post retrieval functions.
-    function getAllPosts(limit, offset) {
+    function getAllPosts() {
       return $http({
         method: 'GET',
-        url: apiURL + '/Posts' + '?filter={"limit":'+ limit + ',"offset": ' + offset + ',"include":["author","category"]}',
+        url: apiURL + '/Posts' + '?filter={"include":["author","category"]}',
       }).then(function successGetAllPosts(response) {
-        return response;
+        return response.data;
       });
     }
 
