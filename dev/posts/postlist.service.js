@@ -5,24 +5,8 @@
     .module('blog')
     .factory('postListFactory', postListFactory);
 
-  // var storyList = [
-  //   {id: 1111, title: 'A Call to Farms', author: 'mattgrosso', category: 'fiction'},
-  //   {id: 2222, title: 'Jurassic Pork', author: 'david', category: 'fiction'},
-  //   {id: 3333, title: 'The Count of Monte Crisco', author: 'sarah', category: 'drama'},
-  //   {id: 4444, title: 'A Short History of a Few Things', author: 'lindsey', category: 'science'},
-  //   {id: 5555, title: 'A Song of Lice and Tires', author: 'martin', category: 'politics'},
-  // ];
-
   postListFactory.$inject = ['$http'];
 
-/**
- * This factory should be able to retrieve a list of blog posts for a given
- * category or author or else all posts.
- * It should return that list as an array of objects.
- */
-
-// TODO: These functions should really all return an array instead of a promise
-// I wonder if that's possible. I'll work on that next chance I get.
   function postListFactory($http) {
 
     var apiURL = 'https://tiy-blog-api.herokuapp.com/api';
@@ -32,20 +16,39 @@
       getAllCategories: getAllCategories,
       getCategoryID: getCategoryID,
       getPostsByCategoryID: getPostsByCategoryID,
+      // getAuthorID: getAuthorID,
       getPostsByAuthorID: getPostsByAuthorID,
-      getPostByTitleID: getPostByTitleID,
-      getTitleID: getTitleID
+      getTitleID: getTitleID,
+      getPostByTitleID: getPostByTitleID
     };
-// TODO: Set up arguments for all post retrieval functions.
-    function getAllPosts() {
+
+    /**
+     * This function returns a promise with an array that contains all of the
+     * posts on the site.
+     * The contents of the return can be modified using filters as arguments.
+     * @param  {[number]} limit   [This is the number of posts you want to return]
+     * @param  {[number]} offset  [This is the index number of the first post
+     *                            you want to return]
+     * @param  {[string]} orderBy [Here you can sort by any key in the objects
+     *                            and include ASC or DESC to sort in ascending
+     *                            or decending order (eg. 'title ASC')]
+     * @return {[promise]}        [Returns a promise with an array of all posts]
+     */
+    function getAllPosts(limit, offset, orderBy) {
+      offset = offset || 0;
+      limit = limit || null;
       return $http({
         method: 'GET',
-        url: apiURL + '/Posts' + '?filter={"include":["author","category"]}',
+        url: apiURL + '/Posts' + '?filter={"limit":' + limit + ',"offset":' + offset + ',"order":"' + orderBy + '","include":["author","category"]}',
       }).then(function successGetAllPosts(response) {
         return response.data;
       });
     }
 
+    /**
+     * This function returns a list of all of the categories on the site.
+     * @return {[promise]} [Returns a promise with an array of all category objects]
+     */
     function getAllCategories() {
       return $http({
         method: 'GET',
@@ -55,6 +58,12 @@
       });
     }
 
+    /**
+     * This function returns the category ID for a given category.
+     * @param  {[string]} category [The name of the category to ID]
+     * @return {[promise]}         [Returns a promise with a string of the
+     *                             category's ID or else 'No such category']
+     */
     function getCategoryID(category) {
       return $http({
         method: 'GET',
@@ -70,9 +79,14 @@
         });
         return catid;
       });
-      // TODO: calling function should expect promise and catch errors
     }
 
+    /**
+     * This function returns a list of all of the posts within a given category.
+     * @param  {[string]} categoryID [The category ID of the desired category]
+     * @return {[type]}              [Returns a promise with an array of all of
+     *                               the posts within the given category]
+     */
     function getPostsByCategoryID(categoryID) {
       return $http({
         method: 'GET',
@@ -82,10 +96,43 @@
       });
     }
 
+    /**
+     * This function returns the author ID for a given author.
+     * @param  {[string]} author [The name of the author to ID]
+     * @return {[promise]}       [Returns a promise with a string of the author's
+     *                           author ID or else 'No such author']
+     */
+    // function getAuthorID(author) {
+    //   return $http({
+    //     method: 'GET',
+    //     url: apiURL + '/Authors',
+    //     // TODO: I need to figure out where this authorization will come from.
+    //     // data: {
+    //     //   email: author.email,
+    //     //   password: author.password
+    //     // }
+    //   }).then(function successGetAuthorID(response) {
+    //     var authorID;
+    //     response.data.forEach(function findAuthorID(each) {
+    //       if(each.name === author){
+    //         authorID = each.id;
+    //       } else {
+    //         authorID = 'No such author';
+    //       }
+    //     });
+    //   });
+    // }
+
+    /**
+     * This function returns a list of all of the posts from a given author.
+     * @param  {[string]} authorID [The author ID of the desired author]
+     * @return {[type]}            [Returns a promise with an array of all of
+     *                             the posts from a given author]
+     */
     function getPostsByAuthorID(authorID) {
       return $http({
         method: 'GET',
-        url: apiURL + '/Posts'
+        url: apiURL + '/Posts?filter={"include":["author","category"]}'
       }).then(function getPostsByAuthor(response) {
         var authorPostList = [];
         response.data.forEach(function successGetPostsByAuthorID(each) {
@@ -97,6 +144,12 @@
       });
     }
 
+    /**
+     * This function returns the ID for a post given its title.
+     * @param  {[string]} title [The title of a post]
+     * @return {[promise]}      [Returns a promise with a string value of the ID
+     *                          of the given post title]
+     */
     function getTitleID(title) {
       return $http({
         method: 'GET',
@@ -112,6 +165,12 @@
       });
     }
 
+    /**
+     * This function returns the full post object of a given post ID
+     * @param  {[string]} id [The ID of the desired post]
+     * @return {[promise]}   [Returns a promise with the full object of the
+     *                       desired post]
+     */
     function getPostByTitleID(id) {
       return $http({
         method: 'GET',
@@ -120,12 +179,6 @@
         return response;
       });
     }
-
-
-
-    // TODO: This should do some logic to figure out what subset of the list
-    // was asked for. It should also get real data from a server, not fake data
-    // from above.
   }
 
 })();

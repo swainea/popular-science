@@ -11,8 +11,11 @@
     this.login = {};
 
     this.loginForm = function loginForm(){
-      LoginService.authenticate(this.login);    //this.login has the email and password in the form, pass it in as a form so it can grab author.email and author.password
-       // LoginService.authenticate(this.login) === response.data 
+      LoginService.authenticate(this.login).then(function(response){
+        console.log(response.id);
+        // LoginService.getLoginData();   Now you can run that logindata and it will return the user's Login Data, in this case, response.data
+        //state.go should go here because the controller marries the UI with the data
+      });
     };
   }
 

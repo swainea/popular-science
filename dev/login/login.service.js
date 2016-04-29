@@ -7,10 +7,13 @@
 
     LoginService.$inject = ["$http"];
 
+
     function LoginService($http) {
+    	var loginData;
 
     	return {
-    		authenticate: authenticate      //this returns authenticate function
+    		authenticate: authenticate,      //this returns authenticate function
+    		getLoginData: getLoginData       //Inject LoginService and getLoginData to make sure it runs after the authentication happens
     	};
 
     	function authenticate(author){
@@ -23,10 +26,18 @@
     			}
 
     		}).then(function successHandler(response) {
-    			// $state.go("home");
+
     			console.log(response.data);
+
+    			loginData = response.data;
+    			console.log(loginData);
                 return response.data;
 	    		});
+    	}
+
+    	function getLoginData() {
+    		console.log(loginData);
+    		return loginData;
     	}
     }
 
