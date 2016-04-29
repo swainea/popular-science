@@ -8,12 +8,15 @@
   blogConfig.$inject = ['$stateProvider', '$urlRouterProvider'];
 
   function blogConfig($stateProvider, $urlRouterProvider) {
-    
+
     $urlRouterProvider.otherwise('/');
 
     $stateProvider
     .state('home', {
       url: '/',
+      templateUrl: 'home/home.template.html',
+      controller: 'HomeViewController',
+      controllerAs: 'home'
     })
     .state('categories', {
       url: '/categories'
@@ -47,10 +50,16 @@
       controllerAs: 'about'
     })
     .state('post', {
-      url: '/post',
+      url: '/post/:id',
       controller: 'CreatePostController',
       controllerAs: 'post'
       // TODO: create a template for "post" and include its URL here'
+    })
+    .state('author', {
+      url: '/author/:id',
+      templateUrl:"author/author.template.html",
+      controller: 'AuthorController',
+      controllerAs: 'author'
     });
   }
 })();
@@ -61,6 +70,7 @@
   //   .module('blog')
   //   .controller('AboutController', AboutController);
 
+
 // We many not need the below function and inject afterall
   // AboutController.$inject = ["$state"];
   //
@@ -68,7 +78,32 @@
   //
   //
   // }
+
 }());
+;(function() {
+    'use strict';
+
+    angular.module('blog')
+      .controller('AuthorController', AuthorController);
+
+      AuthorController.$inject = ['$stateParams', 'postListFactory'];
+
+      function AuthorController($stateParams, postListFactory) {
+        console.log($stateParams.id);
+        console.log("in AuthorController");
+        var that = this;
+        this.allPosts = [];
+
+        postListFactory.getPostsByAuthorID($stateParams.id)
+          .then(function viewPosts(posts) {
+            console.log(posts);
+            that.allPosts = posts;
+        });
+        // this.recentPosts = postListFactory.getAllPosts();
+
+      }
+
+})();
 ;(function() {
     'use strict';
 
@@ -206,6 +241,28 @@
 
 }());
 ;(function() {
+    'use strict';
+
+    angular.module('blog')
+      .controller('HomeViewController', HomeViewController);
+
+      HomeViewController.$inject = ['postListFactory'];
+
+      function HomeViewController(postListFactory) {
+        var that = this;
+        this.recentPosts = [];
+
+        postListFactory.getAllPosts(3, 0, "date DESC")
+          .then(function viewPosts(posts) {
+            console.log(posts);
+            that.recentPosts = posts;
+        });
+        // this.recentPosts = postListFactory.getAllPosts();
+
+      }
+
+})();
+;(function() {
   'use strict';
 
   angular
@@ -257,6 +314,7 @@
     			}
 
     		}).then(function successHandler(response) {
+
     			console.log(response.data);
 
     			loginData = response.data;
@@ -427,7 +485,7 @@
     function getPostsByAuthorID(authorID) {
       return $http({
         method: 'GET',
-        url: apiURL + '/Posts'
+        url: apiURL + '/Posts?filter={"include":["author","category"]}'
       }).then(function getPostsByAuthor(response) {
         var authorPostList = [];
         response.data.forEach(function successGetPostsByAuthorID(each) {

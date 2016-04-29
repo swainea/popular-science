@@ -26,6 +26,7 @@
     			}
 
     		}).then(function successHandler(response) {
+
     			console.log(response.data);
 
     			loginData = response.data;
