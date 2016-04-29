@@ -1,6 +1,9 @@
 * {
   margin: 0; }
 
+html, body {
+  height: 100%; }
+
 .main-header #banner {
   top: 0px;
   left: 0px;
@@ -49,5 +52,16 @@
     font-size: 1.1em;
     text-align: center;
     color: #000000; }
+
+.sidebar {
+  background-color: #F7F5E7;
+  float: right;
+  width: 20%; }
+  .sidebar .list-group {
+    background-color: #F0532B; }
+  .sidebar .list-group-item {
+    background-color: #F0532B; }
+    .sidebar .list-group-item a {
+      color: black; }
 
 /*# sourceMappingURL=main.css.map */
