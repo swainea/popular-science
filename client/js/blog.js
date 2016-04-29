@@ -45,9 +45,7 @@
     })
     .state('about', {
       url: '/about',
-      templateUrl:"about/about.html",
-      controller: 'AboutController',
-      controllerAs: 'about'
+      templateUrl:"about/about.html"
     })
     .state('post', {
       url: '/post',
@@ -55,6 +53,11 @@
       controllerAs: 'post',
       templateUrl: 'create-post/create-post.html'
       // TODO: create a template for "post" and include its URL here'
+    .state('viewPost', {
+      url: '/post/:id',
+      templateUrl:"posts/viewpost.template.html",
+      controller: 'ViewPostController',
+      controllerAs: 'vp'
     })
     .state('author', {
       url: '/author/:id',
@@ -110,9 +113,9 @@
     angular.module('blog')
       .controller('CreateNewAuthorController', CreateNewAuthorController);
 
-      CreateNewAuthorController.$inject = ['NewAuthorService'];
+      CreateNewAuthorController.$inject = ['$state', 'NewAuthorService', 'LoginService'];
 
-      function CreateNewAuthorController(NewAuthorService){
+      function CreateNewAuthorController($state, NewAuthorService, LoginService){
 
         console.log('In Author Stories');
 
@@ -121,7 +124,11 @@
         this.newAuthorForm = function newAuthorForm() {
           // console.log(this.newAuthor);
 
-          NewAuthorService.createAuthor(this.newAuthor);
+          NewAuthorService.createAuthor(this.newAuthor)
+            .then(LoginService.authenticate(this.author))
+            .then( function goHome() {
+              $state.go('home');
+            });
 
 
           };
@@ -281,7 +288,6 @@
         //state.go should go here because the controller marries the UI with the data
       });
     };
-
     this.register = function register (){
       $state.go("createAuthor");
     };
@@ -292,8 +298,6 @@
       $state.go("home");
     };
   }
-
-      
 
 })();
 ;(function() {
@@ -355,7 +359,7 @@
 
     postListFactory.getAllPosts()
       .then(function returnPostsList(response) {
-        that.postList = response.data;
+        that.postList = response;
       });
 
     this.postList = [];
@@ -495,7 +499,7 @@
     function getPostsByAuthorID(authorID) {
       return $http({
         method: 'GET',
-        url: apiURL + '/Posts?filter={"include":["author","category"]}'
+        url: apiURL + '/Posts?filter={"include":["author","category"], "order":"date DESC"}'
       }).then(function getPostsByAuthor(response) {
         var authorPostList = [];
         response.data.forEach(function successGetPostsByAuthorID(each) {
@@ -537,12 +541,35 @@
     function getPostByTitleID(id) {
       return $http({
         method: 'GET',
-        url: apiURL + '/Posts/' + id,
+        url: apiURL + '/Posts/' + id + '?filter={"include":["author","category"]}',
       }).then(function successGetPostByTitleID(response) {
-        return response;
+        return response.data;
       });
     }
   }
+
+})();
+;(function() {
+    'use strict';
+
+    angular.module('blog')
+      .controller('ViewPostController', ViewPostController);
+
+      ViewPostController.$inject = ['$stateParams', 'postListFactory'];
+
+      function ViewPostController($stateParams, postListFactory) {
+        console.log($stateParams.id);
+        console.log("in ViewPostController");
+        var that = this;
+        this.post = [];
+
+        postListFactory.getPostByTitleID($stateParams.id)
+          .then(function viewPost(post) {
+            console.log(post);
+            that.post = post;
+        });
+
+      }
 
 })();
 ;(function() {

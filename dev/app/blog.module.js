@@ -23,9 +23,9 @@
     })
     .state('login', {
       url: '/login',
-      templateUrl:'login/login.template.html',
+      templateUrl: 'login/login.template.html',
       controller: 'LoginController',
-      controllerAs:'lc'
+      controllerAs: 'lc'
     })
     .state('allPosts', {
       url: '/allPosts',
@@ -45,9 +45,7 @@
     })
     .state('about', {
       url: '/about',
-      templateUrl:"about/about.html",
-      controller: 'AboutController',
-      controllerAs: 'about'
+      templateUrl:"about/about.html"
     })
     .state('post', {
       url: '/post',
@@ -55,6 +53,11 @@
       controllerAs: 'post',
       templateUrl: 'create-post/create-post.html'
       // TODO: create a template for "post" and include its URL here'
+    .state('viewPost', {
+      url: '/post/:id',
+      templateUrl:"posts/viewpost.template.html",
+      controller: 'ViewPostController',
+      controllerAs: 'vp'
     })
     .state('author', {
       url: '/author/:id',
