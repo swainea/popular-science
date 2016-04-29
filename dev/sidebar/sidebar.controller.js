@@ -8,8 +8,6 @@
   SidebarController.$inject = ['postListFactory'];
 
   function SidebarController(postListFactory) {
-    // TODO: this array is here as a placeholder. Replace it with some
-    // sort of real data as soon as possible.
     this.categories = '';
 
     // postListFactory.getCategoryID('drama')
