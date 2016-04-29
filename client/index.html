@@ -8,8 +8,9 @@
 </head>
 <body>
   <main>
+
     <header class="main-header">
-      <img ng-src="http://i.imgur.com/RUb6rkl.png" id="banner" alt="Banner">
+      <div class="banner-image"></div>
 
       <nav>
         <ul class="nav nav-tabs">
@@ -26,24 +27,24 @@
       </nav>
     </header>
 
-    <div class="sidebar" ng-controller="SidebarController as sidebar">
-      <ul class="list-group">
-        <li class="list-group-item" ng-repeat="category in sidebar.categories">
-          <a ui-sref="categoryStories({ name: category.name })">
-            {{category.name}}
-          </a>
-        </li>
-        <li class="list-group-item"><button ui-sref="allPosts">All Stories</button></li>
-      </ul>
-    </div>
+      <div class="sidebar" ng-controller="SidebarController as sidebar">
+        <ul class="list-group">
+          <li class="list-group-item" ng-repeat="category in sidebar.categories">
+            <a ui-sref="categoryStories({ name: category.name })">
+              {{category.name}}
+            </a>
+          </li>
+          <li class="list-group-item"><button ui-sref="allPosts">All Stories</button></li>
+        </ul>
+      </div>
 
-    <section ui-view class="main-section">
-    </section>
+      <section ui-view class="main-section"></section>
 
     <div class="panel panel-default">
       <!-- <div class="panel-body"></div> -->
       <div class="panel-footer">&copy 2016 Jordan Kasper</div>
     </div>
+
   </main>
 
   <script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular.min.js'></script>
