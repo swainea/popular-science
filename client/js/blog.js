@@ -22,7 +22,10 @@
       url: '/categories'
     })
     .state('login', {
-      url: '/login'
+      url: '/login',
+      templateUrl:'login/login.template.html',
+      controller: 'LoginController',
+      controllerAs:'lc'
     })
     .state('allPosts', {
       url: '/allPosts',
@@ -35,9 +38,6 @@
       templateUrl: 'create-author/create-author.template.html',
       controller: 'CreateNewAuthorController',
       controllerAs: 'cna'
-    })
-    .state('categoryStories', {
-      url: '/category/:name',
     })
     .state('allStories', {
       url: '/allStories',
@@ -52,7 +52,8 @@
     .state('post', {
       url: '/post',
       controller: 'CreatePostController',
-      controllerAs: 'post'
+      controllerAs: 'post',
+      templateUrl: 'create-post/create-post.html'
       // TODO: create a template for "post" and include its URL here'
     })
     .state('author', {
@@ -73,11 +74,11 @@
 
 // We many not need the below function and inject afterall
   // AboutController.$inject = ["$state"];
-  //
   // function AboutController($state){
   //
   //
   // }
+
 }());
 ;(function() {
     'use strict';
@@ -182,8 +183,6 @@
         CreatePostService.createCategory(this.blogPost.newCategory);
       }
       CreatePostService.submitPost(this.blogPost);
-      // console.log("inside of newPost function");
-
     };
   }
 }());
@@ -210,7 +209,7 @@
         url: "https://tiy-blog-api.herokuapp.com/api/Posts",
         data: blogPost,
         headers: {
-          Authorization: "lYldEKUsuEELUiFwFcRRNm1o1YjsGSsCAUwWzTmgmtdNfYj2p9Dwi9FHEtwdCSAW"
+          Authorization: "cJund8LBpBz7FeeEC785DuGAumKI3jBQ7GomRGTcrgqgl8D4HmSc1GxBuHQUnqRY"
 
         }
       }).then (function onSuccess(response){
@@ -228,7 +227,7 @@
         url: "https://tiy-blog-api.herokuapp.com/api/Categories",
         data: { name: newCategory},
         headers: {
-          Authorization: "lYldEKUsuEELUiFwFcRRNm1o1YjsGSsCAUwWzTmgmtdNfYj2p9Dwi9FHEtwdCSAW"
+          Authorization: "cJund8LBpBz7FeeEC785DuGAumKI3jBQ7GomRGTcrgqgl8D4HmSc1GxBuHQUnqRY"
         }
       }).then (function onSuccess(response){
         console.log("inside of second onSuccess function", response);
@@ -268,21 +267,33 @@
     .module('blog')
     .controller("LoginController", LoginController);
 
-  LoginController.$inject = ["LoginService"];
+  LoginController.$inject = ["$state", "LoginService"];
 
-  function LoginController(LoginService) {            //this will give it access to the things in LoginService
+  function LoginController($state, LoginService) {            //this will give it access to the things in LoginService
     this.login = {};
 
     this.loginForm = function loginForm(){
-      LoginService.authenticate(this.login).then(function(response){
-        console.log(response.id);
+      LoginService.authenticate(this.login)
+        .then(function(response){
+          console.log(response.id);
+          $state.go("home");
         // LoginService.getLoginData();   Now you can run that logindata and it will return the user's Login Data, in this case, response.data
         //state.go should go here because the controller marries the UI with the data
       });
     };
+
+    this.register = function register (){
+      $state.go("createAuthor");
+    };
+
+    this.logout = function logout(){
+      console.log("hi");
+      this.login = {};
+      $state.go("home");
+    };
   }
 
-
+      
 
 })();
 ;(function() {
@@ -373,6 +384,7 @@
       getTitleID: getTitleID,
       getPostByTitleID: getPostByTitleID
     };
+
     /**
      * This function returns a promise with an array that contains all of the
      * posts on the site.

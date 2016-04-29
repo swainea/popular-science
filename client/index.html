@@ -13,14 +13,14 @@
       <div class="banner-image"></div>
 
       <nav>
-        <ul class="nav nav-tabs">
+        <ul ng-controller="LoginController as lc" class="nav nav-tabs">
           <li><a ui-sref='home'>Home</a></li>
           <li><a ui-sref='about'>About</a></li>
           <li><a ui-sref='categoryStories'>Categories</a></li>
           <li><a ui-sref='allPosts'>All Posts</a></li>
           <li><a ui-sref='post'>Post</a></li>
           <li><a ui-sref='login'>Login</a></li>
-
+          <li><a ui-sref='home' ng-click="lc.logout()">Logout</a></li>
           <!-- <li role="presentation"><a ui-sref='post'>Post</a></li>
           <li role="presentation"><a ui-sref='logout'>Logout</a></li> -->
         </ul>
