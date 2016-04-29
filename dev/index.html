@@ -2,8 +2,8 @@
 <html lang='en' ng-app="blog">
 <head>
   <meta charset='utf-8'>
-  <link rel='stylesheet' type='text/css' href='css/main.css'>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+  <link rel='stylesheet' type='text/css' href='css/main.css'>
   <title>Popular Science Blog</title>
 </head>
 <body>
@@ -27,13 +27,13 @@
     </header>
 
     <div class="sidebar" ng-controller="SidebarController as sidebar">
-      <ul>
-        <li ng-repeat="category in sidebar.categories">
+      <ul class="list-group">
+        <li class="list-group-item" ng-repeat="category in sidebar.categories">
           <a ui-sref="categoryStories({ name: category.name })">
             {{category.name}}
           </a>
         </li>
-        <li><button ui-sref="allPosts">All Stories</button></li>
+        <li class="list-group-item"><button ui-sref="allPosts">All Stories</button></li>
       </ul>
     </div>
 
