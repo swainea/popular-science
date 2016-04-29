@@ -50,7 +50,7 @@
       controllerAs: 'about'
     })
     .state('post', {
-      url: '/post/:id',
+      url: '/post',
       controller: 'CreatePostController',
       controllerAs: 'post'
       // TODO: create a template for "post" and include its URL here'
