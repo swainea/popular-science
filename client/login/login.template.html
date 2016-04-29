@@ -1,19 +1,5 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title></title>
-	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-	<style type="text/css">
-	.email {
-		margin-left: 29px;
-	}
-	</style>
 
-</head>
-
-<body ng-app="blog">
-
-	<section class="partial" ng-controller="LoginController as lc" class="container">
+	<div class="container partial">
 		<div class="row">
 			<div class="col-md-12">
 				<form novalidate ng-submit="lc.loginForm()">
@@ -40,15 +26,4 @@
 				</form>
 			</div>
 		</div>
-	</section>
-  		<script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular.min.js'></script>
-        
-        <script src='http://angular-ui.github.io/ui-router/release/angular-ui-router.js'></script>
-        
-
-        <script src='../app/blog.module.js'></script>
-
-        <script src='login.service.js'></script>
-        <script src='login.controller.js'></script>
-</body>
-</html>
+	</div>
