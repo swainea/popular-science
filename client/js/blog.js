@@ -22,7 +22,10 @@
       url: '/categories'
     })
     .state('login', {
-      url: '/login'
+      url: '/login',
+      templateUrl: 'login/login.template.html',
+      controller: 'LoginController',
+      controllerAs: 'lc'
     })
     .state('allPosts', {
       url: '/allPosts',
@@ -45,15 +48,13 @@
     })
     .state('about', {
       url: '/about',
-      templateUrl:"about/about.html",
-      controller: 'AboutController',
-      controllerAs: 'about'
+      templateUrl:"about/about.html"
     })
-    .state('post', {
-      url: '/post',
-      controller: 'CreatePostController',
-      controllerAs: 'post'
-      // TODO: create a template for "post" and include its URL here'
+    .state('viewPost', {
+      url: '/post/:id',
+      templateUrl:"posts/viewpost.template.html",
+      controller: 'ViewPostController',
+      controllerAs: 'vp'
     })
     .state('author', {
       url: '/author/:id',
@@ -73,11 +74,11 @@
 
 // We many not need the below function and inject afterall
   // AboutController.$inject = ["$state"];
-  //
   // function AboutController($state){
   //
   //
   // }
+
 }());
 ;(function() {
     'use strict';
@@ -109,9 +110,9 @@
     angular.module('blog')
       .controller('CreateNewAuthorController', CreateNewAuthorController);
 
-      CreateNewAuthorController.$inject = ['NewAuthorService'];
+      CreateNewAuthorController.$inject = ['$state', 'NewAuthorService', 'LoginService'];
 
-      function CreateNewAuthorController(NewAuthorService){
+      function CreateNewAuthorController($state, NewAuthorService, LoginService){
 
         console.log('In Author Stories');
 
@@ -120,7 +121,11 @@
         this.newAuthorForm = function newAuthorForm() {
           // console.log(this.newAuthor);
 
-          NewAuthorService.createAuthor(this.newAuthor);
+          NewAuthorService.createAuthor(this.newAuthor)
+            .then(LoginService.authenticate(this.author))
+            .then( function goHome() {
+              $state.go('home');
+            });
 
 
           };
@@ -182,8 +187,6 @@
         CreatePostService.createCategory(this.blogPost.newCategory);
       }
       CreatePostService.submitPost(this.blogPost);
-      // console.log("inside of newPost function");
-
     };
   }
 }());
@@ -210,7 +213,7 @@
         url: "https://tiy-blog-api.herokuapp.com/api/Posts",
         data: blogPost,
         headers: {
-          Authorization: "lYldEKUsuEELUiFwFcRRNm1o1YjsGSsCAUwWzTmgmtdNfYj2p9Dwi9FHEtwdCSAW"
+          Authorization: "cJund8LBpBz7FeeEC785DuGAumKI3jBQ7GomRGTcrgqgl8D4HmSc1GxBuHQUnqRY"
 
         }
       }).then (function onSuccess(response){
@@ -228,7 +231,7 @@
         url: "https://tiy-blog-api.herokuapp.com/api/Categories",
         data: { name: newCategory},
         headers: {
-          Authorization: "lYldEKUsuEELUiFwFcRRNm1o1YjsGSsCAUwWzTmgmtdNfYj2p9Dwi9FHEtwdCSAW"
+          Authorization: "cJund8LBpBz7FeeEC785DuGAumKI3jBQ7GomRGTcrgqgl8D4HmSc1GxBuHQUnqRY"
         }
       }).then (function onSuccess(response){
         console.log("inside of second onSuccess function", response);
@@ -282,7 +285,7 @@
     };
   }
 
-
+      
 
 })();
 ;(function() {
@@ -373,6 +376,7 @@
       getTitleID: getTitleID,
       getPostByTitleID: getPostByTitleID
     };
+
     /**
      * This function returns a promise with an array that contains all of the
      * posts on the site.
@@ -483,7 +487,7 @@
     function getPostsByAuthorID(authorID) {
       return $http({
         method: 'GET',
-        url: apiURL + '/Posts?filter={"include":["author","category"]}'
+        url: apiURL + '/Posts?filter={"include":["author","category"], "order":"date DESC"}'
       }).then(function getPostsByAuthor(response) {
         var authorPostList = [];
         response.data.forEach(function successGetPostsByAuthorID(each) {
@@ -525,12 +529,35 @@
     function getPostByTitleID(id) {
       return $http({
         method: 'GET',
-        url: apiURL + '/Posts/' + id,
+        url: apiURL + '/Posts/' + id + '?filter={"include":["author","category"]}',
       }).then(function successGetPostByTitleID(response) {
-        return response;
+        return response.data;
       });
     }
   }
+
+})();
+;(function() {
+    'use strict';
+
+    angular.module('blog')
+      .controller('ViewPostController', ViewPostController);
+
+      ViewPostController.$inject = ['$stateParams', 'postListFactory'];
+
+      function ViewPostController($stateParams, postListFactory) {
+        console.log($stateParams.id);
+        console.log("in ViewPostController");
+        var that = this;
+        this.post = [];
+
+        postListFactory.getPostByTitleID($stateParams.id)
+          .then(function viewPost(post) {
+            console.log(post);
+            that.post = post;
+        });
+
+      }
 
 })();
 ;(function() {

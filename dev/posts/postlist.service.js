@@ -132,7 +132,7 @@
     function getPostsByAuthorID(authorID) {
       return $http({
         method: 'GET',
-        url: apiURL + '/Posts?filter={"include":["author","category"]}'
+        url: apiURL + '/Posts?filter={"include":["author","category"], "order":"date DESC"}'
       }).then(function getPostsByAuthor(response) {
         var authorPostList = [];
         response.data.forEach(function successGetPostsByAuthorID(each) {
@@ -174,9 +174,9 @@
     function getPostByTitleID(id) {
       return $http({
         method: 'GET',
-        url: apiURL + '/Posts/' + id,
+        url: apiURL + '/Posts/' + id + '?filter={"include":["author","category"]}',
       }).then(function successGetPostByTitleID(response) {
-        return response;
+        return response.data;
       });
     }
   }
