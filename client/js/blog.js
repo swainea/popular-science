@@ -45,15 +45,13 @@
     })
     .state('about', {
       url: '/about',
-      templateUrl:"about/about.html",
-      controller: 'AboutController',
-      controllerAs: 'about'
+      templateUrl:"about/about.html"
     })
-    .state('post', {
+    .state('viewPost', {
       url: '/post/:id',
-      controller: 'CreatePostController',
-      controllerAs: 'post'
-      // TODO: create a template for "post" and include its URL here'
+      templateUrl:"posts/viewpost.template.html",
+      controller: 'ViewPostController',
+      controllerAs: 'vp'
     })
     .state('author', {
       url: '/author/:id',
@@ -485,7 +483,7 @@
     function getPostsByAuthorID(authorID) {
       return $http({
         method: 'GET',
-        url: apiURL + '/Posts?filter={"include":["author","category"]}'
+        url: apiURL + '/Posts?filter={"include":["author","category"], "order":"date DESC"}'
       }).then(function getPostsByAuthor(response) {
         var authorPostList = [];
         response.data.forEach(function successGetPostsByAuthorID(each) {
@@ -527,12 +525,35 @@
     function getPostByTitleID(id) {
       return $http({
         method: 'GET',
-        url: apiURL + '/Posts/' + id,
+        url: apiURL + '/Posts/' + id + '?filter={"include":["author","category"]}',
       }).then(function successGetPostByTitleID(response) {
-        return response;
+        return response.data;
       });
     }
   }
+
+})();
+;(function() {
+    'use strict';
+
+    angular.module('blog')
+      .controller('ViewPostController', ViewPostController);
+
+      ViewPostController.$inject = ['$stateParams', 'postListFactory'];
+
+      function ViewPostController($stateParams, postListFactory) {
+        console.log($stateParams.id);
+        console.log("in ViewPostController");
+        var that = this;
+        this.post = [];
+
+        postListFactory.getPostByTitleID($stateParams.id)
+          .then(function viewPost(post) {
+            console.log(post);
+            that.post = post;
+        });
+
+      }
 
 })();
 ;(function() {
