@@ -13,7 +13,7 @@
 
     postListFactory.getAllPosts()
       .then(function returnPostsList(response) {
-        that.postList = response.data;
+        that.postList = response;
       });
 
     this.postList = [];
