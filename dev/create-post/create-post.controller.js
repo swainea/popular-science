@@ -5,9 +5,9 @@
     .module('blog')
     .controller('CreatePostController', CreatePostController);
 
-  CreatePostController.$inject = ['CreatePostService'];
+  CreatePostController.$inject = ['CreatePostService', 'postListFactory'];
 
-  function CreatePostController (CreatePostService){
+  function CreatePostController (CreatePostService, postListFactory){
     this.blogPost = {
       title: "",
       content: "",
@@ -16,11 +16,19 @@
       newCategory: null,
     };
     this.newPost = function newPost (){
-      console.log("blogPost is: ", this.blogPost);
+      // console.log("blogPost is: ", this.blogPost);
       if (this.blogPost.newCategory){
         CreatePostService.createCategory(this.blogPost.newCategory);
       }
       CreatePostService.submitPost(this.blogPost);
     };
-  }
+    this.categoryList = [];
+    var that = this;
+    postListFactory.getAllCategories()
+      .then(function (categories){
+      that.categoryList = categories.data;
+      console.log(categories.data);
+      });
+
+    }
 }());
