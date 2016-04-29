@@ -1,14 +1,19 @@
 * {
     margin: 0;
+    bottom: 0;
 }
 
 html, body{
+  bottom: 0;
   height: 100%;
+  margin: 0;
 }
 
 .main-header {
-  #banner {
-    //  position: absolute;
+  .banner-image{
+    background-image: url(/client/images/RUb6rkl.png);
+    background-size: contain;
+    background-repeat: no-repeat;
     top: 0px;
     left: 0px;
     right: 0px;
@@ -16,10 +21,18 @@ html, body{
     height: 230px;
     z-index: -1;
   }
+  #banner {
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    width: 100%;
+    height: 230px;
+    z-index: -1;
+    background-size: cover;
+  }
   .nav {
     background-color:#F7F5E7;
     border: none;
-
   }
   .nav-tabs>li>a {
     margin-right: 2px;
@@ -50,15 +63,16 @@ html, body{
   }
 }
 .main-section{
+  height: 100%;
   margin-left: 10%;
   margin-right: 10%;
+  bottom: 0;
 }
 .panel{
   border: none;
-    position: absolute;
+    position: fixed;
     bottom: 0;
     width: 100%;
-    padding: none;
     .panel-footer{
       border: none;
       background-color: #F7F5E7;
@@ -77,11 +91,17 @@ html, body{
 // TODO: I don't know how to get this thing to stretch the full height of the
 // page. Help!
 .sidebar{
+  position: relative;
+  bottom: 0;
   background-color: #F7F5E7;
   float: right;
-  width: 20%;
+  width: 17%;
+  margin: 25px;
+  right: 0;
   .list-group {
+    height: 100%;
     background-color: #F0532B;
+    margin: 0;
   }
   .list-group-item {
     background-color: #F0532B;
