@@ -12,11 +12,10 @@
     var that = this;
 
     postListFactory.getAllPosts()
-      .then(function (r) {
-        that.postList = r;
+      .then(function returnPostsList(response) {
+        that.postList = response.data;
       });
 
     this.postList = [];
   }
-
 })();
