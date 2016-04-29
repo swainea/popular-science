@@ -8,7 +8,7 @@
     LoginService.$inject = ["$http"];
 
 
-    function LoginService($http, $state) {
+    function LoginService($http) {
     	var loginData;
 
     	return {
@@ -26,10 +26,11 @@
     			}
 
     		}).then(function successHandler(response) {
+
     			console.log(response.data);
 
     			loginData = response.data;
-    			console.log(loginData);	
+    			console.log(loginData);
                 return response.data;
 	    		});
     	}

@@ -28,8 +28,8 @@ module.exports = function(grunt) {
                 tasks: [ 'css-build' ]
             },
             html: {
-              files: ['dev/*.html'],
-              tasks: ['copy:html']
+                files: ['dev/**/*.html'],
+                tasks: ['copy:html']
             }
         },
 
@@ -39,6 +39,12 @@ module.exports = function(grunt) {
             html: {
                 expand: true,
                 src: ['**/*.html'],
+                dest: 'client/',
+                cwd: 'dev/'
+            },
+            img: {
+                expand: true,
+                src: ['**/*.png'],
                 dest: 'client/',
                 cwd: 'dev/'
             }

@@ -2,14 +2,15 @@
 <html lang='en' ng-app="blog">
 <head>
   <meta charset='utf-8'>
-  <link rel='stylesheet' type='text/css' href='css/main.css'>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+  <link rel='stylesheet' type='text/css' href='css/main.css'>
   <title>Popular Science Blog</title>
 </head>
 <body>
   <main>
+
     <header class="main-header">
-      <img ng-src="http://i.imgur.com/RUb6rkl.png" id="banner" alt="Banner">
+      <div class="banner-image"></div>
 
       <nav>
         <ul class="nav nav-tabs">
@@ -25,15 +26,26 @@
         </ul>
       </nav>
     </header>
-    <section ui-view class="main-section">
-    </section>
+
+      <div class="sidebar" ng-controller="SidebarController as sidebar">
+        <ul class="list-group">
+          <li class="list-group-item" ng-repeat="category in sidebar.categories">
+            <a ui-sref="categoryStories({ name: category.name })">
+              {{category.name}}
+            </a>
+          </li>
+          <li class="list-group-item"><button ui-sref="allPosts">All Stories</button></li>
+        </ul>
+      </div>
+
+      <section ui-view class="main-section"></section>
 
     <div class="panel panel-default">
       <!-- <div class="panel-body"></div> -->
       <div class="panel-footer">&copy 2016 Jordan Kasper</div>
     </div>
-  </main>
 
+  </main>
   <script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular.min.js'></script>
   <script src='https://angular-ui.github.io/ui-router/release/angular-ui-router.js'></script>
   <script src='js/blog.js'></script>
