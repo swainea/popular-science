@@ -17,6 +17,11 @@
       templateUrl: 'home/home.template.html',
       controller: 'HomeViewController',
       controllerAs: 'home'
+
+    })
+    .state('categories', {
+      url: '/categories'
+
     })
     .state('login', {
       url: '/login',
