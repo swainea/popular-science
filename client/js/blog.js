@@ -73,11 +73,11 @@
 
 // We many not need the below function and inject afterall
   // AboutController.$inject = ["$state"];
-  //
   // function AboutController($state){
   //
   //
   // }
+
 }());
 ;(function() {
     'use strict';
@@ -182,8 +182,6 @@
         CreatePostService.createCategory(this.blogPost.newCategory);
       }
       CreatePostService.submitPost(this.blogPost);
-      // console.log("inside of newPost function");
-
     };
   }
 }());
@@ -210,7 +208,7 @@
         url: "https://tiy-blog-api.herokuapp.com/api/Posts",
         data: blogPost,
         headers: {
-          Authorization: "lYldEKUsuEELUiFwFcRRNm1o1YjsGSsCAUwWzTmgmtdNfYj2p9Dwi9FHEtwdCSAW"
+          Authorization: "cJund8LBpBz7FeeEC785DuGAumKI3jBQ7GomRGTcrgqgl8D4HmSc1GxBuHQUnqRY"
 
         }
       }).then (function onSuccess(response){
@@ -228,7 +226,7 @@
         url: "https://tiy-blog-api.herokuapp.com/api/Categories",
         data: { name: newCategory},
         headers: {
-          Authorization: "lYldEKUsuEELUiFwFcRRNm1o1YjsGSsCAUwWzTmgmtdNfYj2p9Dwi9FHEtwdCSAW"
+          Authorization: "cJund8LBpBz7FeeEC785DuGAumKI3jBQ7GomRGTcrgqgl8D4HmSc1GxBuHQUnqRY"
         }
       }).then (function onSuccess(response){
         console.log("inside of second onSuccess function", response);
@@ -261,7 +259,8 @@
       }
 
 })();
-;(function() {
+;
+(function() {
   'use strict';
 
   angular
@@ -373,6 +372,7 @@
       getTitleID: getTitleID,
       getPostByTitleID: getPostByTitleID
     };
+
     /**
      * This function returns a promise with an array that contains all of the
      * posts on the site.
