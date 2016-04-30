@@ -413,17 +413,8 @@ html, body {
 .panel .push {
   height: 50px; }
 
-.panel {
-  border: none;
-  position: fixed;
-  bottom: 0;
-  width: 100%; }
-  .panel .panel-footer {
-    border: none;
-    background-color: #F5BE7D;
-    font-size: 1.1em;
-    text-align: center;
-    color: #000000; }
+.footer-container {
+  background-color: #F5BE7D; }
 
 .sidebar {
   position: relative;
