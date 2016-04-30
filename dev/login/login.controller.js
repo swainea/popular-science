@@ -27,6 +27,8 @@
     this.logout = function logout(){
       console.log("hi");
       this.login = {};
+      LoginService.logOut();
+      $state.go("home");
     };
   }
 
