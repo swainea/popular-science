@@ -19,8 +19,8 @@
           url: 'https://tiy-blog-api.herokuapp.com/api/Authors',
           data: { name: newAuthor.name, email: newAuthor.email, password: newAuthor.password }
         }).then(function successCallback(response) {
-          console.log('Yay, new author!', response);
-          return response;
+          console.log('Yay, new author!', response.data);
+          return response.data;
         }, function errorCallback(response) {
           console.log(response);
         });
