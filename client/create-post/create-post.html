@@ -11,11 +11,7 @@
     <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown" type="button">Category<span class="caret"></span></button>
     <ul class="dropdown-menu">
       <li>Create a New Category</li>
-      <li>Create a New Category</li>
-      <li>cat1</li>
-      <li>cat2</li>
-      <li>cat3</li>
-      <li>cat4</li>
+      <li ng-repeat="category in post.categoryList">{{category.name}}</li>
     </ul>
   </div>
   <label>Create A New Category</label>
