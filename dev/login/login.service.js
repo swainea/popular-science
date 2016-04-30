@@ -13,7 +13,8 @@
 
     	return {
     		authenticate: authenticate,      //this returns authenticate function
-    		getLoginData: getLoginData       //Inject LoginService and getLoginData to make sure it runs after the authentication happens
+    		getLoginData: getLoginData,       //Inject LoginService and getLoginData to make sure it runs after the authentication happens
+        logOut: logOut
     	};
 
     	function authenticate(author){
@@ -39,6 +40,10 @@
     		console.log(loginData);
     		return loginData;
     	}
+
+      function logOut() {
+        loginData = null;
+      }
     }
 
 })();
