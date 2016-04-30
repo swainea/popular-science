@@ -8,10 +8,10 @@
   <label>Write Your Post Here</label>
   <textarea ng-model="post.blogPost.content" class="form-control" name="blogText" rows="10" cols="50">Write your post here</textarea>
   <div class="dropdown">
-    <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown" type="button">Category<span class="caret"></span></button>
+    <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown" type="button">Category <span class="caret"></span></button>
     <ul class="dropdown-menu">
-      <li>Create a New Category</li>
       <li ng-repeat="category in post.categoryList">{{category.name}}</li>
+      <li>Create a New Category</li>
     </ul>
   </div>
   <label>Create A New Category</label>

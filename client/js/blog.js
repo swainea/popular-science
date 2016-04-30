@@ -15,17 +15,17 @@
     .state('home', {
       url: '/',
       templateUrl: 'home/home.template.html',
-      controller: 'HomeViewController',
-      controllerAs: 'home'
+      controller: ['HomeViewController', 'LoginController'],
+      controllerAs: ['home', 'lc']
     })
     .state('categories', {
       url: '/categories'
     })
     .state('login', {
       url: '/login',
-      templateUrl:'login/login.template.html',
+      templateUrl: 'login/login.template.html',
       controller: 'LoginController',
-      controllerAs:'lc'
+      controllerAs: 'lc'
     })
     .state('allPosts', {
       url: '/allPosts',
@@ -52,7 +52,7 @@
       controller: 'CreatePostController',
       controllerAs: 'post',
       templateUrl: 'create-post/create-post.html'
-      // TODO: create a template for "post" and include its URL here'
+    })
     .state('viewPost', {
       url: '/post/:id',
       templateUrl:"posts/viewpost.template.html",
@@ -177,25 +177,31 @@
   CreatePostController.$inject = ['CreatePostService', 'postListFactory'];
 
   function CreatePostController (CreatePostService, postListFactory){
+    // this.myCategory = {id: ""};
+
     this.blogPost = {
       title: "",
       content: "",
-      categoryId: "571e6e9362e24e1100c9e4c2",
+      categoryId: "",
       authorId: "5722369d84c2fd11003f9f2b",
       newCategory: null,
     };
+      // this.myCategory = this.categoryList[0].id;
+
     this.newPost = function newPost (){
-      // console.log("blogPost is: ", this.blogPost);
+      console.log("blogPost is: ", this.blogPost);
       if (this.blogPost.newCategory){
         CreatePostService.createCategory(this.blogPost.newCategory);
       }
       CreatePostService.submitPost(this.blogPost);
     };
-    this.categoryList = postListFactory.getAllCategories()
-                          .then(function (categories){
-                            console.log(categories);
-                            return categories;
-                          });
+    this.categoryList = [];
+    var that = this;
+    postListFactory.getAllCategories()
+      .then(function (categories){
+      that.categoryList = categories.data;
+      console.log(categories.data);
+      });
 
     }
 }());
@@ -222,7 +228,7 @@
         url: "https://tiy-blog-api.herokuapp.com/api/Posts",
         data: blogPost,
         headers: {
-          Authorization: "cJund8LBpBz7FeeEC785DuGAumKI3jBQ7GomRGTcrgqgl8D4HmSc1GxBuHQUnqRY"
+          Authorization: "QnJufD8KLkKUVVHsigMUpAshwKWeWuizzJdjPSy9nj8AX1I8Ezu2skQndX29Z1Kj"
 
         }
       }).then (function onSuccess(response){
@@ -240,7 +246,7 @@
         url: "https://tiy-blog-api.herokuapp.com/api/Categories",
         data: { name: newCategory},
         headers: {
-          Authorization: "cJund8LBpBz7FeeEC785DuGAumKI3jBQ7GomRGTcrgqgl8D4HmSc1GxBuHQUnqRY"
+          Authorization: "QnJufD8KLkKUVVHsigMUpAshwKWeWuizzJdjPSy9nj8AX1I8Ezu2skQndX29Z1Kj"
         }
       }).then (function onSuccess(response){
         console.log("inside of second onSuccess function", response);
@@ -294,6 +300,7 @@
         //state.go should go here because the controller marries the UI with the data
       });
     };
+
     this.register = function register (){
       $state.go("createAuthor");
     };
@@ -301,9 +308,10 @@
     this.logout = function logout(){
       console.log("hi");
       this.login = {};
-      $state.go("home");
     };
   }
+
+
 
 })();
 ;(function() {
