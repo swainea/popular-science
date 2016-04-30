@@ -401,11 +401,7 @@ html, body {
     text-decoration: none;
     font-size: 1.3em;
     background-color: transparent; }
-  .main-header .nav-tabs > li.active > a, .main-header .nav-tabs > li.active > a:focus, .main-header .nav-tabs > li.active > a:hover {
-    border: none;
-    cursor: default;
-    border-bottom-color: transparent;
-    font-style: italic;
+  .main-header .active > a {
     background-color: #F7F5E7; }
 
 .main-section {
