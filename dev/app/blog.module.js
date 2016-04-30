@@ -15,8 +15,8 @@
     .state('home', {
       url: '/',
       templateUrl: 'home/home.template.html',
-      controller: 'HomeViewController',
-      controllerAs: 'home'
+      controller: ['HomeViewController', 'LoginController'],
+      controllerAs: ['home', 'lc']
     })
     .state('categories', {
       url: '/categories'
@@ -39,9 +39,6 @@
       controller: 'CreateNewAuthorController',
       controllerAs: 'cna'
     })
-    .state('categoryStories', {
-      url: '/category/:name',
-    })
     .state('allStories', {
       url: '/allStories',
       templateUrl: 'posts/allposts.template.html'
@@ -49,6 +46,12 @@
     .state('about', {
       url: '/about',
       templateUrl:"about/about.html"
+    })
+    .state('post', {
+      url: '/post',
+      controller: 'CreatePostController',
+      controllerAs: 'post',
+      templateUrl: 'create-post/create-post.html'
     })
     .state('viewPost', {
       url: '/post/:id',
