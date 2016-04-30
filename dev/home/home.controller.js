@@ -4,9 +4,9 @@
     angular.module('blog')
       .controller('HomeViewController', HomeViewController);
 
-      HomeViewController.$inject = ['postListFactory'];
+      HomeViewController.$inject = ['postListFactory', "LoginService"];
 
-      function HomeViewController(postListFactory) {
+      function HomeViewController(postListFactory, LoginService) {
         var that = this;
         this.recentPosts = [];
 
@@ -16,6 +16,8 @@
             that.recentPosts = posts;
         });
         // this.recentPosts = postListFactory.getAllPosts();
+
+        LoginService.getLoginData();
 
       }
 

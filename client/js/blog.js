@@ -115,14 +115,18 @@
       function CreateNewAuthorController($state, NewAuthorService, LoginService){
 
         console.log('In Author Stories');
-
+        var that = this;
         this.newAuthor = {};
 
         this.newAuthorForm = function newAuthorForm() {
           // console.log(this.newAuthor);
 
           NewAuthorService.createAuthor(this.newAuthor)
-            .then(LoginService.authenticate(this.author))
+            .then(function login(data) {
+              console.log('Promise data', data);
+              console.log("that", that.newAuthor);
+              LoginService.authenticate(that.newAuthor);
+            })
             .then( function goHome() {
               $state.go('home');
             });
@@ -154,8 +158,8 @@
           url: 'https://tiy-blog-api.herokuapp.com/api/Authors',
           data: { name: newAuthor.name, email: newAuthor.email, password: newAuthor.password }
         }).then(function successCallback(response) {
-          console.log('Yay, new author!', response);
-          return response;
+          console.log('Yay, new author!', response.data);
+          return response.data;
         }, function errorCallback(response) {
           console.log(response);
         });
@@ -248,9 +252,9 @@
     angular.module('blog')
       .controller('HomeViewController', HomeViewController);
 
-      HomeViewController.$inject = ['postListFactory'];
+      HomeViewController.$inject = ['postListFactory', "LoginService"];
 
-      function HomeViewController(postListFactory) {
+      function HomeViewController(postListFactory, LoginService) {
         var that = this;
         this.recentPosts = [];
 
@@ -260,6 +264,8 @@
             that.recentPosts = posts;
         });
         // this.recentPosts = postListFactory.getAllPosts();
+
+        LoginService.getLoginData();
 
       }
 
