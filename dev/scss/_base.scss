@@ -54,37 +54,17 @@ html, body{
 }
 
 .main-section{
-  height: 100%;
-  margin-left: 10%;
-  margin-right: 10%;
-  bottom: 0;
+  margin-left: 7%;
+  margin-right: 30%;
+  margin-bottom: 10%;
 }
 
 .panel .push{
   height: 50px;
 }
 
-// .panel{
-//   border: none;
-//     position: absolute;
-//     width: 100%;
-//     right: 0;
-//     bottom: 0;
-//     left: 0;
-//     .panel-footer{
-//       border: none;
-//       background-color: #F5BE7D;
-//       font-size: 1.1em;
-//       text-align: center;
-//       color: #000000;
-//     }
-// }
 footer{
   background-color: #F5BE7D;
-}
-
-.footer-container{
-
 }
 
 .sidebar{
@@ -93,6 +73,7 @@ footer{
   background-color: #F5BE7D;
   float: right;
   width: 17%;
+  min-width: 175px;
   margin: 25px;
   right: 0;
   .list-group {
