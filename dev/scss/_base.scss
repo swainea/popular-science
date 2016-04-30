@@ -42,22 +42,14 @@ html, body{
       background-color: #F7F5E7;
     }
   }
+  .active{
+    background-color: blue;
+  }
   a {
     color:#B82B1F;
     text-decoration: none;
     font-size: 1.3em;
     background-color: transparent;
-  }
-  // TODO: I would like to make the active tab have the 'active' class but I'm not sure how.
-  // .nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover {
-  //   border: none;
-  //   cursor: default;
-  //   border-bottom-color: transparent;
-  //   font-style: italic;
-  //   background-color: #F7F5E7;
-  // }
-  .active > a{
-    background-color: #F7F5E7;
   }
 }
 

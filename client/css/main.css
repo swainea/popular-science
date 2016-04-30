@@ -396,13 +396,13 @@ html, body {
     background-color: #F4A051; }
     .main-header .nav-tabs > li > a:hover {
       background-color: #F7F5E7; }
+  .main-header .active {
+    background-color: blue; }
   .main-header a {
     color: #B82B1F;
     text-decoration: none;
     font-size: 1.3em;
     background-color: transparent; }
-  .main-header .active > a {
-    background-color: #F7F5E7; }
 
 .main-section {
   height: 100%;
