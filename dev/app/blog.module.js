@@ -15,14 +15,17 @@
     .state('home', {
       url: '/',
       templateUrl: 'home/home.template.html',
-      controller: 'HomeViewController',
-      controllerAs: 'home'
+      controller: ['HomeViewController', 'LoginController'],
+      controllerAs: ['home', 'lc']
     })
     .state('categories', {
       url: '/categories'
     })
     .state('login', {
-      url: '/login'
+      url: '/login',
+      templateUrl: 'login/login.template.html',
+      controller: 'LoginController',
+      controllerAs: 'lc'
     })
     .state('allPosts', {
       url: '/allPosts',
@@ -36,24 +39,25 @@
       controller: 'CreateNewAuthorController',
       controllerAs: 'cna'
     })
-    .state('categoryStories', {
-      url: '/category/:name',
-    })
     .state('allStories', {
       url: '/allStories',
       templateUrl: 'posts/allposts.template.html'
     })
     .state('about', {
       url: '/about',
-      templateUrl:"about/about.html",
-      controller: 'AboutController',
-      controllerAs: 'about'
+      templateUrl:"about/about.html"
     })
     .state('post', {
       url: '/post',
       controller: 'CreatePostController',
-      controllerAs: 'post'
-      // TODO: create a template for "post" and include its URL here'
+      controllerAs: 'post',
+      templateUrl: 'create-post/create-post.html'
+    })
+    .state('viewPost', {
+      url: '/post/:id',
+      templateUrl:"posts/viewpost.template.html",
+      controller: 'ViewPostController',
+      controllerAs: 'vp'
     })
     .state('author', {
       url: '/author/:id',

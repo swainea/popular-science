@@ -12,15 +12,20 @@
     <header class="main-header">
       <img class="banner-image" src="/client/images/RUb6rkl.png" alt="banner image"/>
 
+<<<<<<< HEAD
       <nav class="nav-container">
         <ul class="nav nav-tabs">
+=======
+      <nav  class="nav-container">
+        <ul ng-controller="LoginController as lc" class="nav nav-tabs">
+>>>>>>> upstream/master
           <li><a ui-sref='home'>Home</a></li>
           <li><a ui-sref='about'>About</a></li>
           <li><a ui-sref='categoryStories'>Categories</a></li>
           <li><a ui-sref='allPosts'>All Posts</a></li>
           <li><a ui-sref='post'>Post</a></li>
           <li><a ui-sref='login'>Login</a></li>
-
+          <li><a ui-sref='home' ng-click="lc.logout()">Logout</a></li>
           <!-- <li role="presentation"><a ui-sref='post'>Post</a></li>
           <li role="presentation"><a ui-sref='logout'>Logout</a></li> -->
         </ul>

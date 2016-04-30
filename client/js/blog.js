@@ -15,14 +15,17 @@
     .state('home', {
       url: '/',
       templateUrl: 'home/home.template.html',
-      controller: 'HomeViewController',
-      controllerAs: 'home'
+      controller: ['HomeViewController', 'LoginController'],
+      controllerAs: ['home', 'lc']
     })
     .state('categories', {
       url: '/categories'
     })
     .state('login', {
-      url: '/login'
+      url: '/login',
+      templateUrl: 'login/login.template.html',
+      controller: 'LoginController',
+      controllerAs: 'lc'
     })
     .state('allPosts', {
       url: '/allPosts',
@@ -36,24 +39,25 @@
       controller: 'CreateNewAuthorController',
       controllerAs: 'cna'
     })
-    .state('categoryStories', {
-      url: '/category/:name',
-    })
     .state('allStories', {
       url: '/allStories',
       templateUrl: 'posts/allposts.template.html'
     })
     .state('about', {
       url: '/about',
-      templateUrl:"about/about.html",
-      controller: 'AboutController',
-      controllerAs: 'about'
+      templateUrl:"about/about.html"
     })
     .state('post', {
       url: '/post',
       controller: 'CreatePostController',
-      controllerAs: 'post'
-      // TODO: create a template for "post" and include its URL here'
+      controllerAs: 'post',
+      templateUrl: 'create-post/create-post.html'
+    })
+    .state('viewPost', {
+      url: '/post/:id',
+      templateUrl:"posts/viewpost.template.html",
+      controller: 'ViewPostController',
+      controllerAs: 'vp'
     })
     .state('author', {
       url: '/author/:id',
@@ -109,9 +113,9 @@
     angular.module('blog')
       .controller('CreateNewAuthorController', CreateNewAuthorController);
 
-      CreateNewAuthorController.$inject = ['NewAuthorService'];
+      CreateNewAuthorController.$inject = ['$state', 'NewAuthorService', 'LoginService'];
 
-      function CreateNewAuthorController(NewAuthorService){
+      function CreateNewAuthorController($state, NewAuthorService, LoginService){
 
         console.log('In Author Stories');
 
@@ -120,7 +124,11 @@
         this.newAuthorForm = function newAuthorForm() {
           // console.log(this.newAuthor);
 
-          NewAuthorService.createAuthor(this.newAuthor);
+          NewAuthorService.createAuthor(this.newAuthor)
+            .then(LoginService.authenticate(this.author))
+            .then( function goHome() {
+              $state.go('home');
+            });
 
 
           };
@@ -166,16 +174,20 @@
     .module('blog')
     .controller('CreatePostController', CreatePostController);
 
-  CreatePostController.$inject = ['CreatePostService'];
+  CreatePostController.$inject = ['CreatePostService', 'postListFactory'];
 
-  function CreatePostController (CreatePostService){
+  function CreatePostController (CreatePostService, postListFactory){
+    // this.myCategory = {id: ""};
+
     this.blogPost = {
       title: "",
       content: "",
-      categoryId: "571e6e9362e24e1100c9e4c2",
+      categoryId: "",
       authorId: "5722369d84c2fd11003f9f2b",
       newCategory: null,
     };
+      // this.myCategory = this.categoryList[0].id;
+
     this.newPost = function newPost (){
       console.log("blogPost is: ", this.blogPost);
       if (this.blogPost.newCategory){
@@ -183,7 +195,15 @@
       }
       CreatePostService.submitPost(this.blogPost);
     };
-  }
+    this.categoryList = [];
+    var that = this;
+    postListFactory.getAllCategories()
+      .then(function (categories){
+      that.categoryList = categories.data;
+      console.log(categories.data);
+      });
+
+    }
 }());
 ;(function() {
   'use strict';
@@ -208,7 +228,11 @@
         url: "https://tiy-blog-api.herokuapp.com/api/Posts",
         data: blogPost,
         headers: {
+<<<<<<< HEAD
           Authorization: "cJund8LBpBz7FeeEC785DuGAumKI3jBQ7GomRGTcrgqgl8D4HmSc1GxBuHQUnqRY"
+=======
+          Authorization: "QnJufD8KLkKUVVHsigMUpAshwKWeWuizzJdjPSy9nj8AX1I8Ezu2skQndX29Z1Kj"
+>>>>>>> upstream/master
 
         }
       }).then (function onSuccess(response){
@@ -226,7 +250,11 @@
         url: "https://tiy-blog-api.herokuapp.com/api/Categories",
         data: { name: newCategory},
         headers: {
+<<<<<<< HEAD
           Authorization: "cJund8LBpBz7FeeEC785DuGAumKI3jBQ7GomRGTcrgqgl8D4HmSc1GxBuHQUnqRY"
+=======
+          Authorization: "QnJufD8KLkKUVVHsigMUpAshwKWeWuizzJdjPSy9nj8AX1I8Ezu2skQndX29Z1Kj"
+>>>>>>> upstream/master
         }
       }).then (function onSuccess(response){
         console.log("inside of second onSuccess function", response);
@@ -267,17 +295,28 @@
     .module('blog')
     .controller("LoginController", LoginController);
 
-  LoginController.$inject = ["LoginService"];
+  LoginController.$inject = ["$state", "LoginService"];
 
-  function LoginController(LoginService) {            //this will give it access to the things in LoginService
+  function LoginController($state, LoginService) {            //this will give it access to the things in LoginService
     this.login = {};
 
     this.loginForm = function loginForm(){
-      LoginService.authenticate(this.login).then(function(response){
-        console.log(response.id);
+      LoginService.authenticate(this.login)
+        .then(function(response){
+          console.log(response.id);
+          $state.go("home");
         // LoginService.getLoginData();   Now you can run that logindata and it will return the user's Login Data, in this case, response.data
         //state.go should go here because the controller marries the UI with the data
       });
+    };
+
+    this.register = function register (){
+      $state.go("createAuthor");
+    };
+
+    this.logout = function logout(){
+      console.log("hi");
+      this.login = {};
     };
   }
 
@@ -343,7 +382,7 @@
 
     postListFactory.getAllPosts()
       .then(function returnPostsList(response) {
-        that.postList = response.data;
+        that.postList = response;
       });
 
     this.postList = [];
@@ -483,7 +522,7 @@
     function getPostsByAuthorID(authorID) {
       return $http({
         method: 'GET',
-        url: apiURL + '/Posts?filter={"include":["author","category"]}'
+        url: apiURL + '/Posts?filter={"include":["author","category"], "order":"date DESC"}'
       }).then(function getPostsByAuthor(response) {
         var authorPostList = [];
         response.data.forEach(function successGetPostsByAuthorID(each) {
@@ -525,12 +564,35 @@
     function getPostByTitleID(id) {
       return $http({
         method: 'GET',
-        url: apiURL + '/Posts/' + id,
+        url: apiURL + '/Posts/' + id + '?filter={"include":["author","category"]}',
       }).then(function successGetPostByTitleID(response) {
-        return response;
+        return response.data;
       });
     }
   }
+
+})();
+;(function() {
+    'use strict';
+
+    angular.module('blog')
+      .controller('ViewPostController', ViewPostController);
+
+      ViewPostController.$inject = ['$stateParams', 'postListFactory'];
+
+      function ViewPostController($stateParams, postListFactory) {
+        console.log($stateParams.id);
+        console.log("in ViewPostController");
+        var that = this;
+        this.post = [];
+
+        postListFactory.getPostByTitleID($stateParams.id)
+          .then(function viewPost(post) {
+            console.log(post);
+            that.post = post;
+        });
+
+      }
 
 })();
 ;(function() {

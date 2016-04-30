@@ -3,8 +3,7 @@
 <ul>
   <li ng-repeat='post in author.allPosts'>
     <a ui-sref='post({ id: post.id })'><h2>{{post.title}}</h2></a>
-    <!-- <a ui-sref='author({ id: post.author.id })'><cite>{{post.author.name}}</cite></a> -->
     <p>{{post.date}}</p>
-    <article>{{post.content.substr(0, 30)}}</article>
+    <article>{{post.content.substr(0, 400)}}</article>
   </li>
 </ul>

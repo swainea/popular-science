@@ -21,7 +21,7 @@
         url: "https://tiy-blog-api.herokuapp.com/api/Posts",
         data: blogPost,
         headers: {
-          Authorization: "cJund8LBpBz7FeeEC785DuGAumKI3jBQ7GomRGTcrgqgl8D4HmSc1GxBuHQUnqRY"
+          Authorization: "QnJufD8KLkKUVVHsigMUpAshwKWeWuizzJdjPSy9nj8AX1I8Ezu2skQndX29Z1Kj"
 
         }
       }).then (function onSuccess(response){
@@ -39,7 +39,7 @@
         url: "https://tiy-blog-api.herokuapp.com/api/Categories",
         data: { name: newCategory},
         headers: {
-          Authorization: "cJund8LBpBz7FeeEC785DuGAumKI3jBQ7GomRGTcrgqgl8D4HmSc1GxBuHQUnqRY"
+          Authorization: "QnJufD8KLkKUVVHsigMUpAshwKWeWuizzJdjPSy9nj8AX1I8Ezu2skQndX29Z1Kj"
         }
       }).then (function onSuccess(response){
         console.log("inside of second onSuccess function", response);

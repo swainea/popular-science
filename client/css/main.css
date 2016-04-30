@@ -367,56 +367,55 @@ textarea {
 html, body {
   bottom: 0;
   height: 100%;
-  margin: 0; }
-
-.main-header .banner-image {
-  background-image: url(/client/images/RUb6rkl.png);
-  background-size: contain;
-  background-repeat: no-repeat;
-  top: 0px;
-  left: 0px;
-  right: 0px;
-  width: 100%;
-  height: 230px;
-  z-index: -1; }
-.main-header #banner {
-  top: 0px;
-  left: 0px;
-  right: 0px;
-  width: 100%;
-  height: 230px;
-  z-index: -1;
-  background-size: cover; }
-.main-header .nav {
-  background-color: #F7F5E7;
-  border: none; }
-.main-header .nav-tabs > li > a {
-  margin-right: 2px;
-  line-height: 1.42857143;
-  border: 1px solid transparent;
-  border-radius: 4px 4px 0 0; }
-.main-header .nav > li > a {
-  position: relative;
-  display: block;
-  padding: 10px 15px; }
-.main-header a {
-  color: #F0532B;
-  text-decoration: none;
-  font-size: 1.3em; }
-.main-header a {
-  background-color: transparent; }
-.main-header .nav-tabs > li.active > a, .main-header .nav-tabs > li.active > a:focus, .main-header .nav-tabs > li.active > a:hover {
-  border: none;
-  cursor: default;
-  border-bottom-color: transparent;
-  font-style: italic;
+  margin: 0;
   background-color: #F7F5E7; }
+
+.wrapper {
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+  margin: 0 auto -50px; }
+
+.main-header {
+  height: 260px; }
+  .main-header .banner-image {
+    height: 75%;
+    z-index: -1; }
+  .main-header .nav-container {
+    height: 20%; }
+  .main-header .nav {
+    background-color: #F5BE7D;
+    height: 100%;
+    padding: 5px; }
+  .main-header .nav-tabs > li > a {
+    margin-right: 2px;
+    line-height: 1.42857143;
+    border: 1px solid transparent;
+    border-radius: 4px 4px 0 0;
+    height: 100%;
+    background-color: #F4A051; }
+    .main-header .nav-tabs > li > a:hover {
+      background-color: #F7F5E7; }
+  .main-header a {
+    color: #B82B1F;
+    text-decoration: none;
+    font-size: 1.3em;
+    background-color: transparent; }
+  .main-header .nav-tabs > li.active > a, .main-header .nav-tabs > li.active > a:focus, .main-header .nav-tabs > li.active > a:hover {
+    border: none;
+    cursor: default;
+    border-bottom-color: transparent;
+    font-style: italic;
+    background-color: #F7F5E7; }
 
 .main-section {
   height: 100%;
   margin-left: 10%;
   margin-right: 10%;
   bottom: 0; }
+
+.panel .push {
+  height: 50px; }
 
 .panel {
   border: none;
@@ -425,7 +424,7 @@ html, body {
   width: 100%; }
   .panel .panel-footer {
     border: none;
-    background-color: #F7F5E7;
+    background-color: #F5BE7D;
     font-size: 1.1em;
     text-align: center;
     color: #000000; }
@@ -433,17 +432,17 @@ html, body {
 .sidebar {
   position: relative;
   bottom: 0;
-  background-color: #F7F5E7;
+  background-color: #F5BE7D;
   float: right;
   width: 17%;
   margin: 25px;
   right: 0; }
   .sidebar .list-group {
     height: 100%;
-    background-color: #F0532B;
+    background-color: #F84E32;
     margin: 0; }
   .sidebar .list-group-item {
-    background-color: #F0532B; }
+    background-color: #F84E32; }
     .sidebar .list-group-item a {
       color: black; }
 
