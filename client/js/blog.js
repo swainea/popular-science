@@ -15,8 +15,8 @@
     .state('home', {
       url: '/',
       templateUrl: 'home/home.template.html',
-      controller: ['HomeViewController', 'LoginController'],
-      controllerAs: ['home', 'lc']
+      controller: 'HomeViewController',
+      controllerAs: 'home'
     })
     .state('login', {
       url: '/login',
@@ -314,6 +314,8 @@
     this.logout = function logout(){
       console.log("hi");
       this.login = {};
+      LoginService.logOut();
+      $state.go("home");
     };
   }
 
@@ -335,7 +337,8 @@
 
     	return {
     		authenticate: authenticate,      //this returns authenticate function
-    		getLoginData: getLoginData       //Inject LoginService and getLoginData to make sure it runs after the authentication happens
+    		getLoginData: getLoginData,       //Inject LoginService and getLoginData to make sure it runs after the authentication happens
+        logOut: logOut
     	};
 
     	function authenticate(author){
@@ -361,6 +364,10 @@
     		console.log(loginData);
     		return loginData;
     	}
+
+      function logOut() {
+        loginData = null;
+      }
     }
 
 })();
