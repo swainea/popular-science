@@ -18,9 +18,6 @@
       controller: ['HomeViewController', 'LoginController'],
       controllerAs: ['home', 'lc']
     })
-    .state('categories', {
-      url: '/categories'
-    })
     .state('login', {
       url: '/login',
       templateUrl: 'login/login.template.html',

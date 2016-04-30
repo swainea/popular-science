@@ -18,9 +18,6 @@
       controller: ['HomeViewController', 'LoginController'],
       controllerAs: ['home', 'lc']
     })
-    .state('categories', {
-      url: '/categories'
-    })
     .state('login', {
       url: '/login',
       templateUrl: 'login/login.template.html',
@@ -232,11 +229,7 @@
         url: "https://tiy-blog-api.herokuapp.com/api/Posts",
         data: blogPost,
         headers: {
-<<<<<<< HEAD
-          Authorization: "cJund8LBpBz7FeeEC785DuGAumKI3jBQ7GomRGTcrgqgl8D4HmSc1GxBuHQUnqRY"
-=======
           Authorization: "QnJufD8KLkKUVVHsigMUpAshwKWeWuizzJdjPSy9nj8AX1I8Ezu2skQndX29Z1Kj"
->>>>>>> upstream/master
 
         }
       }).then (function onSuccess(response){
@@ -254,11 +247,7 @@
         url: "https://tiy-blog-api.herokuapp.com/api/Categories",
         data: { name: newCategory},
         headers: {
-<<<<<<< HEAD
-          Authorization: "cJund8LBpBz7FeeEC785DuGAumKI3jBQ7GomRGTcrgqgl8D4HmSc1GxBuHQUnqRY"
-=======
           Authorization: "QnJufD8KLkKUVVHsigMUpAshwKWeWuizzJdjPSy9nj8AX1I8Ezu2skQndX29Z1Kj"
->>>>>>> upstream/master
         }
       }).then (function onSuccess(response){
         console.log("inside of second onSuccess function", response);
@@ -305,12 +294,14 @@
 
   function LoginController($state, LoginService) {            //this will give it access to the things in LoginService
     this.login = {};
+    this.onLogin = false;
 
     this.loginForm = function loginForm(){
       LoginService.authenticate(this.login)
         .then(function(response){
           console.log(response.id);
           $state.go("home");
+          this.onLogin = true;
         // LoginService.getLoginData();   Now you can run that logindata and it will return the user's Login Data, in this case, response.data
         //state.go should go here because the controller marries the UI with the data
       });
