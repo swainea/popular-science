@@ -15,7 +15,7 @@
     .state('home', {
       url: '/',
       templateUrl: 'home/home.template.html',
-      controller: ['HomeViewController', 'LoginController']
+      controller: ['HomeViewController', 'LoginController'],
       controllerAs: ['home', 'lc']
     })
     .state('categories', {
@@ -52,7 +52,7 @@
       controller: 'CreatePostController',
       controllerAs: 'post',
       templateUrl: 'create-post/create-post.html'
-      // TODO: create a template for "post" and include its URL here'
+    })
     .state('viewPost', {
       url: '/post/:id',
       templateUrl:"posts/viewpost.template.html",
