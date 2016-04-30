@@ -407,7 +407,13 @@ html, body {
 .main-section {
   margin-left: 7%;
   margin-right: 30%;
-  margin-bottom: 10%; }
+  margin-bottom: 10%;
+  font-family: 'Roboto Slab', serif; }
+  .main-section h2 {
+    font-size: 2.5em;
+    font-weight: bolder; }
+  .main-section ul {
+    list-style: none; }
 
 .panel .push {
   height: 50px; }

@@ -57,6 +57,14 @@ html, body{
   margin-left: 7%;
   margin-right: 30%;
   margin-bottom: 10%;
+  @include defaultFont();
+  h2{
+    font-size: 2.5em;
+    font-weight: bolder;
+  }
+  ul{
+    list-style: none;
+  }
 }
 
 .panel .push{
