@@ -1,7 +1,7 @@
 <ul>
   <li>
     <h2>{{vp.post.title}}</h2>
-    <a ui-sref='author({ id: post.author.id })'><cite>{{vp.post.author.name}}</cite></a>
+    <a ui-sref='author({ id: vp.post.author.id })'><cite>{{vp.post.author.name}}</cite></a>
     <p>{{vp.post.date | date:'MMM d, y @ h:mm a'}}</p>
     <article>{{vp.post.content}}</article>
   </li>
