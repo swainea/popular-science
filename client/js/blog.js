@@ -17,9 +17,11 @@
       templateUrl: 'home/home.template.html',
       controller: 'HomeViewController',
       controllerAs: 'home'
+
     })
     .state('categories', {
       url: '/categories'
+
     })
     .state('login', {
       url: '/login',
@@ -290,7 +292,8 @@
       }
 
 })();
-;(function() {
+;
+(function() {
   'use strict';
 
   angular
@@ -301,12 +304,14 @@
 
   function LoginController($state, LoginService) {            //this will give it access to the things in LoginService
     this.login = {};
+    this.onLogin = false;
 
     this.loginForm = function loginForm(){
       LoginService.authenticate(this.login)
         .then(function(response){
           console.log(response.id);
           $state.go("home");
+          this.onLogin = true;
         // LoginService.getLoginData();   Now you can run that logindata and it will return the user's Login Data, in this case, response.data
         //state.go should go here because the controller marries the UI with the data
       });
@@ -319,6 +324,8 @@
     this.logout = function logout(){
       console.log("hi");
       this.login = {};
+      LoginService.logOut();
+      $state.go("home");
     };
   }
 
@@ -340,7 +347,8 @@
 
     	return {
     		authenticate: authenticate,      //this returns authenticate function
-    		getLoginData: getLoginData       //Inject LoginService and getLoginData to make sure it runs after the authentication happens
+    		getLoginData: getLoginData,       //Inject LoginService and getLoginData to make sure it runs after the authentication happens
+        logOut: logOut
     	};
 
     	function authenticate(author){
@@ -366,6 +374,10 @@
     		console.log(loginData);
     		return loginData;
     	}
+
+      function logOut() {
+        loginData = null;
+      }
     }
 
 })();
