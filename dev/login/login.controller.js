@@ -5,9 +5,9 @@
     .module('blog')
     .controller("LoginController", LoginController);
 
-  LoginController.$inject = ["LoginService"];
+  LoginController.$inject = ["$state", "LoginService"];
 
-  function LoginController(LoginService) {            //this will give it access to the things in LoginService
+  function LoginController($state, LoginService) {            //this will give it access to the things in LoginService
     this.login = {};
 
     this.loginForm = function loginForm(){
@@ -27,6 +27,7 @@
     this.logout = function logout(){
       console.log("hi");
       this.login = {};
+      console.log(this.login);
     };
   }
 
