@@ -64,18 +64,27 @@ html, body{
   height: 50px;
 }
 
-.panel{
-  border: none;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    .panel-footer{
-      border: none;
-      background-color: #F5BE7D;
-      font-size: 1.1em;
-      text-align: center;
-      color: #000000;
-    }
+// .panel{
+//   border: none;
+//     position: absolute;
+//     width: 100%;
+//     right: 0;
+//     bottom: 0;
+//     left: 0;
+//     .panel-footer{
+//       border: none;
+//       background-color: #F5BE7D;
+//       font-size: 1.1em;
+//       text-align: center;
+//       color: #000000;
+//     }
+// }
+footer{
+  background-color: #F5BE7D;
+}
+
+.footer-container{
+
 }
 
 .sidebar{

@@ -17,9 +17,11 @@
       templateUrl: 'home/home.template.html',
       controller: 'HomeViewController',
       controllerAs: 'home'
+
     })
     .state('categories', {
       url: '/categories'
+
     })
     .state('login', {
       url: '/login',
@@ -181,30 +183,35 @@
   CreatePostController.$inject = ['CreatePostService', 'postListFactory'];
 
   function CreatePostController (CreatePostService, postListFactory){
-    // this.myCategory = {id: ""};
 
     this.blogPost = {
       title: "",
       content: "",
-      categoryId: "",
       authorId: "5722369d84c2fd11003f9f2b",
-      newCategory: null,
+      newCategory: null
     };
-      // this.myCategory = this.categoryList[0].id;
 
     this.newPost = function newPost (){
+
+
       console.log("blogPost is: ", this.blogPost);
       if (this.blogPost.newCategory){
         CreatePostService.createCategory(this.blogPost.newCategory);
       }
       CreatePostService.submitPost(this.blogPost);
+
     };
+
     this.categoryList = [];
     var that = this;
+
     postListFactory.getAllCategories()
       .then(function (categories){
       that.categoryList = categories.data;
+      that.myCategory = that.categoryList[0];
+
       console.log(categories.data);
+      console.log('My Category', that.myCategory);
       });
 
     }
@@ -232,7 +239,7 @@
         url: "https://tiy-blog-api.herokuapp.com/api/Posts",
         data: blogPost,
         headers: {
-          Authorization: "QnJufD8KLkKUVVHsigMUpAshwKWeWuizzJdjPSy9nj8AX1I8Ezu2skQndX29Z1Kj"
+          Authorization: "3Pedewgqrfl7VwLDuaYZCamGG4F27RdLOHrgEYocLy3b2IUv6CebYzTcJpzuV858"
 
         }
       }).then (function onSuccess(response){
@@ -250,7 +257,7 @@
         url: "https://tiy-blog-api.herokuapp.com/api/Categories",
         data: { name: newCategory},
         headers: {
-          Authorization: "QnJufD8KLkKUVVHsigMUpAshwKWeWuizzJdjPSy9nj8AX1I8Ezu2skQndX29Z1Kj"
+          Authorization: "3Pedewgqrfl7VwLDuaYZCamGG4F27RdLOHrgEYocLy3b2IUv6CebYzTcJpzuV858"
         }
       }).then (function onSuccess(response){
         console.log("inside of second onSuccess function", response);
@@ -285,7 +292,8 @@
       }
 
 })();
-;(function() {
+;
+(function() {
   'use strict';
 
   angular
@@ -296,12 +304,14 @@
 
   function LoginController($state, LoginService) {            //this will give it access to the things in LoginService
     this.login = {};
+    this.onLogin = false;
 
     this.loginForm = function loginForm(){
       LoginService.authenticate(this.login)
         .then(function(response){
           console.log(response.id);
           $state.go("home");
+          this.onLogin = true;
         // LoginService.getLoginData();   Now you can run that logindata and it will return the user's Login Data, in this case, response.data
         //state.go should go here because the controller marries the UI with the data
       });
