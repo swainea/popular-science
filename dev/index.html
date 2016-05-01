@@ -13,8 +13,8 @@
     <header class="main-header">
       <img class="banner-image" src="images/RUb6rkl.png" alt="banner image"/>
       <nav  class="nav-container">
-        <ul ng-controller="LoginController as lc" class="nav nav-tabs">
-          <li><a class="active" ui-sref='home'>Home</a></li>
+        <ul ng-controller="LoginController as lc" class="nav nav-pills">
+          <li><a ui-sref='home'>Home</a></li>
           <li><a ui-sref='about'>About</a></li>
           <li><a ui-sref='allPosts'>All Posts</a></li>
           <li ng-show="lc.isLoggedIn()"><a ui-sref='post'>Post</a></li>
@@ -26,13 +26,13 @@
 
       <div class="sidebar" ng-controller="SidebarController as sidebar">
         <ul class="list-group">
-          <li class="list-group-item" ng-repeat="category in sidebar.categories">
+        </li>
+        <li class="list-group-item listButton"><button class="btn btn-primary" ui-sref="allPosts">All Stories</button></li>
+      </ul>
+          <li class="list-group-item listStyle" ng-repeat="category in sidebar.categories">
             <a ui-sref="categoryStories({ id: category.id })">
               {{category.name}}
             </a>
-          </li>
-          <li class="list-group-item"><button ui-sref="allPosts">All Stories</button></li>
-        </ul>
       </div>
 
       <section ui-view class="main-section"></section>

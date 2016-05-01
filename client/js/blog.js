@@ -262,7 +262,7 @@
       // console.log('My Category', that.myCategory);
       });
 
-}    
+}
 }());
 ;(function() {
   'use strict';
@@ -374,7 +374,6 @@
       }
 
 })();
-;
 (function() {
   'use strict';
 

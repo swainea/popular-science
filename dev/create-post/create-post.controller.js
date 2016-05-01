@@ -56,5 +56,5 @@
       // console.log('My Category', that.myCategory);
       });
 
-}    
+}
 }());
