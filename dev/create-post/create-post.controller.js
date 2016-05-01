@@ -5,28 +5,28 @@
     .module('blog')
     .controller('CreatePostController', CreatePostController);
 
-  CreatePostController.$inject = ['CreatePostService', 'postListFactory'];
+  CreatePostController.$inject = ['CreatePostService', 'postListFactory', 'LoginService'];
 
-  function CreatePostController (CreatePostService, postListFactory){
+  function CreatePostController (CreatePostService, postListFactory, LoginService){
 
     this.myCategory = {};
 
     this.blogPost = {
       title: "",
       content: "",
-      authorId: "5722369d84c2fd11003f9f2b",
+      authorId: LoginService.getLoginData().userId,// but needs to be the userID
       newCategory: null
     };
 
     this.newPost = function newPost (){
 
-      this.blogPost.categoryId = this.test.id;
+      this.blogPost.categoryId = this.myCategory.id;
 
       console.log("blogPost is: ", this.blogPost);
       if (this.blogPost.newCategory){
         CreatePostService.createCategory(this.blogPost.newCategory);
       }
-      CreatePostService.submitPost(this.blogPost);
+      CreatePostService.submitPost(this.blogPost, LoginService.getLoginData().id);
 
     };
 
@@ -38,8 +38,8 @@
       that.categoryList = categories.data;
       that.myCategory = that.categoryList[0];
 
-      console.log(categories.data);
-      console.log('My Category', that.myCategory);
+      // console.log(categories.data);
+      // console.log('My Category', that.myCategory);
       });
 
     }

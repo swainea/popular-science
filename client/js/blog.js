@@ -211,28 +211,28 @@
     .module('blog')
     .controller('CreatePostController', CreatePostController);
 
-  CreatePostController.$inject = ['CreatePostService', 'postListFactory'];
+  CreatePostController.$inject = ['CreatePostService', 'postListFactory', 'LoginService'];
 
-  function CreatePostController (CreatePostService, postListFactory){
+  function CreatePostController (CreatePostService, postListFactory, LoginService){
 
     this.myCategory = {};
 
     this.blogPost = {
       title: "",
       content: "",
-      authorId: "5722369d84c2fd11003f9f2b",
+      authorId: LoginService.getLoginData().userId,// but needs to be the userID
       newCategory: null
     };
 
     this.newPost = function newPost (){
 
-      this.blogPost.categoryId = this.test.id;
+      this.blogPost.categoryId = this.myCategory.id;
 
       console.log("blogPost is: ", this.blogPost);
       if (this.blogPost.newCategory){
         CreatePostService.createCategory(this.blogPost.newCategory);
       }
-      CreatePostService.submitPost(this.blogPost);
+      CreatePostService.submitPost(this.blogPost, LoginService.getLoginData().id);
 
     };
 
@@ -244,8 +244,8 @@
       that.categoryList = categories.data;
       that.myCategory = that.categoryList[0];
 
-      console.log(categories.data);
-      console.log('My Category', that.myCategory);
+      // console.log(categories.data);
+      // console.log('My Category', that.myCategory);
       });
 
     }
@@ -266,14 +266,14 @@
       createCategory: createCategory
     };
 
-    function submitPost (blogPost){
+    function submitPost (blogPost, authorization){
       console.log(blogPost);
       return $http ({
         method:'POST',
         url: "https://tiy-blog-api.herokuapp.com/api/Posts",
         data: blogPost,
         headers: {
-          Authorization: "TRwfnAi7PnnGiQ4qZzem596QdzR6yQ9vZXoMpHWuVO4RRD2fA8e1O7qHe9vARPQi"
+          Authorization: authorization
 
         }
       }).then (function onSuccess(response){
@@ -284,14 +284,14 @@
     );
     }
 
-    function createCategory(newCategory){
+    function createCategory(newCategory, authorization){
       console.log(newCategory);
       return $http ({
         method: 'POST',
         url: "https://tiy-blog-api.herokuapp.com/api/Categories",
         data: { name: newCategory},
         headers: {
-          Authorization: "TRwfnAi7PnnGiQ4qZzem596QdzR6yQ9vZXoMpHWuVO4RRD2fA8e1O7qHe9vARPQi"
+          Authorization: authorization
         }
       }).then (function onSuccess(response){
         console.log("inside of second onSuccess function", response);

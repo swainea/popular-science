@@ -14,14 +14,14 @@
       createCategory: createCategory
     };
 
-    function submitPost (blogPost){
+    function submitPost (blogPost, authorization){
       console.log(blogPost);
       return $http ({
         method:'POST',
         url: "https://tiy-blog-api.herokuapp.com/api/Posts",
         data: blogPost,
         headers: {
-          Authorization: "TRwfnAi7PnnGiQ4qZzem596QdzR6yQ9vZXoMpHWuVO4RRD2fA8e1O7qHe9vARPQi"
+          Authorization: authorization
 
         }
       }).then (function onSuccess(response){
@@ -32,14 +32,14 @@
     );
     }
 
-    function createCategory(newCategory){
+    function createCategory(newCategory, authorization){
       console.log(newCategory);
       return $http ({
         method: 'POST',
         url: "https://tiy-blog-api.herokuapp.com/api/Categories",
         data: { name: newCategory},
         headers: {
-          Authorization: "TRwfnAi7PnnGiQ4qZzem596QdzR6yQ9vZXoMpHWuVO4RRD2fA8e1O7qHe9vARPQi"
+          Authorization: authorization
         }
       }).then (function onSuccess(response){
         console.log("inside of second onSuccess function", response);
