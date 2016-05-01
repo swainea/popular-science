@@ -9,6 +9,8 @@
 
   function CreatePostController (CreatePostService, postListFactory){
 
+    this.test = "";
+
     this.blogPost = {
       title: "",
       content: "",
@@ -18,6 +20,7 @@
 
     this.newPost = function newPost (){
 
+      this.blogPost.categoryId = this.test.id;
 
       console.log("blogPost is: ", this.blogPost);
       if (this.blogPost.newCategory){
