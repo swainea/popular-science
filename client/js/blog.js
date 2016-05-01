@@ -184,6 +184,8 @@
 
   function CreatePostController (CreatePostService, postListFactory){
 
+    this.test = "";
+
     this.blogPost = {
       title: "",
       content: "",
@@ -193,6 +195,7 @@
 
     this.newPost = function newPost (){
 
+      this.blogPost.categoryId = this.test.id;
 
       console.log("blogPost is: ", this.blogPost);
       if (this.blogPost.newCategory){
@@ -239,7 +242,7 @@
         url: "https://tiy-blog-api.herokuapp.com/api/Posts",
         data: blogPost,
         headers: {
-          Authorization: "3Pedewgqrfl7VwLDuaYZCamGG4F27RdLOHrgEYocLy3b2IUv6CebYzTcJpzuV858"
+          Authorization: "TRwfnAi7PnnGiQ4qZzem596QdzR6yQ9vZXoMpHWuVO4RRD2fA8e1O7qHe9vARPQi"
 
         }
       }).then (function onSuccess(response){
@@ -257,7 +260,7 @@
         url: "https://tiy-blog-api.herokuapp.com/api/Categories",
         data: { name: newCategory},
         headers: {
-          Authorization: "3Pedewgqrfl7VwLDuaYZCamGG4F27RdLOHrgEYocLy3b2IUv6CebYzTcJpzuV858"
+          Authorization: "TRwfnAi7PnnGiQ4qZzem596QdzR6yQ9vZXoMpHWuVO4RRD2fA8e1O7qHe9vARPQi"
         }
       }).then (function onSuccess(response){
         console.log("inside of second onSuccess function", response);
@@ -394,7 +397,7 @@
 
     var that = this;
 
-    postListFactory.getAllPosts()
+    postListFactory.getAllPosts("", "", "date DESC")
       .then(function returnPostsList(response) {
         that.postList = response;
       });

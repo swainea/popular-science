@@ -1,9 +1,9 @@
-<h2>{{author.allPosts[0].author.name}}'s Posts</h2>
+<h2>Posts by {{author.allPosts[0].author.name}}</h2>
 
 <ul>
   <li ng-repeat='post in author.allPosts'>
     <a ui-sref='viewPost({ id: post.id })'><h2>{{post.title}}</h2></a>
-    <p>{{post.date}}</p>
+    <p>{{post.date | date:'MMM d, y @ h:mm a'}}</p>
     <article>{{post.content.substr(0, 400)}}<a ng-show='{{post.content.length > 400}}' ui-sref='viewPost({ id: post.id })'>...Read more</a></article>
   </li>
 </ul>

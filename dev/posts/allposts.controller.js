@@ -11,7 +11,7 @@
 
     var that = this;
 
-    postListFactory.getAllPosts()
+    postListFactory.getAllPosts("", "", "date DESC")
       .then(function returnPostsList(response) {
         that.postList = response;
       });
