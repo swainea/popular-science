@@ -1,21 +1,21 @@
-<h2>Create Post</h2>
-
+<h2>Write your post here</h2>
 <form>
-
   <label>Title</label>
   <input ng-model="post.blogPost.title" type="text" class="form-control" placeholder="Title">
-
   <label>Write Your Post Here</label>
-  <textarea ng-model="post.blogPost.content" class="form-control" name="blogText" rows="10" cols="50">Write your post here</textarea>
+  <textarea ng-model="post.blogPost.content" class="form-control" name="blogText" rows="10" cols="50" placeholder="Blog text here">Write your post here</textarea>
   <div class="dropdown">
     <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown" type="button">Category <span class="caret"></span></button>
-    <ul class="dropdown-menu">
-      <li ng-repeat="category in post.categoryList">{{category.name}}</li>
-      <li>Create a New Category</li>
-    </ul>
+<!-- <ul class="dropdown-menu"> -->
+    <select ng-model="post.test" ng-options="category.name for category in post.categoryList">
+      <option value="">-- Select A Category --</option>
+    </select>
+    <p>{{post.test.id}}</p>
+<!-- <li ng-repeat="category in post.categoryList">{{category.name}}</li> -->
+<!-- <li>Create a New Category</li> -->
+<!-- </ul> -->
   </div>
   <label>Create A New Category</label>
   <input ng-model="post.blogPost.newCategory" type="text" class="form-control" placeholder="New Category">
   <button class="btn btn-default" ng-click="post.newPost()">Publish Post</button>
-
 </form>

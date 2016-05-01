@@ -18,6 +18,12 @@
       controller: 'HomeViewController',
       controllerAs: 'home'
     })
+    .state('categoryStories', {
+      url: '/category/:id',
+      templateUrl: 'categories/category.template.html',
+      controller: 'CategoryController',
+      controllerAs: 'cc'
+    })
     .state('login', {
       url: '/login',
       templateUrl: 'login/login.template.html',
@@ -48,7 +54,7 @@
       url: '/post',
       controller: 'CreatePostController',
       controllerAs: 'post',
-      templateUrl: 'create-post/create-post.html'
+      templateUrl: 'create-post/create-post.template.html'
     })
     .state('viewPost', {
       url: '/post/:id',
