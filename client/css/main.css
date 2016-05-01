@@ -508,7 +508,11 @@ html, body {
     .main-section .create-post .create-post-category {
       margin-bottom: 10px; }
     .main-section .create-post .create-post-submit {
-      margin: 0; }
+      position: relative;
+      left: 78%;
+      bottom: 10px;
+      width: 20%;
+      min-width: 100px; }
 
 .panel .push {
   height: 50px; }

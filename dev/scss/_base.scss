@@ -177,7 +177,11 @@ html, body{
       margin-bottom: 10px;
     }
     .create-post-submit{
-      margin: 0;
+      position: relative;
+      left: 78%;
+      bottom: 10px;
+      width: 20%;
+      min-width: 100px;
     }
   }
 }
