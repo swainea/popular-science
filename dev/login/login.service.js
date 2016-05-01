@@ -36,10 +36,9 @@
 	    		});
     	}
 
-    	function getLoginData() {
-    		console.log(loginData);
-    		return loginData;
-    	}
+      	function getLoginData() {
+      		  return loginData;
+      	}
 
       function logOut() {
         loginData = null;
