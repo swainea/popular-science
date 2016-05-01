@@ -1,4 +1,8 @@
 <h2>All Posts</h2>
 <ul>
-  <li ng-repeat="post in allPosts.postList">{{post.title}} By: {{post.author.name}}</li>
+  <li ng-repeat="post in allPosts.postList">
+    <a ui-sref='viewPost({ id: post.id })'>{{post.title}}</a>
+    By: <a ui-sref='author({ id: post.author.id })'>{{post.author.name}}</a>
+    <p>{{post.date | date:'MMM d, y @ h:mm a'}}</p>
+  </li>
 </ul>
