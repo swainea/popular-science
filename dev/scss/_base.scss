@@ -117,7 +117,7 @@ html, body{
     }
     li{
       background-color: $layer1Color;
-      border: 1px solid $layer4Color;
+      @include boxBorder();
       @include boxShadow();
       margin: 8px;
       padding: 15px;
@@ -128,8 +128,9 @@ html, body{
     }
   }
   .about-text{
+    font-size: 1.3em;
     background-color: $layer1Color;
-    border: 1px solid $layer4Color;
+    @include boxBorder();
     @include boxShadow();
     margin: 8px;
     padding: 15px;
@@ -182,6 +183,41 @@ html, body{
       bottom: 10px;
       width: 20%;
       min-width: 100px;
+    }
+  }
+  .login-page{
+    background-color: $layer1Color;
+    @include boxBorder();
+    @include boxShadow();
+    padding: 15px;
+    padding-bottom: 0px;
+    width: 50%;
+    margin: auto;
+    .login-page-email{
+      float: left;
+    }
+    .login-page-password{
+      float: left;
+    }
+    label{
+      font-size: 1.15em;
+      margin-left: 20px;
+      margin-right: 4px;
+    }
+    .email{
+      margin-left: 49px;
+    }
+    .password{
+      margin-left: 20px;
+    }
+    button{
+      margin-left: 40px;
+      margin-top: 10px;
+    }
+    .login-page-new-account{
+      font-size: 0.8em;
+      margin-top: 20px;
+      margin-left: 10px;
     }
   }
 }

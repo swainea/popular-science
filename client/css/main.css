@@ -468,6 +468,7 @@ html, body {
       font-size: 1.5em;
       margin-left: 25px; }
   .main-section .about-text {
+    font-size: 1.3em;
     background-color: #F5BE7D;
     border: 1px solid #B52417;
     box-shadow: 2px 2px 8px grey;
@@ -513,6 +514,33 @@ html, body {
       bottom: 10px;
       width: 20%;
       min-width: 100px; }
+  .main-section .login-page {
+    background-color: #F5BE7D;
+    border: 1px solid #B52417;
+    box-shadow: 2px 2px 8px grey;
+    padding: 15px;
+    padding-bottom: 0px;
+    width: 50%;
+    margin: auto; }
+    .main-section .login-page .login-page-email {
+      float: left; }
+    .main-section .login-page .login-page-password {
+      float: left; }
+    .main-section .login-page label {
+      font-size: 1.15em;
+      margin-left: 20px;
+      margin-right: 4px; }
+    .main-section .login-page .email {
+      margin-left: 49px; }
+    .main-section .login-page .password {
+      margin-left: 20px; }
+    .main-section .login-page button {
+      margin-left: 40px;
+      margin-top: 10px; }
+    .main-section .login-page .login-page-new-account {
+      font-size: 0.8em;
+      margin-top: 20px;
+      margin-left: 10px; }
 
 .panel .push {
   height: 50px; }
