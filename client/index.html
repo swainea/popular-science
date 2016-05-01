@@ -4,6 +4,7 @@
   <meta charset='utf-8'>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
   <link rel='stylesheet' type='text/css' href='css/main.css'>
+  <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
   <title>Popular Science Blog</title>
 </head>
 <body>
@@ -13,7 +14,7 @@
       <img class="banner-image" src="/client/images/RUb6rkl.png" alt="banner image"/>
       <nav  class="nav-container">
         <ul ng-controller="LoginController as lc" class="nav nav-tabs">
-          <li class="active"><a ui-sref='home'>Home</a></li>
+          <li><a class="active" ui-sref='home'>Home</a></li>
           <li><a ui-sref='about'>About</a></li>
           <li ng-show ="lc.onLogin"><a ui-sref='post'>Post</a></li>
           <li><a ui-sref='allPosts'>All Posts</a></li>
@@ -27,7 +28,7 @@
       <div class="sidebar" ng-controller="SidebarController as sidebar">
         <ul class="list-group">
           <li class="list-group-item" ng-repeat="category in sidebar.categories">
-            <a ui-sref="categoryStories({ name: category.name })">
+            <a ui-sref="categoryStories({ id: category.id })">
               {{category.name}}
             </a>
           </li>
@@ -40,8 +41,8 @@
       <div class="push"></div>
   </main>
 
-  <footer class="navbar navbar-default navbar-fixed-bottom">
-    <div class="footer-container">
+  <footer class="footer navbar navbar-default navbar-fixed-bottom">
+    <div class="footer footer-container">
       <p>&copy 2016 Jordan Kasper</p>
     </div>
   </footer>

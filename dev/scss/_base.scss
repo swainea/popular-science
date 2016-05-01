@@ -7,7 +7,7 @@ html, body{
   bottom: 0;
   height: 100%;
   margin: 0;
-  background-color: #F7F5E7;
+  background-color: $layer0Color;
 }
 
 .wrapper {
@@ -27,7 +27,7 @@ html, body{
     height: 20%;
   }
   .nav {
-    background-color:#F5BE7D;
+    background-color:$layer1Color;
     height: 100%;
     padding: 5px;
   }
@@ -37,81 +37,225 @@ html, body{
     border: 1px solid transparent;
     border-radius: 4px 4px 0 0;
     height: 100%;
-    background-color: #F4A051;
+    background-color: $layer2Color;
     &:hover{
-      background-color: #F7F5E7;
+      background-color: $layer0Color;
     }
   }
+  .active{
+    background-color: $layer0Color;
+  }
   a {
-    color:#B82B1F;
+    color:$layer4Color;
     text-decoration: none;
     font-size: 1.3em;
     background-color: transparent;
   }
-  // TODO: I would like to make the active tab have the 'active' class but I'm not sure how.
-  // .nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover {
-  //   border: none;
-  //   cursor: default;
-  //   border-bottom-color: transparent;
-  //   font-style: italic;
-  //   background-color: #F7F5E7;
-  // }
-  .active > a{
-    background-color: #F7F5E7;
-  }
 }
 
 .main-section{
-  height: 100%;
-  margin-left: 10%;
-  margin-right: 10%;
-  bottom: 0;
+  margin-left: 2%;
+  margin-right: 28%;
+  margin-bottom: 5%;
+  padding: 20px;
+  padding-top: 10px;
+  @include defaultFont();
+  h2{
+    margin-top: 10px;
+    margin-bottom: 35px;
+    font-size: 1.5em;
+    font-weight: bolder;
+  }
+  ul{
+    list-style: none;
+    padding-left: 0;
+    .post-title{
+      font-size: 2.5em;
+      margin: 5px;
+    }
+    .post-attributes{
+      display: table;
+      margin-top: 6px;
+    }
+    .by-line{
+      float: left;
+      font-size: 0.75em;
+      margin-left: 20px;
+      margin-bottom: 0;
+      position: relative;
+      bottom: -7px;
+    }
+    .author-name{
+      float: left;
+      margin-left: 10px;
+      margin-bottom: 0;
+      font-size: 1.25em;
+      position: relative;
+      bottom: 0px;
+    }
+    .category-label{
+      float: left;
+      font-size: 0.75em;
+      margin-right: 10px;
+      margin-left: 20px;
+      margin-bottom: 0;
+      position: relative;
+      bottom: -7px;
+    }
+    .post-category{
+      float: left;
+      font-size: 1.5em;
+      margin: 1px;
+      margin-bottom: 0;
+      position: relative;
+      bottom: 0px;
+    }
+    .publish-date{
+      font-size: 0.8em;
+      margin-top: 5px;
+      margin-left: 20px;
+    }
+    li{
+      background-color: $layer1Color;
+      @include boxBorder();
+      @include boxShadow();
+      margin: 8px;
+      padding: 15px;
+    }
+    .article-summary{
+      font-size: 1.5em;
+      margin-left: 25px;
+    }
+  }
+  .about-text{
+    font-size: 1.3em;
+    background-color: $layer1Color;
+    @include boxBorder();
+    @include boxShadow();
+    margin: 8px;
+    padding: 15px;
+  }
+  .allposts{
+    .allposts-post{
+      padding-bottom: 5px;
+      padding-top: 7px;
+    }
+    .allposts-post-title{
+      font-size: 1.75em;
+      float: left;
+    }
+    .allposts-by-line{
+      float: left;
+      position: relative;
+      top: 12px;
+      margin-left: 16px;    }
+    .allposts-author-name{
+      position: relative;
+      top: 9px;
+      margin-left: 6px;
+      font-size: 1.2em;
+    }
+    .allposts-publish-date{
+      margin-top: 12px;
+      position: relative;
+      left: 11px;
+      font-size: 0.9em;    }
+  }
+  .create-post{
+    background-color: $layer1Color;
+    margin: 8px;
+    padding: 15px;
+    @include boxShadow();
+    border: 1px solid $layer4Color;
+    .create-post-title{
+      margin-bottom: 30px;
+      margin-top: 5px;
+    }
+    .create-post-body{
+      margin-bottom: 10px;
+    }
+    .create-post-category{
+      margin-bottom: 10px;
+    }
+    .create-post-submit{
+      position: relative;
+      left: 78%;
+      bottom: 10px;
+      width: 20%;
+      min-width: 100px;
+    }
+  }
+  .login-page{
+    background-color: $layer1Color;
+    @include boxBorder();
+    @include boxShadow();
+    padding: 15px;
+    padding-bottom: 0px;
+    width: 50%;
+    margin: auto;
+    .login-page-email{
+      float: left;
+    }
+    .login-page-password{
+      float: left;
+    }
+    label{
+      font-size: 1.15em;
+      margin-left: 20px;
+      margin-right: 4px;
+    }
+    .email{
+      margin-left: 49px;
+    }
+    .password{
+      margin-left: 20px;
+    }
+    button{
+      margin-left: 40px;
+      margin-top: 10px;
+    }
+    .login-page-new-account{
+      font-size: 0.8em;
+      margin-top: 20px;
+      margin-left: 10px;
+    }
+  }
 }
 
 .panel .push{
   height: 50px;
 }
 
-// .panel{
-//   border: none;
-//     position: absolute;
-//     width: 100%;
-//     right: 0;
-//     bottom: 0;
-//     left: 0;
-//     .panel-footer{
-//       border: none;
-//       background-color: #F5BE7D;
-//       font-size: 1.1em;
-//       text-align: center;
-//       color: #000000;
-//     }
-// }
-footer{
-  background-color: #F5BE7D;
-}
-
-.footer-container{
-
+.footer{
+  background-color: $layer1Color;
+  position: relative;
+  p{
+    position: absolute;
+    bottom: -45px;
+    right: 15px;
+    @include defaultFont();
+    font-size: 1.2em;
+  }
 }
 
 .sidebar{
   position: relative;
   bottom: 0;
-  background-color: #F5BE7D;
+  background-color: $layer1Color;
   float: right;
   width: 17%;
+  min-width: 175px;
   margin: 25px;
   right: 0;
   .list-group {
     height: 100%;
-    background-color: #F84E32;
+    background-color: $layer3Color;
     margin: 0;
   }
   .list-group-item {
-    background-color: #F84E32;
+    background-color: $layer3Color;
     a {
-      color: black;
+      color: $layer5Color;
     }
   }
 }

@@ -41,6 +41,7 @@
         method: 'GET',
         url: apiURL + '/Posts' + '?filter={"limit":' + limit + ',"offset":' + offset + ',"order":"' + orderBy + '","include":["author","category"]}',
       }).then(function successGetAllPosts(response) {
+        console.log(response.data);
         return response.data;
       });
     }
@@ -90,9 +91,9 @@
     function getPostsByCategoryID(categoryID) {
       return $http({
         method: 'GET',
-        url: apiURL + '/Categories/' + categoryID + '?filter={"include":"posts"}',
+        url: apiURL + '/Categories/' + categoryID + '?filter={"include":"posts", "order":"date DESC"}',
       }).then(function successGetPostsByCategory(response) {
-        return response;
+        return response.data;
       });
     }
 

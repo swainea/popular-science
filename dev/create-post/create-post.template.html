@@ -1,21 +1,27 @@
-<h2>Create Post</h2>
+<h2>Write your post here</h2>
 
-<form>
+<div class="create-post">
+  <form>
 
-  <label>Title</label>
-  <input ng-model="post.blogPost.title" type="text" class="form-control" placeholder="Title">
+    <input ng-model="post.blogPost.title" type="text" class="create-post-title form-control" placeholder="Title">
+    <textarea ng-model="post.blogPost.content" class="create-post-body form-control" name="blogText" rows="10" cols="50" placeholder="Blog text here">Write your post here</textarea>
 
-  <label>Write Your Post Here</label>
-  <textarea ng-model="post.blogPost.content" class="form-control" name="blogText" rows="10" cols="50">Write your post here</textarea>
-  <div class="dropdown">
-    <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown" type="button">Category <span class="caret"></span></button>
-    <ul class="dropdown-menu">
-      <li ng-repeat="category in post.categoryList">{{category.name}}</li>
-      <li>Create a New Category</li>
-    </ul>
-  </div>
-  <label>Create A New Category</label>
-  <input ng-model="post.blogPost.newCategory" type="text" class="form-control" placeholder="New Category">
-  <button class="btn btn-default" ng-click="post.newPost()">Publish Post</button>
+    <div class="dropdown">
 
-</form>
+      <select class="create-post-category btn btn-primary dropdown-toggle" ng-model="post.test" ng-options="category.name for category in post.categoryList">
+        <option value="">-- Select A Category --</option>
+      </select>
+
+    </div>
+
+<!--TODO: We need to figure out how to get 'add a category' as an option in the
+dropdown menu. And then we need it to show a field to enter the new category.
+For now, I'm going to comment out the new category fields. Feel free to put them
+back in when you are working on it.  -->
+    <!-- <label>Create A New Category</label>
+    <input ng-model="post.blogPost.newCategory" type="text" class="form-control" placeholder="New Category"> -->
+
+    <button class="create-post-submit btn btn-primary" ng-click="post.newPost()">Publish Post</button>
+
+  </form>
+</div>

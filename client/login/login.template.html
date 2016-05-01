@@ -1,16 +1,27 @@
+<h2>Login</h2>
 
-<form novalidate ng-submit="lc.loginForm()">
+<div class="login-page">
 
-	<label>Email</label>
-	<input class="email" ng-model="lc.login.email" required type="text" placeholder="email">
+	<form novalidate ng-submit="lc.loginForm()">
 
-	<label>Password</label>
-	<input class="password" ng-model="lc.login.password" required type="password" placeholder="password">
+		<div class="login-page-email">
+			<label>Email</label>
+			<input class="email" ng-model="lc.login.email" required type="text" placeholder="email">
+		</div>
 
-	<button class="btn btn-primary">Login</button>
+		<div class="login-page-password">
+			<label>Password</label>
+			<input class="password" ng-model="lc.login.password" required type="password" placeholder="password">
+		</div>
 
-</form>
+		<button class="btn btn-primary">Login</button>
 
-<p>Don't have a login? Get one <a ng-click="lc.register()">HERE</a></p>
+	</form>
+
+	<div class="login-page-new-account">
+		<p>Don't have a login? Get one <a ng-click="lc.register()">HERE</a></p>
+	</div>
+
+</div>
 
 </div>
