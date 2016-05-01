@@ -14,13 +14,13 @@
     this.blogPost = {
       title: "",
       content: "",
-      authorId: "5722369d84c2fd11003f9f2b",
+      authorId: "5723a5280e025811009d1fc8",
       newCategory: null
     };
 
     this.newPost = function newPost (){
-
-      this.blogPost.categoryId = this.test.id;
+      console.log(this.myCategory.id);
+      this.blogPost.categoryId = this.myCategory.id;
 
       console.log("blogPost is: ", this.blogPost);
       if (this.blogPost.newCategory){
@@ -36,10 +36,10 @@
     postListFactory.getAllCategories()
       .then(function (categories){
       that.categoryList = categories.data;
-      that.myCategory = that.categoryList[0];
+      // that.myCategory = that.categoryList[0];
 
       console.log(categories.data);
-      console.log('My Category', that.myCategory);
+      // console.log('My Category', that.myCategory);
       });
 
     }

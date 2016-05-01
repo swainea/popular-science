@@ -220,13 +220,13 @@
     this.blogPost = {
       title: "",
       content: "",
-      authorId: "5722369d84c2fd11003f9f2b",
+      authorId: "5723a5280e025811009d1fc8",
       newCategory: null
     };
 
     this.newPost = function newPost (){
-
-      this.blogPost.categoryId = this.test.id;
+      console.log(this.myCategory.id);
+      this.blogPost.categoryId = this.myCategory.id;
 
       console.log("blogPost is: ", this.blogPost);
       if (this.blogPost.newCategory){
@@ -242,10 +242,10 @@
     postListFactory.getAllCategories()
       .then(function (categories){
       that.categoryList = categories.data;
-      that.myCategory = that.categoryList[0];
+      // that.myCategory = that.categoryList[0];
 
       console.log(categories.data);
-      console.log('My Category', that.myCategory);
+      // console.log('My Category', that.myCategory);
       });
 
     }
@@ -273,7 +273,7 @@
         url: "https://tiy-blog-api.herokuapp.com/api/Posts",
         data: blogPost,
         headers: {
-          Authorization: "TRwfnAi7PnnGiQ4qZzem596QdzR6yQ9vZXoMpHWuVO4RRD2fA8e1O7qHe9vARPQi"
+          Authorization: "ojBmYN0VMw3K9bqn3EGS7AWAgrQCSGkB3aP0d8J3EqfZLVK7UJBi1rhXPP2Tg6nI"
 
         }
       }).then (function onSuccess(response){
@@ -291,7 +291,7 @@
         url: "https://tiy-blog-api.herokuapp.com/api/Categories",
         data: { name: newCategory},
         headers: {
-          Authorization: "TRwfnAi7PnnGiQ4qZzem596QdzR6yQ9vZXoMpHWuVO4RRD2fA8e1O7qHe9vARPQi"
+          Authorization: "ojBmYN0VMw3K9bqn3EGS7AWAgrQCSGkB3aP0d8J3EqfZLVK7UJBi1rhXPP2Tg6nI"
         }
       }).then (function onSuccess(response){
         console.log("inside of second onSuccess function", response);
