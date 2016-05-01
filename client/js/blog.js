@@ -184,7 +184,7 @@
 
   function CreatePostController (CreatePostService, postListFactory){
 
-    this.test = "";
+    this.test = {};
 
     this.blogPost = {
       title: "",
