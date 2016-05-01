@@ -211,9 +211,9 @@
     .module('blog')
     .controller('CreatePostController', CreatePostController);
 
-  CreatePostController.$inject = ['CreatePostService', 'postListFactory'];
+  CreatePostController.$inject = ['$state','CreatePostService', 'postListFactory'];
 
-  function CreatePostController (CreatePostService, postListFactory){
+  function CreatePostController ($state,  CreatePostService, postListFactory){
 
     this.myCategory = {};
 
@@ -221,7 +221,7 @@
       title: "",
       content: "",
       authorId: "5722369d84c2fd11003f9f2b",
-      newCategory: null
+      newCategory: null,
     };
 
     this.newPost = function newPost (){
@@ -233,7 +233,6 @@
         CreatePostService.createCategory(this.blogPost.newCategory);
       }
       CreatePostService.submitPost(this.blogPost);
-
     };
 
     this.categoryList = [];
