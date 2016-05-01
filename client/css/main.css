@@ -368,7 +368,7 @@ html, body {
   bottom: 0;
   height: 100%;
   margin: 0;
-  background-color: #F7F5E7; }
+  background-color: #F7F5E8; }
 
 .wrapper {
   min-height: 100%;
@@ -395,19 +395,21 @@ html, body {
     height: 100%;
     background-color: #F4A051; }
     .main-header .nav-tabs > li > a:hover {
-      background-color: #F7F5E7; }
+      background-color: #F7F5E8; }
   .main-header .active {
-    background-color: blue; }
+    background-color: #F7F5E8; }
   .main-header a {
-    color: #B82B1F;
+    color: #B52417;
     text-decoration: none;
     font-size: 1.3em;
     background-color: transparent; }
 
 .main-section {
-  margin-left: 7%;
-  margin-right: 30%;
-  margin-bottom: 10%;
+  margin-left: 2%;
+  margin-right: 28%;
+  margin-bottom: 5%;
+  padding: 20px;
+  padding-top: 10px;
   font-family: 'Roboto Slab', serif; }
   .main-section h2 {
     margin-top: 10px;
@@ -419,24 +421,56 @@ html, body {
     .main-section ul .post-title {
       font-size: 2.5em;
       margin: 5px; }
-    .main-section ul .post-category {
-      font-size: 1.5em;
-      margin: 5px; }
+    .main-section ul .post-attributes {
+      display: table;
+      margin-top: 6px; }
     .main-section ul .by-line {
+      float: left;
+      font-size: 0.75em;
       margin-left: 20px;
-      margin-bottom: 5px; }
+      margin-bottom: 0;
+      position: relative;
+      bottom: -7px; }
+    .main-section ul .author-name {
+      float: left;
+      margin-left: 10px;
+      margin-bottom: 0;
+      font-size: 1.25em;
+      position: relative;
+      bottom: 0px; }
     .main-section ul .category-label {
       float: left;
+      font-size: 0.75em;
       margin-right: 10px;
-      margin-left: 20px; }
+      margin-left: 20px;
+      margin-bottom: 0;
+      position: relative;
+      bottom: -7px; }
+    .main-section ul .post-category {
+      float: left;
+      font-size: 1.5em;
+      margin: 1px;
+      margin-bottom: 0;
+      position: relative;
+      bottom: 0px; }
     .main-section ul .publish-date {
-      margin-top: 3px; }
+      font-size: 0.8em;
+      margin-top: 5px;
+      margin-left: 20px; }
+    .main-section ul li {
+      background-color: #F5BE7D;
+      border: 1px solid #B52417;
+      margin: 4px;
+      padding: 15px; }
+    .main-section ul .article-summary {
+      font-size: 1.5em;
+      margin-left: 25px; }
 
 .panel .push {
   height: 50px; }
 
 footer {
-  background-color: #F5BE7D; }
+  background-color: #F4A051; }
 
 .sidebar {
   position: relative;
@@ -449,10 +483,10 @@ footer {
   right: 0; }
   .sidebar .list-group {
     height: 100%;
-    background-color: #F84E32;
+    background-color: #F23F1F;
     margin: 0; }
   .sidebar .list-group-item {
-    background-color: #F84E32; }
+    background-color: #F23F1F; }
     .sidebar .list-group-item a {
       color: black; }
 
