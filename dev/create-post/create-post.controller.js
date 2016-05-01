@@ -9,7 +9,7 @@
 
   function CreatePostController (CreatePostService, postListFactory){
 
-    this.test = "";
+    this.myCategory = {};
 
     this.blogPost = {
       title: "",
