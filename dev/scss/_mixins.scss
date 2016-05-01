@@ -4,3 +4,6 @@
 @mixin boxShadow {
   box-shadow: 2px 2px 8px grey;
 }
+@mixin boxBorder {
+  border: 1px solid $layer4Color;
+}
