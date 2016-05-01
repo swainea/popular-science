@@ -28,7 +28,7 @@
       <div class="sidebar" ng-controller="SidebarController as sidebar">
         <ul class="list-group">
           <li class="list-group-item" ng-repeat="category in sidebar.categories">
-            <a ui-sref="categoryStories({ name: category.name })">
+            <a ui-sref="categoryStories({ id: category.id })">
               {{category.name}}
             </a>
           </li>
