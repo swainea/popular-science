@@ -1,3 +1,6 @@
 @mixin defaultFont(){
   font-family: 'Roboto Slab', serif;
 }
+@mixin boxShadow {
+  box-shadow: 2px 2px 8px grey;
+}

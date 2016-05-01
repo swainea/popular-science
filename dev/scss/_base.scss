@@ -7,7 +7,7 @@ html, body{
   bottom: 0;
   height: 100%;
   margin: 0;
-  background-color: #F7F5E7;
+  background-color: $layer0Color;
 }
 
 .wrapper {
@@ -27,7 +27,7 @@ html, body{
     height: 20%;
   }
   .nav {
-    background-color:#F5BE7D;
+    background-color:$layer1Color;
     height: 100%;
     padding: 5px;
   }
@@ -37,16 +37,16 @@ html, body{
     border: 1px solid transparent;
     border-radius: 4px 4px 0 0;
     height: 100%;
-    background-color: #F4A051;
+    background-color: $layer2Color;
     &:hover{
-      background-color: #F7F5E7;
+      background-color: $layer0Color;
     }
   }
   .active{
-    background-color: blue;
+    background-color: $layer0Color;
   }
   a {
-    color:#B82B1F;
+    color:$layer4Color;
     text-decoration: none;
     font-size: 1.3em;
     background-color: transparent;
@@ -54,9 +54,11 @@ html, body{
 }
 
 .main-section{
-  margin-left: 7%;
-  margin-right: 30%;
-  margin-bottom: 10%;
+  margin-left: 2%;
+  margin-right: 28%;
+  margin-bottom: 5%;
+  padding: 20px;
+  padding-top: 10px;
   @include defaultFont();
   h2{
     margin-top: 10px;
@@ -70,23 +72,92 @@ html, body{
       font-size: 2.5em;
       margin: 5px;
     }
-    .post-category{
-      font-size: 1.5em;
-      margin: 5px;
+    .post-attributes{
+      display: table;
+      margin-top: 6px;
     }
     .by-line{
+      float: left;
+      font-size: 0.75em;
       margin-left: 20px;
-      margin-bottom: 5px;
+      margin-bottom: 0;
+      position: relative;
+      bottom: -7px;
+    }
+    .author-name{
+      float: left;
+      margin-left: 10px;
+      margin-bottom: 0;
+      font-size: 1.25em;
+      position: relative;
+      bottom: 0px;
     }
     .category-label{
       float: left;
-      position: relative;
+      font-size: 0.75em;
       margin-right: 10px;
       margin-left: 20px;
+      margin-bottom: 0;
+      position: relative;
+      bottom: -7px;
+    }
+    .post-category{
+      float: left;
+      font-size: 1.5em;
+      margin: 1px;
+      margin-bottom: 0;
+      position: relative;
+      bottom: 0px;
     }
     .publish-date{
-
+      font-size: 0.8em;
+      margin-top: 5px;
+      margin-left: 20px;
     }
+    li{
+      background-color: $layer1Color;
+      border: 1px solid $layer4Color;
+      @include boxShadow();
+      margin: 8px;
+      padding: 15px;
+    }
+    .article-summary{
+      font-size: 1.5em;
+      margin-left: 25px;
+    }
+  }
+  .about-text{
+    background-color: $layer1Color;
+    border: 1px solid $layer4Color;
+    @include boxShadow();
+    margin: 8px;
+    padding: 15px;
+  }
+  .allposts{
+    .allposts-post{
+      padding-bottom: 5px;
+      padding-top: 7px;
+    }
+    .allposts-post-title{
+      font-size: 1.75em;
+      float: left;
+    }
+    .allposts-by-line{
+      float: left;
+      position: relative;
+      top: 12px;
+      margin-left: 16px;    }
+    .allposts-author-name{
+      position: relative;
+      top: 9px;
+      margin-left: 6px;
+      font-size: 1.2em;
+    }
+    .allposts-publish-date{
+      margin-top: 12px;
+      position: relative;
+      left: 11px;
+      font-size: 0.9em;    }
   }
 }
 
@@ -95,13 +166,13 @@ html, body{
 }
 
 footer{
-  background-color: #F5BE7D;
+  background-color: $layer2Color;
 }
 
 .sidebar{
   position: relative;
   bottom: 0;
-  background-color: #F5BE7D;
+  background-color: $layer1Color;
   float: right;
   width: 17%;
   min-width: 175px;
@@ -109,13 +180,13 @@ footer{
   right: 0;
   .list-group {
     height: 100%;
-    background-color: #F84E32;
+    background-color: $layer3Color;
     margin: 0;
   }
   .list-group-item {
-    background-color: #F84E32;
+    background-color: $layer3Color;
     a {
-      color: black;
+      color: $layer5Color;
     }
   }
 }
