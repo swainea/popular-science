@@ -466,6 +466,12 @@ html, body {
     .main-section ul .article-summary {
       font-size: 1.5em;
       margin-left: 25px; }
+  .main-section .about-text {
+    background-color: #F5BE7D;
+    border: 1px solid #B52417;
+    box-shadow: 2px 2px 8px grey;
+    margin: 8px;
+    padding: 15px; }
 
 .panel .push {
   height: 50px; }
