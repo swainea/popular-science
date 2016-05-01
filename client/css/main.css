@@ -427,9 +427,10 @@ html, body {
       margin-bottom: 5px; }
     .main-section ul .category-label {
       float: left;
-      position: relative;
       margin-right: 10px;
       margin-left: 20px; }
+    .main-section ul .publish-date {
+      margin-top: 3px; }
 
 .panel .push {
   height: 50px; }
