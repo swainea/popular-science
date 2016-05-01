@@ -133,6 +133,32 @@ html, body{
     margin: 8px;
     padding: 15px;
   }
+  .allposts{
+    .allposts-post{
+      padding-bottom: 5px;
+      padding-top: 7px;
+    }
+    .allposts-post-title{
+      font-size: 1.75em;
+      float: left;
+    }
+    .allposts-by-line{
+      float: left;
+      position: relative;
+      top: 12px;
+      margin-left: 16px;    }
+    .allposts-author-name{
+      position: relative;
+      top: 9px;
+      margin-left: 6px;
+      font-size: 1.2em;
+    }
+    .allposts-publish-date{
+      margin-top: 12px;
+      position: relative;
+      left: 11px;
+      font-size: 0.9em;    }
+  }
 }
 
 .panel .push{
