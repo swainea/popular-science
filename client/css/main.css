@@ -396,19 +396,40 @@ html, body {
     background-color: #F4A051; }
     .main-header .nav-tabs > li > a:hover {
       background-color: #F7F5E7; }
+  .main-header .active {
+    background-color: blue; }
   .main-header a {
     color: #B82B1F;
     text-decoration: none;
     font-size: 1.3em;
     background-color: transparent; }
-  .main-header .active > a {
-    background-color: #F7F5E7; }
 
 .main-section {
-  height: 100%;
-  margin-left: 10%;
-  margin-right: 10%;
-  bottom: 0; }
+  margin-left: 7%;
+  margin-right: 30%;
+  margin-bottom: 10%;
+  font-family: 'Roboto Slab', serif; }
+  .main-section h2 {
+    margin-top: 10px;
+    margin-bottom: 35px;
+    font-size: 1.5em;
+    font-weight: bolder; }
+  .main-section ul {
+    list-style: none; }
+    .main-section ul .post-title {
+      font-size: 2.5em;
+      margin: 5px; }
+    .main-section ul .post-category {
+      font-size: 1.5em;
+      margin: 5px; }
+    .main-section ul .by-line {
+      margin-left: 20px;
+      margin-bottom: 5px; }
+    .main-section ul .category-label {
+      float: left;
+      position: relative;
+      margin-right: 10px;
+      margin-left: 20px; }
 
 .panel .push {
   height: 50px; }
@@ -422,6 +443,7 @@ footer {
   background-color: #F5BE7D;
   float: right;
   width: 17%;
+  min-width: 175px;
   margin: 25px;
   right: 0; }
   .sidebar .list-group {

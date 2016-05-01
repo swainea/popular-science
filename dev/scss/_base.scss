@@ -42,57 +42,60 @@ html, body{
       background-color: #F7F5E7;
     }
   }
+  .active{
+    background-color: blue;
+  }
   a {
     color:#B82B1F;
     text-decoration: none;
     font-size: 1.3em;
     background-color: transparent;
   }
-  // TODO: I would like to make the active tab have the 'active' class but I'm not sure how.
-  // .nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover {
-  //   border: none;
-  //   cursor: default;
-  //   border-bottom-color: transparent;
-  //   font-style: italic;
-  //   background-color: #F7F5E7;
-  // }
-  .active > a{
-    background-color: #F7F5E7;
-  }
 }
 
 .main-section{
-  height: 100%;
-  margin-left: 10%;
-  margin-right: 10%;
-  bottom: 0;
+  margin-left: 7%;
+  margin-right: 30%;
+  margin-bottom: 10%;
+  @include defaultFont();
+  h2{
+    margin-top: 10px;
+    margin-bottom: 35px;
+    font-size: 1.5em;
+    font-weight: bolder;
+  }
+  ul{
+    list-style: none;
+    .post-title{
+      font-size: 2.5em;
+      margin: 5px;
+    }
+    .post-category{
+      font-size: 1.5em;
+      margin: 5px;
+    }
+    .by-line{
+      margin-left: 20px;
+      margin-bottom: 5px;
+    }
+    .category-label{
+      float: left;
+      position: relative;
+      margin-right: 10px;
+      margin-left: 20px;
+    }
+    .publish-date{
+
+    }
+  }
 }
 
 .panel .push{
   height: 50px;
 }
 
-// .panel{
-//   border: none;
-//     position: absolute;
-//     width: 100%;
-//     right: 0;
-//     bottom: 0;
-//     left: 0;
-//     .panel-footer{
-//       border: none;
-//       background-color: #F5BE7D;
-//       font-size: 1.1em;
-//       text-align: center;
-//       color: #000000;
-//     }
-// }
 footer{
   background-color: #F5BE7D;
-}
-
-.footer-container{
-
 }
 
 .sidebar{
@@ -101,6 +104,7 @@ footer{
   background-color: #F5BE7D;
   float: right;
   width: 17%;
+  min-width: 175px;
   margin: 25px;
   right: 0;
   .list-group {
