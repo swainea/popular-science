@@ -95,20 +95,15 @@
       AuthorController.$inject = ['$stateParams', 'LoginService', 'postListFactory', 'deleteFactory'];
 
       function AuthorController($stateParams, LoginService, postListFactory, deleteFactory) {
-        console.log($stateParams.id);
-        console.log("in AuthorController");
         var that = this;
         this.allPosts = [];
 
         postListFactory.getPostsByAuthorID($stateParams.id)
           .then(function viewPosts(posts) {
-            console.log(posts);
             that.allPosts = posts;
         });
 
         this.deletePost = function deletePost(postId) {
-          console.log(postId);
-          console.log(LoginService.getLoginData().id);
           deleteFactory.deletePost(postId, LoginService.getLoginData().id);
         };
 
@@ -364,7 +359,6 @@
 
         postListFactory.getAllPosts(3, 0, "date DESC")
           .then(function viewPosts(posts) {
-            console.log(posts);
             that.recentPosts = posts;
         });
         // this.recentPosts = postListFactory.getAllPosts();
@@ -374,6 +368,7 @@
       }
 
 })();
+;
 (function() {
   'use strict';
 
@@ -383,7 +378,7 @@
 
   LoginController.$inject = ["$state", "LoginService"];
 
-  function LoginController($state, LoginService) {            //this will give it access to the things in LoginService
+  function LoginController($state, LoginService) {          //this will give it access to the things in LoginService
     this.login = {};
 
     this.loginForm = function loginForm(){
@@ -405,6 +400,7 @@
       $state.go("home");
     //This function calls logout in Login service and redirects to home
     };
+
     this.isLoggedIn = function isLoggedIn() {
       return !!LoginService.getLoginData();
     };
@@ -424,7 +420,8 @@
 
 
     function LoginService($http) {
-    	var loginData;
+
+    	var loginData = null;
 
     	return {
     		authenticate: authenticate,      //this returns authenticate function
@@ -440,20 +437,15 @@
     				email: author.email,
     				password: author.password
     			}
-
     		}).then(function successHandler(response) {
-
-    			console.log(response.data);
-
-    			loginData = response.data;
-    			console.log(loginData);
-                return response.data;
+      			loginData = response.data;
+            return response.data;
 	    		});
     	}
 
-      	function getLoginData() {
-      		  return loginData;
-      	}
+    	function getLoginData() {
+    		  return loginData;
+    	}
 
       function logOut() {
         loginData = null;
@@ -525,7 +517,6 @@
         method: 'GET',
         url: apiURL + '/Posts' + '?filter={"limit":' + limit + ',"offset":' + offset + ',"order":"' + orderBy + '","include":["author","category"]}',
       }).then(function successGetAllPosts(response) {
-        console.log(response.data);
         return response.data;
       });
     }

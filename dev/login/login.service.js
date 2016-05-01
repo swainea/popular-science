@@ -9,7 +9,8 @@
 
 
     function LoginService($http) {
-    	var loginData;
+
+    	var loginData = null;
 
     	return {
     		authenticate: authenticate,      //this returns authenticate function
@@ -25,20 +26,15 @@
     				email: author.email,
     				password: author.password
     			}
-
     		}).then(function successHandler(response) {
-
-    			console.log(response.data);
-
-    			loginData = response.data;
-    			console.log(loginData);
-                return response.data;
+      			loginData = response.data;
+            return response.data;
 	    		});
     	}
 
-      	function getLoginData() {
-      		  return loginData;
-      	}
+    	function getLoginData() {
+    		  return loginData;
+    	}
 
       function logOut() {
         loginData = null;
