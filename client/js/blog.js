@@ -17,11 +17,12 @@
       templateUrl: 'home/home.template.html',
       controller: 'HomeViewController',
       controllerAs: 'home'
-
     })
-    .state('categories', {
-      url: '/categories'
-
+    .state('categoryStories', {
+      url: '/category/:id',
+      templateUrl: 'categories/category.template.html',
+      controller: 'CategoryController',
+      controllerAs: 'cc'
     })
     .state('login', {
       url: '/login',
@@ -53,7 +54,7 @@
       url: '/post',
       controller: 'CreatePostController',
       controllerAs: 'post',
-      templateUrl: 'create-post/create-post.html'
+      templateUrl: 'create-post/create-post.template.html'
     })
     .state('viewPost', {
       url: '/post/:id',
@@ -106,6 +107,30 @@
         });
         // this.recentPosts = postListFactory.getAllPosts();
 
+      }
+
+})();
+;(function() {
+    'use strict';
+
+    angular.module('blog')
+      .controller('CategoryController', CategoryController);
+
+      CategoryController.$inject = ['$stateParams', 'postListFactory'];
+
+      function CategoryController($stateParams, postListFactory) {
+        console.log($stateParams.id);
+        console.log("in CategoryController");
+        var that = this;
+        this.allPosts = [];
+
+        postListFactory.getPostsByCategoryID($stateParams.id)
+          .then(function viewPosts(posts) {
+            console.log(posts);
+            that.allPosts = posts;
+        });
+        // this.recentPosts = postListFactory.getAllPosts();
+        //sdfsdfsdfsdfsdf
       }
 
 })();
@@ -184,7 +209,7 @@
 
   function CreatePostController (CreatePostService, postListFactory){
 
-    this.test = {};
+    this.myCategory = {};
 
     this.blogPost = {
       title: "",
@@ -498,9 +523,9 @@
     function getPostsByCategoryID(categoryID) {
       return $http({
         method: 'GET',
-        url: apiURL + '/Categories/' + categoryID + '?filter={"include":"posts"}',
+        url: apiURL + '/Categories/' + categoryID + '?filter={"include":"posts", "order":"date DESC"}',
       }).then(function successGetPostsByCategory(response) {
-        return response;
+        return response.data;
       });
     }
 
