@@ -4,9 +4,9 @@
     angular.module('blog')
       .controller('AuthorController', AuthorController);
 
-      AuthorController.$inject = ['$stateParams', 'LoginService', 'postListFactory', 'deleteFactory'];
+      AuthorController.$inject = ['$state', '$stateParams', 'LoginService', 'postListFactory', 'deleteFactory'];
 
-      function AuthorController($stateParams, LoginService, postListFactory, deleteFactory) {
+      function AuthorController($state, $stateParams, LoginService, postListFactory, deleteFactory) {
         console.log($stateParams.id);
         console.log("in AuthorController");
         var that = this;
@@ -21,7 +21,10 @@
         this.deletePost = function deletePost(postId) {
           console.log(postId);
           console.log(LoginService.getLoginData().id);
-          deleteFactory.deletePost(postId, LoginService.getLoginData().id);
+          deleteFactory.deletePost(postId, LoginService.getLoginData().id)
+            .then(function deleteSuccess() {
+              $state.go();
+            });
         };
 
 

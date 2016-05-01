@@ -14,35 +14,36 @@
       createCategory: createCategory
     };
 
-    function submitPost (blogPost){
+    function submitPost (blogPost, authorization){
       console.log(blogPost);
       return $http ({
         method:'POST',
         url: "https://tiy-blog-api.herokuapp.com/api/Posts",
         data: blogPost,
         headers: {
-          Authorization: "ojBmYN0VMw3K9bqn3EGS7AWAgrQCSGkB3aP0d8J3EqfZLVK7UJBi1rhXPP2Tg6nI"
-
+          Authorization: authorization
         }
       }).then (function onSuccess(response){
         console.log("inside of onSuccess function", response);
+        return response.data;
       }, function error(response) {
         console.log(response);
       }
     );
     }
 
-    function createCategory(newCategory){
+    function createCategory(newCategory, authorization){
       console.log(newCategory);
       return $http ({
         method: 'POST',
         url: "https://tiy-blog-api.herokuapp.com/api/Categories",
         data: { name: newCategory},
         headers: {
-          Authorization: "ojBmYN0VMw3K9bqn3EGS7AWAgrQCSGkB3aP0d8J3EqfZLVK7UJBi1rhXPP2Tg6nI"
+          Authorization: authorization
         }
       }).then (function onSuccess(response){
         console.log("inside of second onSuccess function", response);
+        return response.data;
       }, function error(response) {
         console.log(response);
       });
