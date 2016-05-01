@@ -41,6 +41,7 @@
         method: 'GET',
         url: apiURL + '/Posts' + '?filter={"limit":' + limit + ',"offset":' + offset + ',"order":"' + orderBy + '","include":["author","category"]}',
       }).then(function successGetAllPosts(response) {
+        console.log(response.data);
         return response.data;
       });
     }

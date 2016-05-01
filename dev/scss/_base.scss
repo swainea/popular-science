@@ -59,11 +59,34 @@ html, body{
   margin-bottom: 10%;
   @include defaultFont();
   h2{
-    font-size: 2.5em;
+    margin-top: 10px;
+    margin-bottom: 35px;
+    font-size: 1.5em;
     font-weight: bolder;
   }
   ul{
     list-style: none;
+    .post-title{
+      font-size: 2.5em;
+      margin: 5px;
+    }
+    .post-category{
+      font-size: 1.5em;
+      margin: 5px;
+    }
+    .by-line{
+      margin-left: 20px;
+      margin-bottom: 5px;
+    }
+    .category-label{
+      float: left;
+      position: relative;
+      margin-right: 10px;
+      margin-left: 20px;
+    }
+    .publish-date{
+
+    }
   }
 }
 

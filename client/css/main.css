@@ -410,10 +410,26 @@ html, body {
   margin-bottom: 10%;
   font-family: 'Roboto Slab', serif; }
   .main-section h2 {
-    font-size: 2.5em;
+    margin-top: 10px;
+    margin-bottom: 35px;
+    font-size: 1.5em;
     font-weight: bolder; }
   .main-section ul {
     list-style: none; }
+    .main-section ul .post-title {
+      font-size: 2.5em;
+      margin: 5px; }
+    .main-section ul .post-category {
+      font-size: 1.5em;
+      margin: 5px; }
+    .main-section ul .by-line {
+      margin-left: 20px;
+      margin-bottom: 5px; }
+    .main-section ul .category-label {
+      float: left;
+      position: relative;
+      margin-right: 10px;
+      margin-left: 20px; }
 
 .panel .push {
   height: 50px; }
