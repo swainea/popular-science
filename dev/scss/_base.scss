@@ -68,6 +68,7 @@ html, body{
   }
   ul{
     list-style: none;
+    padding-left: 0;
     .post-title{
       font-size: 2.5em;
       margin: 5px;
@@ -116,7 +117,7 @@ html, body{
     }
     li{
       background-color: $layer1Color;
-      border: 1px solid $layer4Color;
+      @include boxBorder();
       @include boxShadow();
       margin: 8px;
       padding: 15px;
@@ -127,8 +128,9 @@ html, body{
     }
   }
   .about-text{
+    font-size: 1.3em;
     background-color: $layer1Color;
-    border: 1px solid $layer4Color;
+    @include boxBorder();
     @include boxShadow();
     margin: 8px;
     padding: 15px;
@@ -159,14 +161,81 @@ html, body{
       left: 11px;
       font-size: 0.9em;    }
   }
+  .create-post{
+    background-color: $layer1Color;
+    margin: 8px;
+    padding: 15px;
+    @include boxShadow();
+    border: 1px solid $layer4Color;
+    .create-post-title{
+      margin-bottom: 30px;
+      margin-top: 5px;
+    }
+    .create-post-body{
+      margin-bottom: 10px;
+    }
+    .create-post-category{
+      margin-bottom: 10px;
+    }
+    .create-post-submit{
+      position: relative;
+      left: 78%;
+      bottom: 10px;
+      width: 20%;
+      min-width: 100px;
+    }
+  }
+  .login-page{
+    background-color: $layer1Color;
+    @include boxBorder();
+    @include boxShadow();
+    padding: 15px;
+    padding-bottom: 0px;
+    width: 50%;
+    margin: auto;
+    .login-page-email{
+      float: left;
+    }
+    .login-page-password{
+      float: left;
+    }
+    label{
+      font-size: 1.15em;
+      margin-left: 20px;
+      margin-right: 4px;
+    }
+    .email{
+      margin-left: 49px;
+    }
+    .password{
+      margin-left: 20px;
+    }
+    button{
+      margin-left: 40px;
+      margin-top: 10px;
+    }
+    .login-page-new-account{
+      font-size: 0.8em;
+      margin-top: 20px;
+      margin-left: 10px;
+    }
+  }
 }
 
 .panel .push{
   height: 50px;
 }
 
-footer{
-  background-color: $layer2Color;
+.footer{
+  background-color: $layer1Color;
+  position: relative;
+  p{
+    position: absolute;
+    bottom: -45px;
+    right: 15px;
+    @include defaultFont();
+    font-size: 1.2em;
+  }
 }
 
 .sidebar{
