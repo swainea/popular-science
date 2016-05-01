@@ -8,8 +8,9 @@
 
     <div class="dropdown">
 
-      <select class="create-post-category btn btn-primary dropdown-toggle" ng-model="post.test" ng-options="category.name for category in post.categoryList">
+      <select class="create-post-category btn btn-primary dropdown-toggle" ng-model="post.myCategory" ng-options="category.name for category in post.categoryList">
         <option value="">-- Select A Category --</option>
+        <option value="">-- ???? --</option>
       </select>
 
     </div>
@@ -18,8 +19,8 @@
 dropdown menu. And then we need it to show a field to enter the new category.
 For now, I'm going to comment out the new category fields. Feel free to put them
 back in when you are working on it.  -->
-    <!-- <label>Create A New Category</label>
-    <input ng-model="post.blogPost.newCategory" type="text" class="form-control" placeholder="New Category"> -->
+    <label>Create A New Category</label>
+    <input ng-model="post.blogPost.newCategory" type="text" class="form-control" placeholder="New Category">
 
     <button class="create-post-submit btn btn-primary" ng-click="post.newPost()">Publish Post</button>
 
