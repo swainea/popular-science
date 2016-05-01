@@ -44,6 +44,7 @@
         }
       }).then (function onSuccess(response){
         console.log("inside of second onSuccess function", response);
+        return response.data;
       }, function error(response) {
         console.log(response);
       });

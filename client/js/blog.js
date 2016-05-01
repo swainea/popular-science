@@ -230,14 +230,25 @@
 
       console.log("blogPost is: ", this.blogPost);
       if (this.blogPost.newCategory){
-        CreatePostService.createCategory(this.blogPost.newCategory);
-      }
+
+        CreatePostService.createCategory(this.blogPost.newCategory)
+          .then (function handleCatData(catData) {
+            console.log(catData);
+            that.blogPost.categoryId = catData.id;
+            CreatePostService.submitPost(that.blogPost, LoginService.getLoginData().id)
+              .then(function successHandler(newPost) {
+                console.log(newPost);
+                $state.go("viewPost", {id: newPost.id});
+          });
+        });
+      } else {
       CreatePostService.submitPost(this.blogPost, LoginService.getLoginData().id)
         .then(function successHandler(newPost) {
           console.log(newPost);
           $state.go("viewPost", {id: newPost.id});
         });
-    };
+    }
+  };
 
     this.categoryList = [];
     var that = this;
@@ -251,7 +262,7 @@
       // console.log('My Category', that.myCategory);
       });
 
-    }
+}    
 }());
 ;(function() {
   'use strict';
@@ -299,6 +310,7 @@
         }
       }).then (function onSuccess(response){
         console.log("inside of second onSuccess function", response);
+        return response.data;
       }, function error(response) {
         console.log(response);
       });
