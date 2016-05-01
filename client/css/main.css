@@ -545,8 +545,15 @@ html, body {
 .panel .push {
   height: 50px; }
 
-footer {
-  background-color: #F4A051; }
+.footer {
+  background-color: #F5BE7D;
+  position: relative; }
+  .footer p {
+    position: absolute;
+    bottom: -45px;
+    right: 15px;
+    font-family: 'Roboto Slab', serif;
+    font-size: 1.2em; }
 
 .sidebar {
   position: relative;

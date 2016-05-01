@@ -226,8 +226,16 @@ html, body{
   height: 50px;
 }
 
-footer{
-  background-color: $layer2Color;
+.footer{
+  background-color: $layer1Color;
+  position: relative;
+  p{
+    position: absolute;
+    bottom: -45px;
+    right: 15px;
+    @include defaultFont();
+    font-size: 1.2em;
+  }
 }
 
 .sidebar{
