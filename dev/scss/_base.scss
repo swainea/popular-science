@@ -68,6 +68,7 @@ html, body{
   }
   ul{
     list-style: none;
+    padding-left: 0;
     .post-title{
       font-size: 2.5em;
       margin: 5px;
@@ -160,7 +161,24 @@ html, body{
       font-size: 0.9em;    }
   }
   .create-post{
-    
+    background-color: $layer1Color;
+    margin: 8px;
+    padding: 15px;
+    @include boxShadow();
+    border: 1px solid $layer4Color;
+    .create-post-title{
+      margin-bottom: 30px;
+      margin-top: 5px;
+    }
+    .create-post-body{
+      margin-bottom: 10px;
+    }
+    .create-post-category{
+      margin-bottom: 10px;
+    }
+    .create-post-submit{
+      margin: 0;
+    }
   }
 }
 
