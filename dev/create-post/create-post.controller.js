@@ -5,9 +5,9 @@
     .module('blog')
     .controller('CreatePostController', CreatePostController);
 
-  CreatePostController.$inject = ['CreatePostService', 'postListFactory', 'LoginService'];
+  CreatePostController.$inject = ['$state', 'CreatePostService', 'postListFactory', 'LoginService'];
 
-  function CreatePostController (CreatePostService, postListFactory, LoginService){
+  function CreatePostController ($state, CreatePostService, postListFactory, LoginService){
 
     this.myCategory = {};
 
@@ -26,8 +26,11 @@
       if (this.blogPost.newCategory){
         CreatePostService.createCategory(this.blogPost.newCategory);
       }
-      CreatePostService.submitPost(this.blogPost, LoginService.getLoginData().id);
-
+      CreatePostService.submitPost(this.blogPost, LoginService.getLoginData().id)
+        .then(function successHandler(newPost) {
+          console.log(newPost);
+          $state.go("viewPost", {id: newPost.id});
+        });
     };
 
     this.categoryList = [];
@@ -36,7 +39,7 @@
     postListFactory.getAllCategories()
       .then(function (categories){
       that.categoryList = categories.data;
-      that.myCategory = that.categoryList[0];
+      // that.myCategory = that.categoryList[0];
 
       // console.log(categories.data);
       // console.log('My Category', that.myCategory);

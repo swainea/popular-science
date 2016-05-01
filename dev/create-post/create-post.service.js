@@ -26,6 +26,7 @@
         }
       }).then (function onSuccess(response){
         console.log("inside of onSuccess function", response);
+        return response.data;
       }, function error(response) {
         console.log(response);
       }
