@@ -13,6 +13,7 @@
 
     postListFactory.getAllCategories()
       .then(function returnCategoryList(response) {
+        console.log(response);
         that.categories = response.data;
       });
 
