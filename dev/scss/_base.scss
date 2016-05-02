@@ -341,3 +341,20 @@ a:hover {
 .create-author-form {
   margin-bottom: 20px;
 }
+.titles {
+  position: absolute;
+  top: 1%;
+  left: 6%;
+  width: 30%;
+  color: $layer5Color;
+  h1 {
+    font-size: 3.5em;
+    font-family: 'Bitter', serif;
+    font-weight: 700;
+  }
+  h2{
+    font-size: 2em;
+    font-style: italic;
+    font-weight: 200;
+  }
+}

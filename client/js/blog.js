@@ -19,11 +19,15 @@
       controller: 'HomeViewController',
       controllerAs: 'home'
     })
-    .state('categoryStories', {
-      url: '/category/:id',
-      templateUrl: 'categories/category.template.html',
-      controller: 'CategoryController',
-      controllerAs: 'cc'
+    .state('error', {
+                url: '/eror',
+                template: '<p class= "error-message"> Oops, something went wrong. Please contact us or try again later...</p>'
+                // templateUrl: 'error/error.template.html',
+                // controller: 'ErrorController',
+                // controllerAs: 'error',
+                // params: {
+                //     msg: 'Something went wrong, please try back later...'
+                // }
     })
     .state('login', {
       url: '/login',
@@ -33,6 +37,12 @@
       params: {
         msg: null
       }
+    })
+    .state('categoryStories', {
+      url: '/category/:id',
+      templateUrl: 'categories/category.template.html',
+      controller: 'CategoryController',
+      controllerAs: 'cc'
     })
     .state('allPosts', {
       url: '/allPosts',
@@ -414,8 +424,13 @@
         // LoginService.getLoginData();   Now you can run that logindata and it will return the user's Login Data, in this case, response.data
         //state.go should go here because the controller marries the UI with the data
       })
-      .catch(function() {
-        that.errorMessage = "Please enter your correct login information or create a new account.";
+      .catch(function(response) {
+        if (response.status > 499) {
+          $state.go('error', {msg:'Something is wrong, please contact us or try back later...'});
+        }
+        else {
+          that.errorMessage = "Please enter your correct login information or create a new account.";
+        }
       });
     };
 
@@ -435,13 +450,7 @@
     this.isLoggedIn = function isLoggedIn() {
       return !!LoginService.getLoginData();
     };
-    // this.loginName = function loginName(){
-    //   LoginService.getLoginData();
-    //   return that.getLoginData.name;
-    // };
   }
-
-
 
 })();
 ;(function() {
@@ -454,7 +463,7 @@
     LoginService.$inject = ["$http"];
 
 
-    function LoginService($http) {
+    function LoginService($http ) {
 
     	var loginData = null;
       
@@ -473,6 +482,7 @@
     				email: author.email,
     				password: author.password
     			}
+
     		}).then(function successHandler(response) {
       			loginData = response.data;
             return response.data;
@@ -489,7 +499,7 @@
     }
 
 })();
-;(function() {
+;;(function() {
   'use strict';
 
   angular
