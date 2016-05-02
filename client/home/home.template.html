@@ -2,6 +2,7 @@
 <ul>
   <li ng-repeat='post in home.recentPosts'>
     <a ui-sref='viewPost({ id: post.id })'><h3 class="post-title">{{post.title}}</h3></a>
+    <p class="publish-date">{{post.date | date:'MMM d, y @ h:mm a'}}</p>
     <div class="post-attributes">
       <p class="by-line">By:</p>
       <a class="author-name" ui-sref='author({ id: post.author.id })'><cite>{{post.author.name}}</cite></a>
