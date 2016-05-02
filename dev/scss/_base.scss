@@ -230,6 +230,7 @@ html, body{
 .footer{
   background-color: $layer1Color;
   position: relative;
+  clear: both;
   p{
     position: absolute;
     bottom: -45px;
@@ -283,6 +284,14 @@ a:hover {
 }
 
 .btn {
+  background-color: #B03020;
+}
+
+.btn:hover {
+  background-color: #E94A27;
+}
+
+.btn:active {
   background-color: #B03020;
 }
 

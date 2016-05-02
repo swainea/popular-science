@@ -548,7 +548,8 @@ html, body {
 
 .footer {
   background-color: #F5BE7D;
-  position: relative; }
+  position: relative;
+  clear: both; }
   .footer p {
     position: absolute;
     bottom: -45px;
@@ -588,6 +589,12 @@ a:hover {
   color: #E94A27; }
 
 .btn {
+  background-color: #B03020; }
+
+.btn:hover {
+  background-color: #E94A27; }
+
+.btn:active {
   background-color: #B03020; }
 
 .delete-post-button {
