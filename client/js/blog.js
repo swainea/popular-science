@@ -230,7 +230,7 @@
     this.blogPost = {
       title: "",
       content: "",
-      authorId: LoginService.getLoginData().userId,// but needs to be the userID
+      authorId: LoginService.getLoginData().userId, 
       newCategory: null
     };
 
