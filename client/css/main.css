@@ -425,7 +425,8 @@ html, body {
     padding-left: 0; }
     .main-section ul .post-title {
       font-size: 2.5em;
-      margin: 5px; }
+      margin: 5px;
+      display: inline-block; }
     .main-section ul .post-attributes {
       display: table;
       margin-top: 6px; }
@@ -460,8 +461,8 @@ html, body {
       bottom: 0px; }
     .main-section ul .publish-date {
       font-size: 0.8em;
-      margin-top: 5px;
-      margin-left: 20px; }
+      margin-top: 4%;
+      float: right; }
     .main-section ul li {
       background-color: #F5BE7D;
       border: 1px solid #B52417;
@@ -553,7 +554,7 @@ html, body {
   .footer p {
     position: absolute;
     bottom: -45px;
-    right: 15px;
+    left: 15px;
     font-family: 'Roboto Slab', serif;
     font-size: 1.2em; }
 

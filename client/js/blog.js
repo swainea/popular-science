@@ -425,6 +425,8 @@
 
     this.logout = function logout(){
       this.login = {};
+      console.log(this.login);
+
       LoginService.logOut();
       $state.go("home");
     //This function calls logout in Login service and redirects to home
