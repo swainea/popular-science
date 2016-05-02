@@ -140,8 +140,21 @@
             that.allPosts = posts;
         });
 
+        this.areYouSure = false;
+
+        this.deletePostID = null;
+
+        this.askDeletePost = function askDeletePost(postId) {
+          this.deletePostID = postId;
+          this.areYouSure = true;
+        };
+
+        this.doNotDeletePost = function doNotDeletePost() {
+          this.areYouSure = false;
+        };
+
         this.deletePost = function deletePost(postId) {
-          
+
           deleteFactory.deletePost(postId, LoginService.getLoginData().id)
             .then(function deleteSuccess() {
               $state.transitionTo($state.current, $stateParams, {
@@ -746,6 +759,7 @@
 
     postListFactory.getAllCategories()
       .then(function returnCategoryList(response) {
+        console.log(response);
         that.categories = response.data;
       });
 

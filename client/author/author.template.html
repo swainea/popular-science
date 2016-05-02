@@ -2,9 +2,15 @@
 
 <ul>
   <li ng-repeat='post in author.allPosts'>
-    <button ng-show='author.authorId === post.authorId' class="delete-post-button create-post-submit btn btn-primary" ng-click="author.deletePost(post.id)">Delete Post</button>
+    <button ng-show='author.authorId === post.authorId' class="delete-post-button create-post-submit btn btn-primary" ng-click="author.askDeletePost(post.id)">Delete Post</button>
     <a ui-sref='viewPost({ id: post.id })'><h2>{{post.title}}</h2></a>
     <p>{{post.date | date:'MMM d, y @ h:mm a'}}</p>
     <article>{{post.content.substr(0, 400)}}<a ng-show='{{post.content.length > 400}}' ui-sref='viewPost({ id: post.id })'>...Read more</a></article>
   </li>
 </ul>
+
+<div ng-show="author.areYouSure" class="ask-delete">
+  <p>Are you sure you want to delete this post?</p>
+  <button ng-click="author.deletePost(author.deletePostID)" type="button">Yes</button>
+  <button ng-click="author.doNotDeletePost()" type="button">No</button>
+</div>
