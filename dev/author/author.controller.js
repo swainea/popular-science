@@ -4,20 +4,36 @@
     angular.module('blog')
       .controller('AuthorController', AuthorController);
 
-      AuthorController.$inject = ['$stateParams', 'postListFactory'];
+      AuthorController.$inject = ['$state', '$stateParams', 'LoginService', 'postListFactory', 'deleteFactory'];
 
-      function AuthorController($stateParams, postListFactory) {
-        console.log($stateParams.id);
-        console.log("in AuthorController");
+      function AuthorController($state, $stateParams, LoginService, postListFactory, deleteFactory) {
+
         var that = this;
+        this.authorId = "";
+
+        if (LoginService.getLoginData()) {
+          this.authorId = LoginService.getLoginData().userId;
+        }
+        console.log('after if', this.authorId);
         this.allPosts = [];
 
         postListFactory.getPostsByAuthorID($stateParams.id)
           .then(function viewPosts(posts) {
-            console.log(posts);
             that.allPosts = posts;
         });
-        // this.recentPosts = postListFactory.getAllPosts();
+
+        this.deletePost = function deletePost(postId) {
+          
+          deleteFactory.deletePost(postId, LoginService.getLoginData().id)
+            .then(function deleteSuccess() {
+              $state.transitionTo($state.current, $stateParams, {
+                reload: true,
+                inherit: false,
+                notify: true
+              });
+            });
+        };
+
 
       }
 

@@ -9,11 +9,13 @@
 
 
     function LoginService($http) {
-    	var loginData;
+
+    	var loginData = null;
 
     	return {
     		authenticate: authenticate,      //this returns authenticate function
-    		getLoginData: getLoginData       //Inject LoginService and getLoginData to make sure it runs after the authentication happens
+    		getLoginData: getLoginData,       //Inject LoginService and getLoginData to make sure it runs after the authentication happens
+        logOut: logOut
     	};
 
     	function authenticate(author){
@@ -24,21 +26,19 @@
     				email: author.email,
     				password: author.password
     			}
-
     		}).then(function successHandler(response) {
-
-    			console.log(response.data);
-
-    			loginData = response.data;
-    			console.log(loginData);
-                return response.data;
+      			loginData = response.data;
+            return response.data;
 	    		});
     	}
 
     	function getLoginData() {
-    		console.log(loginData);
-    		return loginData;
+    		  return loginData;
     	}
+
+      function logOut() {
+        loginData = null;
+      }
     }
 
 })();

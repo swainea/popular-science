@@ -90,9 +90,9 @@
     function getPostsByCategoryID(categoryID) {
       return $http({
         method: 'GET',
-        url: apiURL + '/Categories/' + categoryID + '?filter={"include":"posts"}',
+        url: apiURL + '/Categories/' + categoryID + '?filter={"include":"posts", "order":"date DESC"}',
       }).then(function successGetPostsByCategory(response) {
-        return response;
+        return response.data;
       });
     }
 

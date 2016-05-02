@@ -1,0 +1,23 @@
+<h2>Write your post here</h2>
+
+<div class="create-post">
+  <form>
+
+    <input ng-model="post.blogPost.title" type="text" class="create-post-title form-control" placeholder="Title">
+    <textarea ng-model="post.blogPost.content" class="create-post-body form-control" name="blogText" rows="10" cols="50" placeholder="Blog text here">Write your post here</textarea>
+
+    <div class="dropdown">
+
+      <select class="create-post-category btn btn-primary dropdown-toggle" ng-model="post.myCategory" ng-options="category.name for category in post.categoryList">
+        <option value="">-- Select A Category --</option>
+      </select>
+
+    </div>
+    
+    <label>Or Create A New Category</label>
+    <input ng-model="post.blogPost.newCategory" type="text" class="form-control" placeholder="New Category">
+
+    <button class="create-post-submit btn btn-primary" ng-click="post.newPost()">Publish Post</button>
+
+  </form>
+</div>

@@ -2,37 +2,51 @@
   'use strict';
 
   angular
-    .module('blog')
-    .controller('CreatePostController', CreatePostController);
+  .module('blog')
+  .controller('CreatePostController', CreatePostController);
 
-  CreatePostController.$inject = ['CreatePostService', 'postListFactory'];
+  CreatePostController.$inject = ['$state', 'CreatePostService', 'postListFactory', 'LoginService'];
 
-  function CreatePostController (CreatePostService, postListFactory){
-    // this.myCategory = {id: ""};
+  function CreatePostController ($state, CreatePostService, postListFactory, LoginService){
+    this.categoryList = [];
+    var that = this;
+    this.myCategory = {};
 
     this.blogPost = {
       title: "",
       content: "",
-      categoryId: "",
-      authorId: "5722369d84c2fd11003f9f2b",
-      newCategory: null,
+      authorId: LoginService.getLoginData().userId,
+      newCategory: null
     };
-      // this.myCategory = this.categoryList[0].id;
 
     this.newPost = function newPost (){
-      console.log("blogPost is: ", this.blogPost);
-      if (this.blogPost.newCategory){
-        CreatePostService.createCategory(this.blogPost.newCategory);
-      }
-      CreatePostService.submitPost(this.blogPost);
-    };
-    this.categoryList = [];
-    var that = this;
-    postListFactory.getAllCategories()
-      .then(function (categories){
-      that.categoryList = categories.data;
-      console.log(categories.data);
-      });
 
-    }
+      this.blogPost.categoryId = this.myCategory.id;
+      if (this.blogPost.newCategory){
+        CreatePostService.createCategory(this.blogPost.newCategory, LoginService.getLoginData().id)
+          .then(function newCatSuccess(newCat) {
+            that.blogPost.categoryId = newCat.id;
+
+            CreatePostService.submitPost(that.blogPost, LoginService.getLoginData().id)
+              .then(function successHandler(newPost) {
+                $state.go("viewPost", {id: newPost.id});
+              });
+
+          });
+
+      } else {
+      CreatePostService.submitPost(this.blogPost, LoginService.getLoginData().id)
+        .then(function successHandler(newPost) {
+          $state.go("viewPost", {id: newPost.id});
+        });
+      }
+    };
+
+    postListFactory.getAllCategories()
+    .then(function (categories){
+      that.categoryList = categories.data;
+    });
+
+  }
+
 }());
