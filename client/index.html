@@ -13,13 +13,16 @@
     <header class="main-header">
       <img class="banner-image" src="/images/RUb6rkl.png" alt="banner image"/>
       <nav  class="nav-container">
-        <ul ng-controller="LoginController as lc" class="nav nav-pills">
+        <ul ng-controller="LoginController as lc" class="nav nav-pills pull-left">
           <li><a ui-sref='home'>Home</a></li>
           <li><a ui-sref='about'>About</a></li>
           <li><a ui-sref='allPosts'>All Posts</a></li>
           <li ng-show="lc.isLoggedIn()"><a ui-sref='post'>Post</a></li>
+        </ul>
+        <ul ng-controller="LoginController as lc" class="nav nav-pills pull-right">
+          <!-- <li><p>{{ lc.login.name  }}</p></li> -->
           <li ng-hide="lc.isLoggedIn()"><a ui-sref='login'>Login</a></li>
-          <li ng-show="lc.isLoggedIn()"><a ui-sref='home' ng-click="lc.logout()">Logout</a></li>
+          <li  ng-show="lc.isLoggedIn()"><a ui-sref='home' ng-click="lc.logout()">Logout</a></li>
         </ul>
       </nav>
     </header>

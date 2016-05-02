@@ -25,6 +25,7 @@ html, body{
   }
   .nav-container{
     height: 20%;
+    background-color: $layer1Color;
   }
   .nav {
     background-color:$layer1Color;
@@ -263,6 +264,9 @@ html, body{
   }
   .listStyle {
     font-family: 'Roboto Slab', serif;
+  }
+  .righties {
+    background-color: red;
   }
     // .listButton {
     //   background-color: $layer1Color;
