@@ -8,7 +8,7 @@
 
   LoginController.$inject = ["$state", "LoginService"];
 
-  function LoginController($state, LoginService) {            //this will give it access to the things in LoginService
+  function LoginController($state, LoginService) {          //this will give it access to the things in LoginService
     this.login = {};
 
     this.loginForm = function loginForm(){
@@ -30,6 +30,7 @@
       $state.go("home");
     //This function calls logout in Login service and redirects to home
     };
+
     this.isLoggedIn = function isLoggedIn() {
       return !!LoginService.getLoginData();
     };
