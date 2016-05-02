@@ -547,7 +547,8 @@ html, body {
 
 .footer {
   background-color: #F5BE7D;
-  position: relative; }
+  position: relative;
+  clear: both; }
   .footer p {
     position: absolute;
     bottom: -45px;
