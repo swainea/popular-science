@@ -382,13 +382,19 @@
 
   function LoginController($state, LoginService) {          //this will give it access to the things in LoginService
     this.login = {};
+    this.errorMessage = "";
+    var that = this;
 
     this.loginForm = function loginForm(){
       LoginService.authenticate(this.login)
         .then(function(){
           $state.go("home");
+
         // LoginService.getLoginData();   Now you can run that logindata and it will return the user's Login Data, in this case, response.data
         //state.go should go here because the controller marries the UI with the data
+      })
+      .catch(function() {
+        that.errorMessage = "Please enter your correct login information or create a new account.";
       });
     };
 
