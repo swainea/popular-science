@@ -8,7 +8,7 @@
     LoginService.$inject = ["$http"];
 
 
-    function LoginService($http) {
+    function LoginService($http ) {
 
     	var loginData = null;
 
@@ -26,6 +26,7 @@
     				email: author.email,
     				password: author.password
     			}
+
     		}).then(function successHandler(response) {
       			loginData = response.data;
             return response.data;

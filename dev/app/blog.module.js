@@ -18,17 +18,27 @@
       controller: 'HomeViewController',
       controllerAs: 'home'
     })
-    .state('categoryStories', {
-      url: '/category/:id',
-      templateUrl: 'categories/category.template.html',
-      controller: 'CategoryController',
-      controllerAs: 'cc'
+    .state('error', {
+                url: '/eror',
+                template: '<p class= "error-message"> Oops, something went wrong. Please contact us or try again later...</p>'
+                // templateUrl: 'error/error.template.html',
+                // controller: 'ErrorController',
+                // controllerAs: 'error',
+                // params: {
+                //     msg: 'Something went wrong, please try back later...'
+                // }
     })
     .state('login', {
       url: '/login',
       templateUrl: 'login/login.template.html',
       controller: 'LoginController',
       controllerAs: 'lc'
+    })
+    .state('categoryStories', {
+      url: '/category/:id',
+      templateUrl: 'categories/category.template.html',
+      controller: 'CategoryController',
+      controllerAs: 'cc'
     })
     .state('allPosts', {
       url: '/allPosts',
