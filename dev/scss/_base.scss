@@ -281,7 +281,8 @@ html, body{
   .listButton{
     background-color: $layer1Color;
     &:hover{
-      background-color: $layer2Color;
+      background-color: $layer1Color;
+      color: $layer0Color;
     }
   }
 
@@ -315,7 +316,7 @@ a:hover {
   width: 100%;
   background-color: $layer2Color;
   font-size: 1.5em;
-  color: $layer4Color;
+  color: $layer5Color;
   margin-top: 10px;
   margin-bottom: 10px;
   border: 1px solid $layer4Color;

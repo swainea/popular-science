@@ -592,7 +592,8 @@ html, body {
   .sidebar .listButton {
     background-color: #F5BE7D; }
     .sidebar .listButton:hover {
-      background-color: #F4A051; }
+      background-color: #F5BE7D;
+      color: #F7F5E8; }
   .sidebar .category-label {
     background-color: #F4A051;
     text-align: left;
@@ -617,7 +618,7 @@ a:hover {
   width: 100%;
   background-color: #F4A051;
   font-size: 1.5em;
-  color: #B52417;
+  color: black;
   margin-top: 10px;
   margin-bottom: 10px;
   border: 1px solid #B52417; }
