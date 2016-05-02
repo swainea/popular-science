@@ -225,6 +225,23 @@ html, body{
       margin-left: 10px;
     }
   }
+  .ask-delete{
+    position: absolute;
+    top: 100px;
+    left: 30%;
+    width: 400px;
+    height: 250px;
+    background-color: $layer2Color;
+    color: $layer4Color;
+    text-align: center;
+    border: 3px solid $layer4Color;
+    @include boxShadow();
+    font-size: 2em;
+    padding-top: 45px;
+    button{
+      background-color: $layer1Color;
+    }
+  }
 }
 
 .footer{
@@ -278,6 +295,19 @@ html, body{
     &:hover{
       background-color: $layer2Color;
     }
+    button{
+      width: 100%;
+      background-color: $layer2Color;
+      font-size: 1.5em;
+      color: $layer5Color;
+      margin-top: 10px;
+      margin-bottom: 10px;
+      border: 1px solid $layer4Color;
+      &:hover{
+        background-color: $layer3Color;
+        color: $layer0Color;
+      }
+    }
   }
 
   .listButton{
@@ -315,7 +345,6 @@ a:hover {
 }
 
 .btn {
-  width: 100%;
   background-color: $layer2Color;
   font-size: 1.5em;
   color: $layer5Color;
@@ -334,7 +363,7 @@ a:hover {
 
 .delete-post-button {
   float: right;
-  background-color: #B86C3E;
+  background-color: $layer2Color;
 }
 
 .create-author-form {

@@ -546,6 +546,21 @@ html, body {
       font-size: 0.8em;
       margin-top: 20px;
       margin-left: 10px; }
+  .main-section .ask-delete {
+    position: absolute;
+    top: 100px;
+    left: 30%;
+    width: 400px;
+    height: 250px;
+    background-color: #F4A051;
+    color: #B52417;
+    text-align: center;
+    border: 3px solid #B52417;
+    box-shadow: 2px 2px 8px grey;
+    font-size: 2em;
+    padding-top: 45px; }
+    .main-section .ask-delete button {
+      background-color: #F5BE7D; }
 
 .footer {
   background-color: #F5BE7D;
@@ -590,6 +605,17 @@ html, body {
         background-color: #F23F1F; }
     .sidebar .list-group-item:hover {
       background-color: #F4A051; }
+    .sidebar .list-group-item button {
+      width: 100%;
+      background-color: #F4A051;
+      font-size: 1.5em;
+      color: black;
+      margin-top: 10px;
+      margin-bottom: 10px;
+      border: 1px solid #B52417; }
+      .sidebar .list-group-item button:hover {
+        background-color: #F23F1F;
+        color: #F7F5E8; }
   .sidebar .listButton {
     background-color: #F5BE7D; }
     .sidebar .listButton:hover {
@@ -616,7 +642,6 @@ a:hover {
   color: #E94A27; }
 
 .btn {
-  width: 100%;
   background-color: #F4A051;
   font-size: 1.5em;
   color: black;
@@ -632,7 +657,7 @@ a:hover {
 
 .delete-post-button {
   float: right;
-  background-color: #B86C3E; }
+  background-color: #F4A051; }
 
 .create-author-form {
   margin-bottom: 20px; }
