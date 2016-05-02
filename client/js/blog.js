@@ -92,10 +92,17 @@
     angular.module('blog')
       .controller('AuthorController', AuthorController);
 
-      AuthorController.$inject = ['$stateParams', 'LoginService', 'postListFactory', 'deleteFactory'];
+      AuthorController.$inject = ['$state', '$stateParams', 'LoginService', 'postListFactory', 'deleteFactory'];
 
-      function AuthorController($stateParams, LoginService, postListFactory, deleteFactory) {
+      function AuthorController($state, $stateParams, LoginService, postListFactory, deleteFactory) {
+
         var that = this;
+        this.authorId = "";
+
+        if (LoginService.getLoginData()) {
+          this.authorId = LoginService.getLoginData().userId;
+        }
+        console.log('after if', this.authorId);
         this.allPosts = [];
 
         postListFactory.getPostsByAuthorID($stateParams.id)
@@ -104,7 +111,15 @@
         });
 
         this.deletePost = function deletePost(postId) {
-          deleteFactory.deletePost(postId, LoginService.getLoginData().id);
+          
+          deleteFactory.deletePost(postId, LoginService.getLoginData().id)
+            .then(function deleteSuccess() {
+              $state.transitionTo($state.current, $stateParams, {
+                reload: true,
+                inherit: false,
+                notify: true
+              });
+            });
         };
 
 
@@ -283,7 +298,6 @@
         data: blogPost,
         headers: {
           Authorization: authorization
-
         }
       }).then (function onSuccess(response){
         console.log("inside of onSuccess function", response);

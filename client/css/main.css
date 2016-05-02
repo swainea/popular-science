@@ -578,4 +578,8 @@ html, body {
   .sidebar .listStyle {
     font-family: 'Roboto Slab', serif; }
 
+.delete-post-button {
+  float: right;
+  background-color: #B86C3E; }
+
 /*# sourceMappingURL=main.css.map */
