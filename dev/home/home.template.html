@@ -5,7 +5,8 @@
     <div class="post-attributes">
       <p class="by-line">By:</p>
       <a class="author-name" ui-sref='author({ id: post.author.id })'><cite>{{post.author.name}}</cite></a>
-      <p class="category-label">Category: </p>
+      <p class="category-label" ng-show='post.category.name'>Category: </p>
+      <p class="category-label" ng-show='!post.category.name'>Not in a category</p>
       <a class="category-name" ui-sref='categoryStories({ id: post.category.id })'><h4 class="post-category">{{post.category.name}}</h4></a>
     </div>
     <p class="publish-date">{{post.date | date:'MMM d, y @ h:mm a'}}</p>

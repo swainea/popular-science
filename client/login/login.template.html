@@ -1,5 +1,7 @@
 <h2>Login</h2>
 
+<p class='error-message' ng-hide='!lc.msg'>{{lc.msg}}</p>
+
 <div class="login-page">
 
 	<form novalidate ng-submit="lc.loginForm()">
@@ -17,7 +19,7 @@
 		<button class="btn btn-primary">Login</button>
 
 	</form>
-	<p>{{lc.errorMessage}}</p>
+	<p class='error-message'>{{lc.errorMessage}}</p>
 	<div class="login-page-new-account">
 		<p>Don't have a login? Get one <a ng-click="lc.register()">HERE</a></p>
 	</div>

@@ -3,7 +3,8 @@
 
   angular
   .module('blog', ['ui.router'])
-  .config(blogConfig);
+  .config(blogConfig)
+  .run(blogStartup);
 
   blogConfig.$inject = ['$stateProvider', '$urlRouterProvider'];
 
@@ -18,17 +19,30 @@
       controller: 'HomeViewController',
       controllerAs: 'home'
     })
-    .state('categoryStories', {
-      url: '/category/:id',
-      templateUrl: 'categories/category.template.html',
-      controller: 'CategoryController',
-      controllerAs: 'cc'
+    .state('error', {
+                url: '/eror',
+                template: '<p class= "error-message"> Oops, something went wrong. Please contact us or try again later...</p>'
+                // templateUrl: 'error/error.template.html',
+                // controller: 'ErrorController',
+                // controllerAs: 'error',
+                // params: {
+                //     msg: 'Something went wrong, please try back later...'
+                // }
     })
     .state('login', {
       url: '/login',
       templateUrl: 'login/login.template.html',
       controller: 'LoginController',
-      controllerAs: 'lc'
+      controllerAs: 'lc',
+      params: {
+        msg: null
+      }
+    })
+    .state('categoryStories', {
+      url: '/category/:id',
+      templateUrl: 'categories/category.template.html',
+      controller: 'CategoryController',
+      controllerAs: 'cc'
     })
     .state('allPosts', {
       url: '/allPosts',
@@ -54,7 +68,8 @@
       url: '/post',
       controller: 'CreatePostController',
       controllerAs: 'post',
-      templateUrl: 'create-post/create-post.template.html'
+      templateUrl: 'create-post/create-post.template.html',
+      secure: true
     })
     .state('viewPost', {
       url: '/post/:id',
@@ -69,4 +84,19 @@
       controllerAs: 'author'
     });
   }
+
+  blogStartup.$inject = ["$rootScope", "$state", "LoginService"];
+
+  function blogStartup($rootscope, $state, LoginService){
+    $rootscope.$on('$stateChangeStart', function checkAuth (e, toState){
+        console.log("inside of checkAuth");
+         var isLoggedIn = !!LoginService.getLoginData();
+
+         if (toState.secure && !isLoggedIn) {
+           console.log('not logged in');
+           e.preventDefault();
+           $state.go('login', {msg: 'Please log in'});
+         }
+  });
+}
 })();
