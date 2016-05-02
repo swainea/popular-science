@@ -594,14 +594,15 @@ a:hover {
 .btn:hover {
   background-color: #E94A27; }
 
-.btn:active {
-  background-color: #B03020; }
-
 .delete-post-button {
   float: right;
   background-color: #B86C3E; }
 
 .create-author-form {
   margin-bottom: 20px; }
+
+.error-message {
+  color: red;
+  font-size: 1.2em; }
 
 /*# sourceMappingURL=main.css.map */

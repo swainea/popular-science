@@ -27,6 +27,7 @@
     				password: author.password
     			}
     		}).then(function successHandler(response) {
+            console.log('authenticate response', response);
       			loginData = response.data;
             return response.data;
 	    		});

@@ -20,10 +20,11 @@
 
         // LoginService.getLoginData();   Now you can run that logindata and it will return the user's Login Data, in this case, response.data
         //state.go should go here because the controller marries the UI with the data
-      })
-      .catch(function() {
-        that.errorMessage = "Please enter your correct login information or create a new account.";
-      });
+        })
+        .catch(function( err ) {
+          console.log('error data', err.status);
+          that.errorMessage = "Please enter your correct login information or create a new account.";
+        });
     };
 
     this.register = function register (){

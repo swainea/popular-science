@@ -163,18 +163,23 @@
         console.log('In Author Stories');
         var that = this;
         this.newAuthor = {};
+        this.errorMessage = "";
 
         this.newAuthorForm = function newAuthorForm() {
           // console.log(this.newAuthor);
+          console.log(LoginService);
 
           NewAuthorService.createAuthor(this.newAuthor)
-            .then(function login(data) {
-              console.log('Promise data', data);
-              console.log("that", that.newAuthor);
-              LoginService.authenticate(that.newAuthor);
-            })
+            .then( LoginService.authenticate(this.newAuthor) )
             .then( function goHome() {
+              console.log('success');
               $state.go('home');
+            })
+            .catch( function errorHandler(response) {
+              console.log('failure', response);
+              if (response.status === 422) {
+                that.errorMessage = "This user account already exists. Please use another email.";
+              }
             });
 
 
@@ -206,8 +211,6 @@
         }).then(function successCallback(response) {
           console.log('Yay, new author!', response.data);
           return response.data;
-        }, function errorCallback(response) {
-          console.log(response);
         });
       }
 
@@ -392,10 +395,11 @@
 
         // LoginService.getLoginData();   Now you can run that logindata and it will return the user's Login Data, in this case, response.data
         //state.go should go here because the controller marries the UI with the data
-      })
-      .catch(function() {
-        that.errorMessage = "Please enter your correct login information or create a new account.";
-      });
+        })
+        .catch(function( err ) {
+          console.log('error data', err.status);
+          that.errorMessage = "Please enter your correct login information or create a new account.";
+        });
     };
 
     this.register = function register (){
@@ -450,6 +454,7 @@
     				password: author.password
     			}
     		}).then(function successHandler(response) {
+            console.log('authenticate response', response);
       			loginData = response.data;
             return response.data;
 	    		});

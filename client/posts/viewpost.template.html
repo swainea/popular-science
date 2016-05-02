@@ -1,5 +1,5 @@
 <ul>
-  <li>
+  <li ng-hide='!vp.post.title'>
     <h3 class='post-title'>{{vp.post.title}}</h3>
     <div class="post-attributes">
       <p class="by-line">By:</p>
@@ -9,5 +9,8 @@
     </div>
     <p class="publish-date">{{vp.post.date | date:'MMM d, y @ h:mm a'}}</p>
     <article class="article-summary">{{vp.post.content}}</article>
+  </li>
+  <li ng-show='!vp.post.title'>
+    <h4>This does not appear to be a valid post. Would you like to go <a ui-sref='home'>Home?</a></h4>
   </li>
 </ul>
