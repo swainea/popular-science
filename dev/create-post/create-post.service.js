@@ -15,7 +15,7 @@
     };
 
     function submitPost (blogPost, authorization){
-      console.log(blogPost);
+      // console.log(blogPost);
       return $http ({
         method:'POST',
         url: "https://tiy-blog-api.herokuapp.com/api/Posts",
@@ -25,10 +25,10 @@
 
         }
       }).then (function onSuccess(response){
-        console.log("inside of onSuccess function", response);
+        // console.log("inside of onSuccess function", response);
         return response.data;
       }, function error(response) {
-        console.log(response);
+        // console.log(response);
       }
     );
     }
@@ -43,10 +43,10 @@
           Authorization: authorization
         }
       }).then (function onSuccess(response){
-        console.log("inside of second onSuccess function", response);
+        // console.log("inside of second onSuccess function", response);
         return response.data;
       }, function error(response) {
-        console.log(response);
+        // console.log(response);
       });
     }
   }

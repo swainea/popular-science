@@ -220,7 +220,7 @@
     this.blogPost = {
       title: "",
       content: "",
-      authorId: LoginService.getLoginData().userId,// but needs to be the userID
+      authorId: LoginService.getLoginData().userId, 
       newCategory: null
     };
 
@@ -262,7 +262,7 @@
       // console.log('My Category', that.myCategory);
       });
 
-}    
+}
 }());
 ;(function() {
   'use strict';
@@ -462,7 +462,7 @@
     }
 
 })();
-;;(function() {
+;(function() {
   'use strict';
 
   angular
