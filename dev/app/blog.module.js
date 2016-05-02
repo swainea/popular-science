@@ -3,7 +3,8 @@
 
   angular
   .module('blog', ['ui.router'])
-  .config(blogConfig);
+  .config(blogConfig)
+  .run(blogStartup);
 
   blogConfig.$inject = ['$stateProvider', '$urlRouterProvider'];
 
@@ -28,7 +29,10 @@
       url: '/login',
       templateUrl: 'login/login.template.html',
       controller: 'LoginController',
-      controllerAs: 'lc'
+      controllerAs: 'lc',
+      params: {
+        msg: null
+      }
     })
     .state('allPosts', {
       url: '/allPosts',
@@ -54,7 +58,8 @@
       url: '/post',
       controller: 'CreatePostController',
       controllerAs: 'post',
-      templateUrl: 'create-post/create-post.template.html'
+      templateUrl: 'create-post/create-post.template.html',
+      secure: true
     })
     .state('viewPost', {
       url: '/post/:id',
@@ -69,4 +74,19 @@
       controllerAs: 'author'
     });
   }
+
+  blogStartup.$inject = ["$rootScope", "$state", "LoginService"];
+
+  function blogStartup($rootscope, $state, LoginService){
+    $rootscope.$on('$stateChangeStart', function checkAuth (e, toState){
+        console.log("inside of checkAuth");
+         var isLoggedIn = !!LoginService.getLoginData();
+
+         if (toState.secure && !isLoggedIn) {
+           console.log('not logged in');
+           e.preventDefault();
+           $state.go('login', {msg: 'Please log in'});
+         }
+  });
+}
 })();
