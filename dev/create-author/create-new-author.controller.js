@@ -11,18 +11,23 @@
         console.log('In Author Stories');
         var that = this;
         this.newAuthor = {};
+        this.errorMessage = "";
 
         this.newAuthorForm = function newAuthorForm() {
           // console.log(this.newAuthor);
+          console.log(LoginService);
 
           NewAuthorService.createAuthor(this.newAuthor)
-            .then(function login(data) {
-              console.log('Promise data', data);
-              console.log("that", that.newAuthor);
-              LoginService.authenticate(that.newAuthor);
-            })
+            .then( LoginService.authenticate(this.newAuthor) )
             .then( function goHome() {
+              console.log('success');
               $state.go('home');
+            })
+            .catch( function errorHandler(response) {
+              console.log('failure', response);
+              if (response.status === 422) {
+                that.errorMessage = "This user account already exists. Please use another email.";
+              }
             });
 
 

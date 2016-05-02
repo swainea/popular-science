@@ -21,8 +21,6 @@
         }).then(function successCallback(response) {
           console.log('Yay, new author!', response.data);
           return response.data;
-        }, function errorCallback(response) {
-          console.log(response);
         });
       }
 

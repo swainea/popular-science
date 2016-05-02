@@ -9,7 +9,7 @@
   LoginController.$inject = ["$stateParams", "$state", "LoginService"];
 
   function LoginController($stateParams, $state, LoginService) {
-    this.msg = $stateParams.msg;        
+    this.msg = $stateParams.msg;
     this.login = {};
     this.errorMessage = "";
     var that = this;

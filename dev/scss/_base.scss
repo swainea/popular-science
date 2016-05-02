@@ -125,7 +125,7 @@ html, body{
     li{
       background-color: $layer1Color;
       @include boxBorder();
-      @include boxShadow();
+      border-radius: 10px;
       margin: 8px;
       padding: 15px;
     }
@@ -138,7 +138,7 @@ html, body{
     font-size: 1.3em;
     background-color: $layer1Color;
     @include boxBorder();
-    @include boxShadow();
+    border-radius: 10px;
     margin: 8px;
     padding: 15px;
   }
@@ -172,7 +172,7 @@ html, body{
     background-color: $layer1Color;
     margin: 8px;
     padding: 15px;
-    @include boxShadow();
+    border-radius: 10px;
     border: 1px solid $layer4Color;
     .create-post-title{
       margin-bottom: 30px;
@@ -195,8 +195,7 @@ html, body{
   .login-page{
     background-color: $layer1Color;
     @include boxBorder();
-    @include boxShadow();
-    padding: 15px;
+    border-radius: 10px;
     padding-bottom: 0px;
     width: 50%;
     margin: auto;
@@ -341,12 +340,17 @@ a:hover {
 .create-author-form {
   margin-bottom: 20px;
 }
+
+.error-message {
+  color: red;
+  font-size: 1.2em;
+
 .titles {
   position: absolute;
   top: 1%;
   left: 6%;
   width: 50%;
-  height:20%; 
+  height:20%;
   color: $layer5Color;
   h1 {
     font-size: 3.5em;
