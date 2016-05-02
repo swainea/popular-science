@@ -412,6 +412,10 @@
     this.isLoggedIn = function isLoggedIn() {
       return !!LoginService.getLoginData();
     };
+    // this.loginName = function loginName(){
+    //   LoginService.getLoginData();
+    //   return that.getLoginData.name;
+    // };
   }
 
 
@@ -461,7 +465,7 @@
     }
 
 })();
-;(function() {
+;;(function() {
   'use strict';
 
   angular
