@@ -22,7 +22,6 @@
         data: blogPost,
         headers: {
           Authorization: authorization
-
         }
       }).then (function onSuccess(response){
         // console.log("inside of onSuccess function", response);

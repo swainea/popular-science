@@ -556,21 +556,30 @@ html, body {
     font-size: 1.2em; }
 
 .sidebar {
+  padding: 5px;
   position: relative;
   bottom: 0;
   background-color: #F5BE7D;
   float: right;
-  width: 17%;
+  width: 16%;
   min-width: 175px;
   margin: 25px;
   right: 0; }
   .sidebar .list-group {
+    text-align: center;
     height: 100%;
     background-color: #F23F1F;
     margin: 0; }
   .sidebar .list-group-item {
+    text-align: center;
     background-color: #F23F1F; }
     .sidebar .list-group-item a {
       color: black; }
+  .sidebar .listStyle {
+    font-family: 'Roboto Slab', serif; }
+
+.delete-post-button {
+  float: right;
+  background-color: #B86C3E; }
 
 /*# sourceMappingURL=main.css.map */
