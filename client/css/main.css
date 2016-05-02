@@ -591,6 +591,12 @@ a:hover {
 .btn {
   background-color: #B03020; }
 
+.btn:hover {
+  background-color: #E94A27; }
+
+.btn:active {
+  background-color: #B03020; }
+
 .delete-post-button {
   float: right;
   background-color: #B86C3E; }
