@@ -23,6 +23,7 @@
         });
 
         this.deletePost = function deletePost(postId) {
+          
           deleteFactory.deletePost(postId, LoginService.getLoginData().id)
             .then(function deleteSuccess() {
               $state.transitionTo($state.current, $stateParams, {
