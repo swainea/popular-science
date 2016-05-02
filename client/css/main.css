@@ -377,6 +377,7 @@ html, body {
   margin: 0 auto -50px; }
 
 .main-header {
+  margin-bottom: -15px;
   height: 260px; }
   .main-header .banner-image {
     height: 75%;
@@ -406,12 +407,14 @@ html, body {
     background-color: transparent; }
 
 .main-section {
-  margin-left: 2%;
-  margin-right: 28%;
-  margin-bottom: 5%;
+  margin-left: 0%;
+  margin-right: 25%;
+  margin-bottom: 0%;
   padding: 20px;
   padding-top: 10px;
-  font-family: 'Roboto Slab', serif; }
+  font-family: 'Roboto Slab', serif;
+  background-color: #F7F5E8;
+  height: 100%; }
   .main-section h2 {
     margin-top: 10px;
     margin-bottom: 35px;
@@ -543,9 +546,6 @@ html, body {
       margin-top: 20px;
       margin-left: 10px; }
 
-.panel .push {
-  height: 50px; }
-
 .footer {
   background-color: #F5BE7D;
   position: relative;
@@ -557,26 +557,52 @@ html, body {
     font-family: 'Roboto Slab', serif;
     font-size: 1.2em; }
 
-.sidebar {
-  padding: 5px;
+.content {
   position: relative;
+  height: 100%;
+  background-color: #F5BE7D; }
+
+.sidebar {
+  position: absolute;
+  height: 100%;
   bottom: 0;
   background-color: #F5BE7D;
   float: right;
-  width: 16%;
+  width: 25%;
   min-width: 175px;
-  margin: 25px;
+  margin: 0px;
   right: 0; }
   .sidebar .list-group {
     text-align: center;
-    height: 100%;
-    background-color: #F23F1F;
     margin: 0; }
   .sidebar .list-group-item {
     text-align: center;
-    background-color: #F23F1F; }
+    background-color: #F5BE7D;
+    text-align: right;
+    border: none;
+    padding-bottom: 5px;
+    padding-top: 5px; }
     .sidebar .list-group-item a {
-      color: black; }
+      font-size: 1.2em;
+      color: #B52417; }
+      .sidebar .list-group-item a:hover {
+        background-color: #F23F1F; }
+    .sidebar .list-group-item:hover {
+      background-color: #F4A051; }
+  .sidebar .listButton {
+    background-color: #F5BE7D; }
+    .sidebar .listButton:hover {
+      background-color: #F5BE7D;
+      color: #F7F5E8; }
+  .sidebar .category-label {
+    background-color: #F4A051;
+    text-align: left;
+    font-size: 1.25em;
+    padding-bottom: 3px;
+    padding-top: 3px;
+    border-top: 1px solid #B52417;
+    border-bottom: 1px solid #B52417;
+    margin-bottom: 1px; }
   .sidebar .listStyle {
     font-family: 'Roboto Slab', serif; }
   .sidebar .righties {
@@ -589,10 +615,19 @@ a:hover {
   color: #E94A27; }
 
 .btn {
-  background-color: #B03020; }
+  width: 100%;
+  background-color: #F4A051;
+  font-size: 1.5em;
+  color: black;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #B52417; }
 
 .btn:hover {
-  background-color: #E94A27; }
+  background-color: #F23F1F; }
+
+.btn:active {
+  background-color: #B52417; }
 
 .delete-post-button {
   float: right;
