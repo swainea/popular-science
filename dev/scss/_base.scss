@@ -229,8 +229,7 @@ html, body{
 .footer{
   background-color: $layer1Color;
   position: relative;
-  height: 50px;
-  font-size: 11px;
+  clear: both;
   p{
     position: absolute;
     bottom: -45px;
