@@ -92,24 +92,34 @@
     angular.module('blog')
       .controller('AuthorController', AuthorController);
 
-      AuthorController.$inject = ['$stateParams', 'LoginService', 'postListFactory', 'deleteFactory'];
+      AuthorController.$inject = ['$state', '$stateParams', 'LoginService', 'postListFactory', 'deleteFactory'];
 
-      function AuthorController($stateParams, LoginService, postListFactory, deleteFactory) {
-        console.log($stateParams.id);
-        console.log("in AuthorController");
+      function AuthorController($state, $stateParams, LoginService, postListFactory, deleteFactory) {
+
         var that = this;
+        this.authorId = "";
+
+        if (LoginService.getLoginData()) {
+          this.authorId = LoginService.getLoginData().userId;
+        }
+        console.log('after if', this.authorId);
         this.allPosts = [];
 
         postListFactory.getPostsByAuthorID($stateParams.id)
           .then(function viewPosts(posts) {
-            console.log(posts);
             that.allPosts = posts;
         });
 
         this.deletePost = function deletePost(postId) {
-          console.log(postId);
-          console.log(LoginService.getLoginData().id);
-          deleteFactory.deletePost(postId, LoginService.getLoginData().id);
+          
+          deleteFactory.deletePost(postId, LoginService.getLoginData().id)
+            .then(function deleteSuccess() {
+              $state.transitionTo($state.current, $stateParams, {
+                reload: true,
+                inherit: false,
+                notify: true
+              });
+            });
         };
 
 
@@ -208,61 +218,53 @@
   'use strict';
 
   angular
-    .module('blog')
-    .controller('CreatePostController', CreatePostController);
+  .module('blog')
+  .controller('CreatePostController', CreatePostController);
 
   CreatePostController.$inject = ['$state', 'CreatePostService', 'postListFactory', 'LoginService'];
 
   function CreatePostController ($state, CreatePostService, postListFactory, LoginService){
-
+    this.categoryList = [];
+    var that = this;
     this.myCategory = {};
 
     this.blogPost = {
       title: "",
       content: "",
-      authorId: LoginService.getLoginData().userId,// but needs to be the userID
+      authorId: LoginService.getLoginData().userId,
       newCategory: null
     };
 
     this.newPost = function newPost (){
 
       this.blogPost.categoryId = this.myCategory.id;
-
-      console.log("blogPost is: ", this.blogPost);
       if (this.blogPost.newCategory){
+        CreatePostService.createCategory(this.blogPost.newCategory, LoginService.getLoginData().id)
+          .then(function newCatSuccess(newCat) {
+            that.blogPost.categoryId = newCat.id;
 
-        CreatePostService.createCategory(this.blogPost.newCategory)
-          .then (function handleCatData(catData) {
-            console.log(catData);
-            that.blogPost.categoryId = catData.id;
             CreatePostService.submitPost(that.blogPost, LoginService.getLoginData().id)
               .then(function successHandler(newPost) {
-                console.log(newPost);
                 $state.go("viewPost", {id: newPost.id});
+              });
+
           });
-        });
+
       } else {
       CreatePostService.submitPost(this.blogPost, LoginService.getLoginData().id)
         .then(function successHandler(newPost) {
-          console.log(newPost);
           $state.go("viewPost", {id: newPost.id});
         });
-    }
-  };
-
-    this.categoryList = [];
-    var that = this;
+      }
+    };
 
     postListFactory.getAllCategories()
-      .then(function (categories){
+    .then(function (categories){
       that.categoryList = categories.data;
-      // that.myCategory = that.categoryList[0];
+    });
 
-      // console.log(categories.data);
-      // console.log('My Category', that.myCategory);
-      });
+  }
 
-}
 }());
 ;(function() {
   'use strict';
@@ -281,17 +283,14 @@
     };
 
     function submitPost (blogPost, authorization){
-      console.log(blogPost);
       return $http ({
         method:'POST',
         url: "https://tiy-blog-api.herokuapp.com/api/Posts",
         data: blogPost,
         headers: {
           Authorization: authorization
-
         }
       }).then (function onSuccess(response){
-        console.log("inside of onSuccess function", response);
         return response.data;
       }, function error(response) {
         console.log(response);
@@ -300,7 +299,6 @@
     }
 
     function createCategory(newCategory, authorization){
-      console.log(newCategory);
       return $http ({
         method: 'POST',
         url: "https://tiy-blog-api.herokuapp.com/api/Categories",
@@ -309,7 +307,6 @@
           Authorization: authorization
         }
       }).then (function onSuccess(response){
-        console.log("inside of second onSuccess function", response);
         return response.data;
       }, function error(response) {
         console.log(response);
@@ -364,7 +361,6 @@
 
         postListFactory.getAllPosts(3, 0, "date DESC")
           .then(function viewPosts(posts) {
-            console.log(posts);
             that.recentPosts = posts;
         });
         // this.recentPosts = postListFactory.getAllPosts();
@@ -384,15 +380,21 @@
 
   LoginController.$inject = ["$state", "LoginService"];
 
-  function LoginController($state, LoginService) {            //this will give it access to the things in LoginService
+  function LoginController($state, LoginService) {          //this will give it access to the things in LoginService
     this.login = {};
+    this.errorMessage = "";
+    var that = this;
 
     this.loginForm = function loginForm(){
       LoginService.authenticate(this.login)
         .then(function(){
           $state.go("home");
+
         // LoginService.getLoginData();   Now you can run that logindata and it will return the user's Login Data, in this case, response.data
         //state.go should go here because the controller marries the UI with the data
+      })
+      .catch(function() {
+        that.errorMessage = "Please enter your correct login information or create a new account.";
       });
     };
 
@@ -406,6 +408,7 @@
       $state.go("home");
     //This function calls logout in Login service and redirects to home
     };
+
     this.isLoggedIn = function isLoggedIn() {
       return !!LoginService.getLoginData();
     };
@@ -429,7 +432,8 @@
 
 
     function LoginService($http) {
-    	var loginData;
+
+    	var loginData = null;
 
     	return {
     		authenticate: authenticate,      //this returns authenticate function
@@ -445,20 +449,15 @@
     				email: author.email,
     				password: author.password
     			}
-
     		}).then(function successHandler(response) {
-
-    			console.log(response.data);
-
-    			loginData = response.data;
-    			console.log(loginData);
-                return response.data;
+      			loginData = response.data;
+            return response.data;
 	    		});
     	}
 
-      	function getLoginData() {
-      		  return loginData;
-      	}
+    	function getLoginData() {
+    		  return loginData;
+    	}
 
       function logOut() {
         loginData = null;
@@ -530,7 +529,6 @@
         method: 'GET',
         url: apiURL + '/Posts' + '?filter={"limit":' + limit + ',"offset":' + offset + ',"order":"' + orderBy + '","include":["author","category"]}',
       }).then(function successGetAllPosts(response) {
-        console.log(response.data);
         return response.data;
       });
     }

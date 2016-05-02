@@ -1,7 +1,35 @@
 
-        <form name='createNewAuthorForm' ng-submit=cna.newAuthorForm(createNewAuthorForm)>
+        <!-- <form name='createNewAuthorForm' ng-submit=cna.newAuthorForm(createNewAuthorForm)>
           <input type="text" ng-model="cna.newAuthor.name" required placeholder="Name">
           <input type="text" ng-model="cna.newAuthor.email" required placeholder="email">
-          <input type="password" ng-model="cna.newAuthor.password" required placeholder="Password">
+          <input type="password" ng-model="cna.newAuthor.password" required placeholder="password">
           <button>Submit</button>
-        </form>
+        </form> -->
+
+
+        <h2>Create a New Account</h2>
+
+        <div class="login-page">
+
+        	<form novalidate class='create-author-form' name='createNewAuthorForm' ng-submit=cna.newAuthorForm(createNewAuthorForm)>
+
+            <div class="login-page-email">
+        			<label>Name</label>
+        			<input class="email" ng-model="cna.newAuthor.name" required type="text" placeholder="Name">
+        		</div>
+
+        		<div class="login-page-email">
+        			<label>Email</label>
+        			<input class="email" ng-model="cna.newAuthor.email" required type="text" placeholder="email">
+        		</div>
+
+        		<div class="login-page-password">
+        			<label>Password</label>
+        			<input class="password" ng-model="cna.newAuthor.password" required type="password" placeholder="password">
+        		</div>
+
+        		<button class="btn btn-primary">Get Blogging!</button>
+
+        	</form>
+
+        </div>

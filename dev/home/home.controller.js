@@ -12,7 +12,6 @@
 
         postListFactory.getAllPosts(3, 0, "date DESC")
           .then(function viewPosts(posts) {
-            console.log(posts);
             that.recentPosts = posts;
         });
         // this.recentPosts = postListFactory.getAllPosts();
