@@ -18,6 +18,7 @@ html, body{
   }
 
 .main-header {
+  margin-bottom: -15px;
   height: 260px;
   .banner-image{
     height: 75%;
@@ -55,12 +56,14 @@ html, body{
 }
 
 .main-section{
-  margin-left: 2%;
-  margin-right: 28%;
-  margin-bottom: 5%;
+  margin-left: 0%;
+  margin-right: 25%;
+  margin-bottom: 0%;
   padding: 20px;
   padding-top: 10px;
-  @include defaultFont();
+  font-family: 'Roboto Slab', serif;
+  background-color: #F7F5E8;
+  height: 100%;
   h2{
     margin-top: 10px;
     margin-bottom: 35px;
@@ -226,10 +229,6 @@ html, body{
   }
 }
 
-.panel .push{
-  height: 50px;
-}
-
 .footer{
   background-color: $layer1Color;
   position: relative;
@@ -243,28 +242,62 @@ html, body{
   }
 }
 
-.sidebar{
-  padding: 5px;
+.content{
   position: relative;
-  bottom: 0;
+  height: 100%;
   background-color: $layer1Color;
+}
+
+.sidebar{
+  position: absolute;
+  height: 100%;
+  bottom: 0;
+  background-color: #F5BE7D;
   float: right;
-  width: 16%;
+  width: 25%;
   min-width: 175px;
-  margin: 25px;
+  margin: 0px;
   right: 0;
   .list-group {
     text-align: center;
-    height: 100%;
-    background-color: $layer3Color;
     margin: 0;
   }
   .list-group-item {
     text-align: center;
-    background-color: $layer3Color;
+    background-color: $layer1Color;
+    text-align: right;
+    border: none;
+    padding-bottom: 5px;
+    padding-top: 5px;
     a {
-      color: $layer5Color;
+      font-size: 1.2em;
+      color: $layer4Color;
+      &:hover{
+        background-color: $layer3Color;
+      }
     }
+    &:hover{
+      background-color: $layer2Color;
+    }
+  }
+
+  .listButton{
+    background-color: $layer1Color;
+    &:hover{
+      background-color: $layer1Color;
+      color: $layer0Color;
+    }
+  }
+
+  .category-label{
+    background-color: $layer2Color;
+    text-align: left;
+    font-size: 1.25em;
+    padding-bottom: 3px;
+    padding-top: 3px;
+    border-top: 1px solid $layer4Color;
+    border-bottom: 1px solid $layer4Color;
+    margin-bottom: 1px;
   }
   .listStyle {
     font-family: 'Roboto Slab', serif;
@@ -272,10 +305,6 @@ html, body{
   .righties {
     background-color: red;
   }
-    // .listButton {
-    //   background-color: $layer1Color;
-    //
-    // }
 }
 
 a {
@@ -287,15 +316,21 @@ a:hover {
 }
 
 .btn {
-  background-color: #B03020;
+  width: 100%;
+  background-color: $layer2Color;
+  font-size: 1.5em;
+  color: $layer5Color;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border: 1px solid $layer4Color;
 }
 
 .btn:hover {
-  background-color: #E94A27;
+  background-color: $layer3Color;
 }
 
 .btn:active {
-  background-color: #B03020;
+  background-color: $layer4Color;
 }
 
 .delete-post-button {
