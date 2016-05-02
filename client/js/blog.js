@@ -230,7 +230,7 @@
     this.blogPost = {
       title: "",
       content: "",
-      authorId: LoginService.getLoginData().userId, 
+      authorId: LoginService.getLoginData().userId,// but needs to be the userID
       newCategory: null
     };
 
@@ -240,25 +240,36 @@
 
       console.log("blogPost is: ", this.blogPost);
       if (this.blogPost.newCategory){
+        CreatePostService.createCategory(this.blogPost.newCategory, LoginService.getLoginData().id)
+          .then(function newCatSuccess(newCat) {
+            console.log(newCat);
+            that.blogPost.categoryId = newCat.id;
+            console.log('catId after newCat.id assignment', that.blogPost.categoryId);
 
-        CreatePostService.createCategory(this.blogPost.newCategory)
-          .then (function handleCatData(catData) {
-            console.log(catData);
-            that.blogPost.categoryId = catData.id;
             CreatePostService.submitPost(that.blogPost, LoginService.getLoginData().id)
               .then(function successHandler(newPost) {
                 console.log(newPost);
                 $state.go("viewPost", {id: newPost.id});
+              });
+
           });
-        });
+          // .then(
+          //
+          //   CreatePostService.submitPost(that.blogPost, LoginService.getLoginData().id)
+          //     .then(function successHandler(newPost) {
+          //       console.log(newPost);
+          //       $state.go("viewPost", {id: newPost.id});
+          //     })
+          //
+          // );
       } else {
       CreatePostService.submitPost(this.blogPost, LoginService.getLoginData().id)
         .then(function successHandler(newPost) {
           console.log(newPost);
           $state.go("viewPost", {id: newPost.id});
         });
-    }
-  };
+      }
+    };
 
     this.categoryList = [];
     var that = this;
@@ -272,7 +283,7 @@
       // console.log('My Category', that.myCategory);
       });
 
-}
+    }
 }());
 ;(function() {
   'use strict';
@@ -300,7 +311,7 @@
           Authorization: authorization
         }
       }).then (function onSuccess(response){
-        console.log("inside of onSuccess function", response);
+        // console.log("inside of onSuccess function", response);
         return response.data;
       }, function error(response) {
         console.log(response);
@@ -309,7 +320,8 @@
     }
 
     function createCategory(newCategory, authorization){
-      console.log(newCategory);
+      console.log('createCategory cat', newCategory);
+      console.log('createCategory auth', authorization);
       return $http ({
         method: 'POST',
         url: "https://tiy-blog-api.herokuapp.com/api/Categories",
