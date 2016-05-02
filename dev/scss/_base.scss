@@ -270,7 +270,23 @@ html, body{
     // }
 }
 
+a {
+  color: #B03020;
+}
+
+a:hover {
+  color: #E94A27;
+}
+
+.btn {
+  background-color: #B03020;
+}
+
 .delete-post-button {
   float: right;
   background-color: #B86C3E;
+}
+
+.create-author-form {
+  margin-bottom: 20px;
 }
