@@ -241,13 +241,10 @@
       if (this.blogPost.newCategory){
         CreatePostService.createCategory(this.blogPost.newCategory, LoginService.getLoginData().id)
           .then(function newCatSuccess(newCat) {
-            console.log(newCat);
             that.blogPost.categoryId = newCat.id;
-            console.log('catId after newCat.id assignment', that.blogPost.categoryId);
 
             CreatePostService.submitPost(that.blogPost, LoginService.getLoginData().id)
               .then(function successHandler(newPost) {
-                console.log(newPost);
                 $state.go("viewPost", {id: newPost.id});
               });
 
@@ -302,8 +299,6 @@
     }
 
     function createCategory(newCategory, authorization){
-      console.log('createCategory cat', newCategory);
-      console.log('createCategory auth', authorization);
       return $http ({
         method: 'POST',
         url: "https://tiy-blog-api.herokuapp.com/api/Categories",

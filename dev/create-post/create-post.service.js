@@ -31,8 +31,6 @@
     }
 
     function createCategory(newCategory, authorization){
-      console.log('createCategory cat', newCategory);
-      console.log('createCategory auth', authorization);
       return $http ({
         method: 'POST',
         url: "https://tiy-blog-api.herokuapp.com/api/Categories",
