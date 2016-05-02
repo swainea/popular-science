@@ -14,7 +14,7 @@
     this.blogPost = {
       title: "",
       content: "",
-      authorId: LoginService.getLoginData().userId,
+      authorId: LoginService.getLoginData().userId,// but needs to be the userID
       newCategory: null
     };
 
@@ -24,25 +24,36 @@
 
       console.log("blogPost is: ", this.blogPost);
       if (this.blogPost.newCategory){
+        CreatePostService.createCategory(this.blogPost.newCategory, LoginService.getLoginData().id)
+          .then(function newCatSuccess(newCat) {
+            console.log(newCat);
+            that.blogPost.categoryId = newCat.id;
+            console.log('catId after newCat.id assignment', that.blogPost.categoryId);
 
-        CreatePostService.createCategory(this.blogPost.newCategory)
-          .then (function handleCatData(catData) { //not getting into here
-            console.log(catData);
-            that.blogPost.categoryId = catData.id;
             CreatePostService.submitPost(that.blogPost, LoginService.getLoginData().id)
               .then(function successHandler(newPost) {
                 console.log(newPost);
                 $state.go("viewPost", {id: newPost.id});
+              });
+
           });
-        });
-      } else { // this works as expected
+          // .then(
+          //
+          //   CreatePostService.submitPost(that.blogPost, LoginService.getLoginData().id)
+          //     .then(function successHandler(newPost) {
+          //       console.log(newPost);
+          //       $state.go("viewPost", {id: newPost.id});
+          //     })
+          //
+          // );
+      } else {
       CreatePostService.submitPost(this.blogPost, LoginService.getLoginData().id)
         .then(function successHandler(newPost) {
           console.log(newPost);
           $state.go("viewPost", {id: newPost.id});
         });
-    }
-  };
+      }
+    };
 
     this.categoryList = [];
     var that = this;
@@ -56,5 +67,5 @@
       // console.log('My Category', that.myCategory);
       });
 
-}
+    }
 }());
