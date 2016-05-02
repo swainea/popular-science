@@ -14,7 +14,7 @@
     this.blogPost = {
       title: "",
       content: "",
-      authorId: LoginService.getLoginData().userId,// but needs to be the userID
+      authorId: LoginService.getLoginData().userId,
       newCategory: null
     };
 
@@ -26,7 +26,7 @@
       if (this.blogPost.newCategory){
 
         CreatePostService.createCategory(this.blogPost.newCategory)
-          .then (function handleCatData(catData) {
+          .then (function handleCatData(catData) { //not getting into here
             console.log(catData);
             that.blogPost.categoryId = catData.id;
             CreatePostService.submitPost(that.blogPost, LoginService.getLoginData().id)
@@ -35,7 +35,7 @@
                 $state.go("viewPost", {id: newPost.id});
           });
         });
-      } else {
+      } else { // this works as expected
       CreatePostService.submitPost(this.blogPost, LoginService.getLoginData().id)
         .then(function successHandler(newPost) {
           console.log(newPost);
