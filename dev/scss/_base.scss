@@ -76,6 +76,7 @@ html, body{
     .post-title{
       font-size: 2.5em;
       margin: 5px;
+      display: inline-block;
     }
     .post-attributes{
       display: table;
@@ -116,8 +117,10 @@ html, body{
     }
     .publish-date{
       font-size: 0.8em;
-      margin-top: 5px;
-      margin-left: 20px;
+      margin-top: 4%;
+      // margin-left: 20px;
+      // display: inline-block;
+      float: right;
     }
     li{
       background-color: $layer1Color;
@@ -232,7 +235,7 @@ html, body{
   p{
     position: absolute;
     bottom: -45px;
-    right: 15px;
+    left: 15px;
     @include defaultFont();
     font-size: 1.2em;
   }
@@ -341,4 +344,22 @@ a:hover {
 .error-message {
   color: red;
   font-size: 1.2em;
+
+.titles {
+  position: absolute;
+  top: 1%;
+  left: 6%;
+  width: 50%;
+  height:20%;
+  color: $layer5Color;
+  h1 {
+    font-size: 3.5em;
+    font-family: 'Bitter', serif;
+    font-weight: 700;
+  }
+  h2{
+    font-size: 2em;
+    font-style: italic;
+    font-weight: 200;
+  }
 }

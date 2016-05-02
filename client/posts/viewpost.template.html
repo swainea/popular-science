@@ -1,6 +1,7 @@
 <ul>
   <li ng-hide='!vp.post.title'>
     <h3 class='post-title'>{{vp.post.title}}</h3>
+     <p class="publish-date">{{vp.post.date | date:'MMM d, y @ h:mm a'}}</p>
     <div class="post-attributes">
       <p class="by-line">By:</p>
       <a class="author-name" ui-sref='author({ id: vp.post.author.id })'><cite>{{vp.post.author.name}}</cite></a>
@@ -8,7 +9,6 @@
       <p class="category-label" ng-show='!vp.post.category.name'>Not in a category</p>
       <a class="category-name" ui-sref='categoryStories({ id: vp.post.category.id })'><h4 class="post-category">{{vp.post.category.name}}</h4></a>
     </div>
-    <p class="publish-date">{{vp.post.date | date:'MMM d, y @ h:mm a'}}</p>
     <article class="article-summary">{{vp.post.content}}</article>
   </li>
   <li ng-show='!vp.post.title'>
