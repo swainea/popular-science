@@ -1,12 +1,4 @@
 
-        <!-- <form name='createNewAuthorForm' ng-submit=cna.newAuthorForm(createNewAuthorForm)>
-          <input type="text" ng-model="cna.newAuthor.name" required placeholder="Name">
-          <input type="text" ng-model="cna.newAuthor.email" required placeholder="email">
-          <input type="password" ng-model="cna.newAuthor.password" required placeholder="password">
-          <button>Submit</button>
-        </form> -->
-
-
         <h2>Create a New Account</h2>
 
         <div class="login-page">
@@ -27,7 +19,7 @@
         			<label>Password</label>
         			<input class="password" ng-model="cna.newAuthor.password" required type="password" placeholder="password">
         		</div>
-
+            <p class='error-message'>{{cna.errorMessage}}</p>
         		<button class="btn btn-primary">Get Blogging!</button>
 
         	</form>

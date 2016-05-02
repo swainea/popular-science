@@ -61,6 +61,7 @@ html, body{
   margin-bottom: 0%;
   padding: 20px;
   padding-top: 10px;
+  padding-bottom: 54px;
   font-family: 'Roboto Slab', serif;
   background-color: #F7F5E8;
   height: 100%;
@@ -76,6 +77,7 @@ html, body{
     .post-title{
       font-size: 2.5em;
       margin: 5px;
+      display: inline-block;
     }
     .post-attributes{
       display: table;
@@ -116,13 +118,15 @@ html, body{
     }
     .publish-date{
       font-size: 0.8em;
-      margin-top: 5px;
-      margin-left: 20px;
+      margin-top: 4%;
+      // margin-left: 20px;
+      // display: inline-block;
+      float: right;
     }
     li{
       background-color: $layer1Color;
       @include boxBorder();
-      @include boxShadow();
+      border-radius: 10px;
       margin: 8px;
       padding: 15px;
     }
@@ -135,7 +139,7 @@ html, body{
     font-size: 1.3em;
     background-color: $layer1Color;
     @include boxBorder();
-    @include boxShadow();
+    border-radius: 10px;
     margin: 8px;
     padding: 15px;
   }
@@ -169,7 +173,7 @@ html, body{
     background-color: $layer1Color;
     margin: 8px;
     padding: 15px;
-    @include boxShadow();
+    border-radius: 10px;
     border: 1px solid $layer4Color;
     .create-post-title{
       margin-bottom: 30px;
@@ -192,8 +196,7 @@ html, body{
   .login-page{
     background-color: $layer1Color;
     @include boxBorder();
-    @include boxShadow();
-    padding: 15px;
+    border-radius: 10px;
     padding-bottom: 0px;
     width: 50%;
     margin: auto;
@@ -224,16 +227,34 @@ html, body{
       margin-left: 10px;
     }
   }
+  .ask-delete{
+    position: absolute;
+    top: 100px;
+    left: 30%;
+    width: 400px;
+    height: 250px;
+    background-color: $layer2Color;
+    color: $layer4Color;
+    text-align: center;
+    border: 3px solid $layer4Color;
+    @include boxShadow();
+    font-size: 2em;
+    padding-top: 45px;
+    button{
+      background-color: $layer1Color;
+    }
+  }
 }
 
 .footer{
   background-color: $layer1Color;
   position: relative;
+
   clear: both;
   p{
     position: absolute;
     bottom: -45px;
-    right: 15px;
+    left: 15px;
     @include defaultFont();
     font-size: 1.2em;
   }
@@ -276,6 +297,19 @@ html, body{
     &:hover{
       background-color: $layer2Color;
     }
+    button{
+      width: 100%;
+      background-color: $layer2Color;
+      font-size: 1.5em;
+      color: $layer5Color;
+      margin-top: 10px;
+      margin-bottom: 10px;
+      border: 1px solid $layer4Color;
+      &:hover{
+        background-color: $layer3Color;
+        color: $layer0Color;
+      }
+    }
   }
 
   .listButton{
@@ -313,7 +347,6 @@ a:hover {
 }
 
 .btn {
-  width: 100%;
   background-color: $layer2Color;
   font-size: 1.5em;
   color: $layer5Color;
@@ -332,9 +365,33 @@ a:hover {
 
 .delete-post-button {
   float: right;
-  background-color: #B86C3E;
+  background-color: $layer2Color;
 }
 
 .create-author-form {
   margin-bottom: 20px;
+}
+
+.error-message {
+  color: red;
+  font-size: 1.2em;
+}
+
+.titles {
+  position: absolute;
+  top: 1%;
+  left: 6%;
+  width: 50%;
+  height:20%;
+  color: $layer5Color;
+  h1 {
+    font-size: 3.5em;
+    font-family: 'Bitter', serif;
+    font-weight: 700;
+  }
+  h2{
+    font-size: 2em;
+    font-style: italic;
+    font-weight: 200;
+  }
 }

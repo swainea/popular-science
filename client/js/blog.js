@@ -19,11 +19,15 @@
       controller: 'HomeViewController',
       controllerAs: 'home'
     })
-    .state('categoryStories', {
-      url: '/category/:id',
-      templateUrl: 'categories/category.template.html',
-      controller: 'CategoryController',
-      controllerAs: 'cc'
+    .state('error', {
+                url: '/eror',
+                template: '<p class= "error-message"> Oops, something went wrong. Please contact us or try again later...</p>'
+                // templateUrl: 'error/error.template.html',
+                // controller: 'ErrorController',
+                // controllerAs: 'error',
+                // params: {
+                //     msg: 'Something went wrong, please try back later...'
+                // }
     })
     .state('login', {
       url: '/login',
@@ -33,6 +37,12 @@
       params: {
         msg: null
       }
+    })
+    .state('categoryStories', {
+      url: '/category/:id',
+      templateUrl: 'categories/category.template.html',
+      controller: 'CategoryController',
+      controllerAs: 'cc'
     })
     .state('allPosts', {
       url: '/allPosts',
@@ -130,8 +140,21 @@
             that.allPosts = posts;
         });
 
+        this.areYouSure = false;
+
+        this.deletePostID = null;
+
+        this.askDeletePost = function askDeletePost(postId) {
+          this.deletePostID = postId;
+          this.areYouSure = true;
+        };
+
+        this.doNotDeletePost = function doNotDeletePost() {
+          this.areYouSure = false;
+        };
+
         this.deletePost = function deletePost(postId) {
-          
+
           deleteFactory.deletePost(postId, LoginService.getLoginData().id)
             .then(function deleteSuccess() {
               $state.transitionTo($state.current, $stateParams, {
@@ -183,18 +206,23 @@
         console.log('In Author Stories');
         var that = this;
         this.newAuthor = {};
+        this.errorMessage = "";
 
         this.newAuthorForm = function newAuthorForm() {
           // console.log(this.newAuthor);
+          console.log(LoginService);
 
           NewAuthorService.createAuthor(this.newAuthor)
-            .then(function login(data) {
-              console.log('Promise data', data);
-              console.log("that", that.newAuthor);
-              LoginService.authenticate(that.newAuthor);
-            })
+            .then( LoginService.authenticate(this.newAuthor) )
             .then( function goHome() {
+              console.log('success');
               $state.go('home');
+            })
+            .catch( function errorHandler(response) {
+              console.log('failure', response);
+              if (response.status === 422) {
+                that.errorMessage = "This user account already exists. Please use another email.";
+              }
             });
 
 
@@ -226,8 +254,6 @@
         }).then(function successCallback(response) {
           console.log('Yay, new author!', response.data);
           return response.data;
-        }, function errorCallback(response) {
-          console.log(response);
         });
       }
 
@@ -401,7 +427,7 @@
   LoginController.$inject = ["$stateParams", "$state", "LoginService"];
 
   function LoginController($stateParams, $state, LoginService) {
-    this.msg = $stateParams.msg;        
+    this.msg = $stateParams.msg;
     this.login = {};
     this.errorMessage = "";
     var that = this;
@@ -414,8 +440,13 @@
         // LoginService.getLoginData();   Now you can run that logindata and it will return the user's Login Data, in this case, response.data
         //state.go should go here because the controller marries the UI with the data
       })
-      .catch(function() {
-        that.errorMessage = "Please enter your correct login information or create a new account.";
+      .catch(function(response) {
+        if (response.status > 499) {
+          $state.go('error', {msg:'Something is wrong, please contact us or try back later...'});
+        }
+        else {
+          that.errorMessage = "Please enter your correct login information or create a new account.";
+        }
       });
     };
 
@@ -425,6 +456,8 @@
 
     this.logout = function logout(){
       this.login = {};
+      console.log(this.login);
+
       LoginService.logOut();
       $state.go("home");
     //This function calls logout in Login service and redirects to home
@@ -433,13 +466,7 @@
     this.isLoggedIn = function isLoggedIn() {
       return !!LoginService.getLoginData();
     };
-    // this.loginName = function loginName(){
-    //   LoginService.getLoginData();
-    //   return that.getLoginData.name;
-    // };
   }
-
-
 
 })();
 ;(function() {
@@ -452,7 +479,7 @@
     LoginService.$inject = ["$http"];
 
 
-    function LoginService($http) {
+    function LoginService($http ) {
 
     	var loginData = null;
       
@@ -471,7 +498,9 @@
     				email: author.email,
     				password: author.password
     			}
+
     		}).then(function successHandler(response) {
+            console.log('authenticate response', response);
       			loginData = response.data;
             return response.data;
 	    		});
@@ -750,6 +779,7 @@
 
     postListFactory.getAllCategories()
       .then(function returnCategoryList(response) {
+        console.log(response);
         that.categories = response.data;
       });
 
