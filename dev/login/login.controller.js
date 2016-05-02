@@ -6,9 +6,10 @@
     .module('blog')
     .controller("LoginController", LoginController);
 
-  LoginController.$inject = ["$state", "LoginService"];
+  LoginController.$inject = ["$stateParams", "$state", "LoginService"];
 
-  function LoginController($state, LoginService) {          //this will give it access to the things in LoginService
+  function LoginController($stateParams, $state, LoginService) {
+    this.msg = $stateParams.msg;        
     this.login = {};
     this.errorMessage = "";
     var that = this;
