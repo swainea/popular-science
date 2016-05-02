@@ -32,20 +32,20 @@
       </nav>
     </header>
 
+    <div class="content">
       <div class="sidebar" ng-controller="SidebarController as sidebar">
         <ul class="list-group">
-        </li>
-        <li class="list-group-item listButton"><button class="btn btn-primary" ui-sref="allPosts">All Stories</button></li>
-      </ul>
-          <li class="list-group-item listStyle" ng-repeat="category in sidebar.categories">
-            <a ui-sref="categoryStories({ id: category.id })">
-              {{category.name}}
-            </a>
+          <li class="list-group-item listButton"><button class="btn btn-primary" ui-sref="allPosts">All Stories</button></li>
+          <li class="list-group-item listStyle category-label">Categories</li>
+          <li ui-sref="categoryStories({ id: category.id })" class="list-group-item listStyle" ng-repeat="category in sidebar.categories">
+            <label>{{category.name}}</label>
+          </li>
+        </ul>
       </div>
 
       <section ui-view class="main-section"></section>
+    </div>
 
-      <div class="push"></div>
   </main>
 
   <footer class="footer navbar navbar-default navbar-fixed-bottom">

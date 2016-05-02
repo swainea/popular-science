@@ -6,9 +6,10 @@
     .module('blog')
     .controller("LoginController", LoginController);
 
-  LoginController.$inject = ["$state", "LoginService"];
+  LoginController.$inject = ["$stateParams", "$state", "LoginService"];
 
-  function LoginController($state, LoginService) {          //this will give it access to the things in LoginService
+  function LoginController($stateParams, $state, LoginService) {
+    this.msg = $stateParams.msg;        
     this.login = {};
     this.errorMessage = "";
     var that = this;
@@ -37,6 +38,8 @@
 
     this.logout = function logout(){
       this.login = {};
+      console.log(this.login);
+
       LoginService.logOut();
       $state.go("home");
     //This function calls logout in Login service and redirects to home
