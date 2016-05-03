@@ -7,6 +7,6 @@
     <p class="allposts-publish-date">{{post.date | date:'MMM d, y @ h:mm a'}}</p>
   </li>
 
-  <button ng-click="allPosts.nextPage();" name="previousPage">Previous Page</button>
-  <button ng-click="allPosts.previousPage();" name="nextPage">Next Page</button>
+  <button ng-click="allPosts.previousPage()"  ng-show="allPosts.page > 1" name="previousPage">Previous Page</button>
+  <button ng-click="allPosts.nextPage()" ng-hide="allPosts.postList.length < 10" name="nextPage">Next Page</button>
 </ul>

@@ -89,11 +89,9 @@
 
   function blogStartup($rootscope, $state, LoginService){
     $rootscope.$on('$stateChangeStart', function checkAuth (e, toState){
-        console.log("inside of checkAuth");
          var isLoggedIn = !!LoginService.getLoginData();
 
          if (toState.secure && !isLoggedIn) {
-           console.log('not logged in');
            e.preventDefault();
            $state.go('login', {msg: 'Please log in'});
          }
@@ -530,9 +528,11 @@
     var that = this;
 
     this.page = 0;
+    this.nextPageButton = true;
+    this.previousPageButton = true;
+    this.postList = [];
 
     this.nextPage = function nextPage(){
-      console.log("inside on nextPage");
       that.page++;
       pagination(that.page)
         .then(function returnPostsList(response) {
@@ -550,10 +550,8 @@
         });
     };
 
-    this.postList = [];
-
     function pagination(page) {
-      return postListFactory.getAllPosts(10,((page-1)*10), "date DESC");
+      return postListFactory.getAllPosts("10",((page-1)*10), "date DESC");
     }
   }
 })();

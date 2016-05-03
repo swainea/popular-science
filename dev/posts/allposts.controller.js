@@ -12,9 +12,11 @@
     var that = this;
 
     this.page = 0;
+    this.nextPageButton = true;
+    this.previousPageButton = true;
+    this.postList = [];
 
     this.nextPage = function nextPage(){
-      console.log("inside on nextPage");
       that.page++;
       pagination(that.page)
         .then(function returnPostsList(response) {
@@ -32,10 +34,8 @@
         });
     };
 
-    this.postList = [];
-
     function pagination(page) {
-      return postListFactory.getAllPosts(10,((page-1)*10), "date DESC");
+      return postListFactory.getAllPosts("10",((page-1)*10), "date DESC");
     }
   }
 })();

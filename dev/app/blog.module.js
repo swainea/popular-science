@@ -89,11 +89,9 @@
 
   function blogStartup($rootscope, $state, LoginService){
     $rootscope.$on('$stateChangeStart', function checkAuth (e, toState){
-        console.log("inside of checkAuth");
          var isLoggedIn = !!LoginService.getLoginData();
 
          if (toState.secure && !isLoggedIn) {
-           console.log('not logged in');
            e.preventDefault();
            $state.go('login', {msg: 'Please log in'});
          }
