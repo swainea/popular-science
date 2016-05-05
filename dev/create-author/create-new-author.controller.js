@@ -17,7 +17,7 @@
           // console.log(this.newAuthor);
           console.log(LoginService);
 
-          NewAuthorService.createAuthor(this.newAuthor)
+          return NewAuthorService.createAuthor(this.newAuthor)
             .then( LoginService.authenticate(this.newAuthor) )
             .then( function goHome() {
               console.log('success');
@@ -29,8 +29,6 @@
                 that.errorMessage = "This user account already exists. Please use another email.";
               }
             });
-
-
           };
 
       }
